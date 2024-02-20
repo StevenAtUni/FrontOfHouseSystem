@@ -12,7 +12,7 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
   }
 
   @Override
-  public void sendRecipe(int bookingID, int bookingStartTime, int bookingEndTime, int diners,
+  public void sendReceipts(int bookingID, int bookingStartTime, int bookingEndTime, int diners,
       String[] dishesPurchased, int dishPrices, int tipAmount, int serviceCharge) {
 
   }
