@@ -17,23 +17,23 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
 
   }
 
+//  @Override
+//  public void sendOrder(int orderID, int tableID, int[] dishes, String orderNote) {
+//
+//  }
+
+//  @Override
+//  public void noteUpdate(int orderID, String newOrderNote) {
+//
+//  }
+
   @Override
-  public void sendOrder(int orderID, int tableID, int[] dishes, String orderNote) {
+  public void markOrderComplete(int orderID) {
 
   }
 
   @Override
-  public void noteUpdate(int orderID, String newOrderNote) {
-
-  }
-
-  @Override
-  public void orderComplete(int orderID) {
-
-  }
-
-  @Override
-  public void markDishUnavailable(int dishID) {
+  public void markItemUnavailable(int itemID) {
 
   }
 }
