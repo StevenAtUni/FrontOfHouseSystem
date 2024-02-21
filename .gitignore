@@ -27,3 +27,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+.idea/google-java-format.xml
+.idea/workspace.xml
