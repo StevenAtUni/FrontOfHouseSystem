@@ -2,18 +2,24 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
 
 
   @Override
-  public void getMenu(String[][] menu) {
+  public Menu getMenu() {
+    return null;
 
   }
 
   @Override
-  public void getBookingData(String bookingData) {
+  public BookingData getBookingData(int date) {
+    return null;
+  }
+
+  @Override
+  public void sendBill(int billID, int date, int sum, String stuff, String[] dishes,
+      String[] wine) {
 
   }
 
   @Override
-  public void sendReceipts(int bookingID, int bookingStartTime, int bookingEndTime, int diners,
-      String[] dishesPurchased, int dishPrices, int tipAmount, int serviceCharge) {
+  public void sendItemPopularity(int date, int itemID) {
 
   }
 

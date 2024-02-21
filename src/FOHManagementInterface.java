@@ -1,12 +1,14 @@
 public interface FOHManagementInterface {
 
-  //Method to get the menu from mangement
-  public void getMenu (String[][] menu);
+  //Method to get the menu from management
+  public Menu getMenu();
   
   //Get the booking day of the current day from management
-  public void getBookingData (String bookingData);
+  public BookingData getBookingData (int date);
 
-  //send the receipts data to mangement
-  public void sendReceipts(int bookingID, int bookingStartTime, int bookingEndTime, int diners, String[] dishesPurchased, int dishPrices, int tipAmount, int serviceCharge);
+  //send the receipts data to management
+  public void sendBill (int billID, int date, int sum, String stuff, String[] dishes, String[] wine);
+
+  public void sendItemPopularity(int date, int itemID);
 
 }
