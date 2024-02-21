@@ -18,12 +18,12 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
   }
 
   @Override
-  public void sendOrder(int orderID, int tableID, String[] dishName, String orderNote) {
+  public void sendOrder(int orderID, int tableID, int[] dishes, String orderNote) {
 
   }
 
   @Override
-  public void noteUpdate(int orderID, String NewOrderNote) {
+  public void noteUpdate(int orderID, String newOrderNote) {
 
   }
 
@@ -33,7 +33,7 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
   }
 
   @Override
-  public void DishUnavailable(String dishName) {
+  public void markDishUnavailable(int dishID) {
 
   }
 }
