@@ -1,21 +1,45 @@
+
 public abstract class FOHController implements FOHManagementInterface, FOHKitchenInterface {
 
 
   @Override
-  public void getMenu(String[][] menu) {
+  public Menu getMenu() {
+      return null;
+  }
+
+  @Override
+  public void sendBill(int billID, int date, int sum, String stuff, String[] servedDishes,
+      String[] servedWines) {
 
   }
 
   @Override
-  public void getBookingData(String bookingData) {
+  public void sendDishPopularity(int date, int itemID, int saleNum) {
 
   }
 
   @Override
-  public void sendReceipts(int bookingID, int bookingStartTime, int bookingEndTime, int diners,
-      String[] dishesPurchased, int dishPrices, int tipAmount, int serviceCharge) {
+  public void sendInfoForBooking(int date, int bookings) {
 
   }
+
+  @Override
+  public void sendInfoForStaffNeeded(int date, int time, int bookings, int customers, int tables) {
+
+  }
+
+  @Override
+  public void sendReservationInfo(int date, int reservID, String name, int people, int tables,
+      String tableArrangement) {
+
+  }
+
+  @Override
+  public BoookingData getBookingData(int date) {
+
+    return null;
+  }
+
 
   @Override
   public void sendOrder(int orderID, int tableID, int[] dishes, String orderNote) {
@@ -23,17 +47,17 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
   }
 
   @Override
-  public void noteUpdate(int orderID, String newOrderNote) {
+  public void sendNoteUpdate(int orderID, String newOrderNote) {
 
   }
 
   @Override
-  public void orderComplete(int orderID) {
+  public void getOrderComplete() {
 
   }
 
   @Override
-  public void markDishUnavailable(int dishID) {
+  public void markDishUnavailable() {
 
   }
 }
