@@ -5,4 +5,7 @@ public interface FOHManagementInterface {
 
     // Method for the management team to view how many tables (2 seats) are booked for specific time
     int getAmountBooked(int timestamp);
+
+    // Method for the management team to update the service charge percentage
+    void setServiceCharge(int newCharge);
 }

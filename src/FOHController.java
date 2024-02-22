@@ -10,6 +10,10 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
     }
 
     @Override
+    public void setServiceCharge(int newCharge) {
+    }
+
+    @Override
     public void markOrderComplete(int orderID) {
     }
 
