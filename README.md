@@ -6,7 +6,7 @@
     Team 7 "Dragon" responsible for the Front of House System within Development Group 3
 </div>
 
-## Project Roles
+<h4>Project Roles</h4>
 <ul>
     <li>Steven - Project Manager & Code Reviewer</li>
     <li>Hossain - Java Developer</li>
