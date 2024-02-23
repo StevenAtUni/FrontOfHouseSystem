@@ -14,7 +14,7 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
     }
 
     @Override
-    public void markOrderComplete(int orderID) {
+    public void markItemComplete(int orderID, int itemID) {
     }
 
     @Override
