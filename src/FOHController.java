@@ -2,7 +2,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
 
     @Override
-    public void sendMenu(Object[][] menu) {
+    public void sendMenu(Object[][] menu, Object[][] drinksMenu, Object[][] wineMenu) {
     }
 
     @Override
