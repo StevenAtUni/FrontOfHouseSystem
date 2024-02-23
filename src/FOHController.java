@@ -1,4 +1,5 @@
-public abstract class FOHController implements FOHManagementInterface, FOHKitchenInterface {
+public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
+    // Class name may be changed at a later date when we figure out how we will implement our system/code.
 
     @Override
     public void sendMenu(Object[][] menu) {
@@ -19,5 +20,10 @@ public abstract class FOHController implements FOHManagementInterface, FOHKitche
 
     @Override
     public void markItemUnavailable(int itemID) {
+    }
+
+    @Override
+    public Object[][] getOrders() {
+        return null;
     }
 }
