@@ -7,11 +7,11 @@ public class Customer {
     private String name;
     private BookingCollection bookings;
 
-    private String [] allergens;
+    private String[] allergens;
 
-    private String [] disabilities;
+    private String[] disabilities;
 
-    public Customer(int cutomerID, String name, BookingCollection bookings, String [] allergens, String [] disabilities) {
+    public Customer(int cutomerID, String name, BookingCollection bookings, String[] allergens, String[] disabilities) {
         this.customerID = cutomerID;
         this.name = name;
         this.bookings = bookings;

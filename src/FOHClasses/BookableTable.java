@@ -9,13 +9,13 @@ public class BookableTable {
     private long[] bookedTimes;
     private BookingCollection bookingCollection;
     //isAccessibleTable" directly conveys the concept of being usable by people with disabilities
-    private boolean isAccesibleTable;
+    private boolean isAccessible;
     private TableCollection tableCollection;
 
-    public BookableTable(int tableID, int capacity, boolean isAccesibleTable) {
+    public BookableTable(int tableID, int capacity, boolean isAccessible) {
         this.tableID = tableID;
         this.capacity = capacity;
-        this.isAccesibleTable = isAccesibleTable;
+        this.isAccessible = isAccessible;
         //TODO add this.bookingCollection and this.tableCollection
     }
 
@@ -36,8 +36,8 @@ public class BookableTable {
         return bookingCollection;
     }
 
-    public boolean isAccesibleTable() {
-        return isAccesibleTable;
+    public boolean isAccessible() {
+        return isAccessible;
     }
     //Setters
     public void setCapacity(int capacity) {
@@ -52,8 +52,8 @@ public class BookableTable {
         this.bookingCollection = bookingCollection;
     }
 
-    public void setAccesibleTable(boolean accesibleTable) {
-        isAccesibleTable = accesibleTable;
+    public void setAccessible(boolean accessible) {
+        isAccessible = accessible;
     }
 
     //Methods
