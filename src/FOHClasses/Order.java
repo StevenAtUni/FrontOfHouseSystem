@@ -3,42 +3,42 @@ package FOHClasses;
 import FOHClasses.Collection.DishCollection;
 
 public class Order {
-    private final int orderInt;
+    private final int orderID;
     private DishCollection items;
-    private String specialRequests;
+    private String orderNotes;
     private String orderStatus;
-    private final PhysicalTable table;
+    private  int tableID;
     private final Customer customer;
     private Waiter server;
 
-    public Order(int orderInt, String specialRequests, PhysicalTable table, Customer customer, Waiter server) {
-        this.orderInt = orderInt;
-        this.specialRequests = specialRequests;
+    public Order(int orderID, String orderNotes, int tableID, Customer customer, Waiter server) {
+        this.orderID = orderID;
+        this.orderNotes = orderNotes;
         this.orderStatus = "taking order";
-        this.table = table;
+        this.tableID = tableID;
         this.customer = customer;
         this.server = server;
         //TODO add this.items
     }
     //Getter
-    public int getOrderInt() {
-        return orderInt;
+    public int getOrderID() {
+        return orderID;
     }
 
     public DishCollection getItems() {
         return items;
     }
 
-    public String getSpecialRequests() {
-        return specialRequests;
+    public String getOrderNotes() {
+        return orderNotes;
     }
 
     public String getOrderStatus() {
         return orderStatus;
     }
 
-    public PhysicalTable getTable() {
-        return table;
+    public int getTableID() {
+        return tableID;
     }
 
     public Customer getCustomer() {
@@ -50,12 +50,15 @@ public class Order {
     }
     //Setter
 
+    public void setTableID(int tableID ){
+        this.tableID=tableID;
+    }
     public void setItems(DishCollection items) {
         this.items = items;
     }
 
-    public void setSpecialRequests(String specialRequests) {
-        this.specialRequests = specialRequests;
+    public void setOrderNotes(String orderNotes) {
+        this.orderNotes = orderNotes;
     }
 
     public void setOrderStatus(String orderStatus) {

@@ -3,15 +3,17 @@ package FOHClasses;
 import FOHClasses.Collection.DishCollection;
 
 public class Bill {
+    private final int billID;
     private final Waiter waiter;
-    private final String paymenType;
+    private final String paymentType;
     private final int totalPrice;
     private final DishCollection items;
     private final int serviceCharge;
 
-    public Bill(Waiter waiter, String paymenType, int totalPrice, DishCollection items, int serviceCharge) {
+    public Bill(int billID, Waiter waiter, String paymentType, int totalPrice, DishCollection items, int serviceCharge) {
+        this.billID = billID;
         this.waiter = waiter;
-        this.paymenType = paymenType;
+        this.paymentType = paymentType;
         this.totalPrice = totalPrice;
         this.items = items;
         this.serviceCharge = serviceCharge;
@@ -22,7 +24,7 @@ public class Bill {
     }
 
     public String getPaymentType() {
-        return paymenType;
+        return paymentType;
     }
 
     public int getTotalPrice() {
@@ -36,4 +38,5 @@ public class Bill {
     public int getServiceCharge() {
         return serviceCharge;
     }
+    public int getBillID(){return billID;}
 }

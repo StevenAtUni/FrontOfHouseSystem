@@ -7,19 +7,17 @@ public class Waiter {
     private String phoneNumber;
     private String waiterType;
     private PhysicalTable tableCurrentlyWaiting;
-    private float salary;
     private float tipEarned;
     private String email;
     private String payInfo;
     private Order currentOrder;
 
-    public Waiter(int staffID, String name, int pin, String waiterType, PhysicalTable tableCurrentlyWaiting, float salary, float tipEarned, String email, String payInfo) {
+    public Waiter(int staffID, String name, int pin, String waiterType, PhysicalTable tableCurrentlyWaiting, float tipEarned, String email, String payInfo) {
         this.staffID = staffID;
         this.name = name;
         this.pin = pin;
         this.waiterType = waiterType;
         this.tableCurrentlyWaiting = tableCurrentlyWaiting;
-        this.salary = salary;
         this.tipEarned = tipEarned;
         this.email = email;
         this.payInfo = payInfo;
@@ -51,9 +49,6 @@ public class Waiter {
         return tableCurrentlyWaiting;
     }
 
-    public float getSalary() {
-        return salary;
-    }
 
     public float getTipEarned() {
         return tipEarned;
@@ -92,9 +87,6 @@ public class Waiter {
         this.tableCurrentlyWaiting = tableCurrentlyWaiting;
     }
 
-    public void setSalary(float salary) {
-        this.salary = salary;
-    }
 
     public void setTipEarned(float tipEarned) {
         this.tipEarned = tipEarned;

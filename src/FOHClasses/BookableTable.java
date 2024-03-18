@@ -8,13 +8,14 @@ public class BookableTable {
     private int capacity;
     private long[] bookedTimes;
     private BookingCollection bookingCollection;
-    private boolean isWheelChairFriendly;
+    //isAccessibleTable" directly conveys the concept of being usable by people with disabilities
+    private boolean isAccesibleTable;
     private TableCollection tableCollection;
 
-    public BookableTable(int tableID, int capacity, boolean isWheelChairFriendly) {
+    public BookableTable(int tableID, int capacity, boolean isAccesibleTable) {
         this.tableID = tableID;
         this.capacity = capacity;
-        this.isWheelChairFriendly = isWheelChairFriendly;
+        this.isAccesibleTable = isAccesibleTable;
         //TODO add this.bookingCollection and this.tableCollection
     }
 
@@ -35,8 +36,8 @@ public class BookableTable {
         return bookingCollection;
     }
 
-    public boolean isWheelChairFriendly() {
-        return isWheelChairFriendly;
+    public boolean isAccesibleTable() {
+        return isAccesibleTable;
     }
     //Setters
     public void setCapacity(int capacity) {
@@ -51,8 +52,8 @@ public class BookableTable {
         this.bookingCollection = bookingCollection;
     }
 
-    public void setWheelChairFriendly(boolean wheelChairFriendly) {
-        isWheelChairFriendly = wheelChairFriendly;
+    public void setAccesibleTable(boolean accesibleTable) {
+        isAccesibleTable = accesibleTable;
     }
 
     //Methods

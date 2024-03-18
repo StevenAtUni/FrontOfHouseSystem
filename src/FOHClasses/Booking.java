@@ -1,29 +1,27 @@
 package FOHClasses;
 
-import java.util.function.ToDoubleBiFunction;
-
 public class Booking {
-    private final int bookingInt;
+    private final int bookingID;
     private long time;
     private final Customer customer;
     private BookableTable reservedTable;
     private String note;
-    private int numberOfPeople;
+    private int numberOfDiners;
 
 
     //constructor
-    public Booking(int bookingInt, long time, Customer customer, BookableTable reservedTable, String note, int numberOfPeople) {
-        this.bookingInt = bookingInt;
+    public Booking(int bookingID, long time, Customer customer, BookableTable reservedTable, String note, int numberOfDiners) {
+        this.bookingID = bookingID;
         this.time = time;
         this.customer = customer;
         this.reservedTable = reservedTable;
         this.note = note;
-        this.numberOfPeople = numberOfPeople;
+        this.numberOfDiners = numberOfDiners;
     }
 
     //Getters
-    public int getBookingInt() {
-        return bookingInt;
+    public int getBookingID() {
+        return bookingID;
     }
 
     public long getTime() {
@@ -42,8 +40,8 @@ public class Booking {
         return note;
     }
 
-    public int getNumberOfPeople() {
-        return numberOfPeople;
+    public int getNumberOfDiners() {
+        return numberOfDiners;
     }
 
     //Setters
@@ -60,8 +58,8 @@ public class Booking {
         this.note = note;
     }
 
-    public void setNumberOfPeople(int numberOfPeople) {
-        this.numberOfPeople = numberOfPeople;
+    public void setNumberOfDiners(int numberOfDiners) {
+        this.numberOfDiners = numberOfDiners;
     }
 
     //Methods
