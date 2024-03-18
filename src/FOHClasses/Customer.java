@@ -3,14 +3,14 @@ package FOHClasses;
 import FOHClasses.Collection.BookingCollection;
 
 public class Customer {
-    private final int cutomerID;
+    private final int customerID;
     private String name;
     private BookingCollection bookings;
     private String allergens;
     private String disabilities;
 
     public Customer(int cutomerID, String name, BookingCollection bookings, String allergens, String disabilities) {
-        this.cutomerID = cutomerID;
+        this.customerID = cutomerID;
         this.name = name;
         this.bookings = bookings;
         this.allergens = allergens;
@@ -18,8 +18,8 @@ public class Customer {
     }
     //Getter
 
-    public int getCutomerID() {
-        return cutomerID;
+    public int getCustomerID() {
+        return customerID;
     }
 
     public String getName() {
@@ -55,5 +55,11 @@ public class Customer {
         this.disabilities = disabilities;
     }
     //Methods
+    public void addBooking(Booking booking){
+        //TODO
+    }
+    public void removeBooking(Booking booking){
+        //TODO
+    }
 
 }

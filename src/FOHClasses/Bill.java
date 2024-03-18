@@ -21,7 +21,7 @@ public class Bill {
         return waiter;
     }
 
-    public String getPaymenType() {
+    public String getPaymentType() {
         return paymenType;
     }
 
