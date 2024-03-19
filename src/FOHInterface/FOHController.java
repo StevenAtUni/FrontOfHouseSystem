@@ -60,7 +60,6 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     }
 
 
-
     public void makeBooking(Customer customer, int bookingID, BookableTable reservedTable, String note, int numberOfDiners, long time){
         //This method creates a booking class and then is added in the booking collection for its respectable Bookable table and customer
 
@@ -79,6 +78,28 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
             reservedTable.addBooking(booking);
         }
 
+    }
+
+    public void addTableToBookable(PhysicalTable table, BookableTable bTable){
+        //adds table to the table collection of bookable table
+        bTable.addTable(table);
+    }
+
+    public void connectTable(PhysicalTable table1, PhysicalTable table2){
+        //Connects two table together
+        table1.connectTable(table2);
+        table2.connectTable(table1);
+    }
+    public void disconnectTable(PhysicalTable table1, PhysicalTable table2){
+        //disconnects two table
+        table1.removeTable(table2);
+        table2.removeTable(table1);
+    }
+
+    public void assignWaiterToTable(Waiter waiter, PhysicalTable table){
+        // assign a waiter to a table and vice versa
+        table.assignWaiter(waiter);
+        waiter.assignTable(table);
     }
 
 }

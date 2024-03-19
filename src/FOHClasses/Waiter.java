@@ -26,7 +26,6 @@ public class Waiter {
     }
 
     //Getters
-
     public int getStaffID() {
         return staffID;
     }
@@ -99,6 +98,12 @@ public class Waiter {
     }
 
     //Methods
+    public void assignTable(PhysicalTable table){
+        //TODO
+    }
+    public  void unAssignTable(PhysicalTable table){
+        //TODO
+    }
     public void login(int StaffID, int pin){
         //TODO
     }
