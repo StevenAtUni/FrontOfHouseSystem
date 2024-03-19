@@ -12,7 +12,8 @@ public class PhysicalTable {
     public PhysicalTable(int tableID, int childSeats) {
         this.tableID = tableID;
         this.childSeats = childSeats;
-        //TODO add this.assignedWaiters and this.tableCollection
+        this.assignedWaiters = new WaiterCollection();
+        this.tableCollection = new TableCollection();
     }
 
     //Getters
