@@ -53,9 +53,9 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         //TODO: Send this information to the Database to store
     }
 
-    public PhysicalTable createTable(int tableID, int childSeats){
+    public PhysicalTable createTable(int tableID, int childSeats, BookableTable assignedTable){
         //THis makes a physical table class
-        return new PhysicalTable(tableID, childSeats);
+        return new PhysicalTable(tableID, childSeats, assignedTable);
         //TODO: Send this information to the Database to store
     }
 
@@ -83,18 +83,9 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     public void addTableToBookable(PhysicalTable table, BookableTable bTable){
         //adds table to the table collection of bookable table
         bTable.addTable(table);
+        table.setAssignedTable(bTable);
     }
 
-    public void connectTable(PhysicalTable table1, PhysicalTable table2){
-        //Connects two table together
-        table1.connectTable(table2);
-        table2.connectTable(table1);
-    }
-    public void disconnectTable(PhysicalTable table1, PhysicalTable table2){
-        //disconnects two table
-        table1.removeTable(table2);
-        table2.removeTable(table1);
-    }
 
     public void assignWaiterToTable(Waiter waiter, BookableTable table){
         // assign a waiter to a table and vice versa

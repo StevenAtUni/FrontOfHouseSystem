@@ -6,13 +6,20 @@ import FOHClasses.Collection.WaiterCollection;
 public class PhysicalTable {
     private final int tableID;
     private int childSeats;
-    private WaiterCollection assignedWaiters;
-    private TableCollection tableCollection;
+    private BookableTable assignedTable;
 
-    public PhysicalTable(int tableID, int childSeats) {
+    public PhysicalTable(int tableID, int childSeats, BookableTable assignedTable) {
         this.tableID = tableID;
         this.childSeats = childSeats;
-        this.tableCollection = new TableCollection();
+        this.assignedTable = assignedTable;
+    }
+
+    public BookableTable getAssignedTable() {
+        return assignedTable;
+    }
+
+    public void setAssignedTable(BookableTable assignedTable) {
+        this.assignedTable = assignedTable;
     }
 
     //Getters
@@ -25,13 +32,6 @@ public class PhysicalTable {
         return childSeats;
     }
 
-    public WaiterCollection getAssignedWaiters() {
-        return assignedWaiters;
-    }
-
-    public TableCollection getTableCollection() {
-        return tableCollection;
-    }
 
     //Setters
 
@@ -39,13 +39,6 @@ public class PhysicalTable {
         this.childSeats = childSeats;
     }
 
-    public void setAssignedWaiters(WaiterCollection assignedWaiters) {
-        this.assignedWaiters = assignedWaiters;
-    }
-
-    public void setTableCollection(TableCollection tableCollection) {
-        this.tableCollection = tableCollection;
-    }
     //Methods
     public void connectTable(PhysicalTable table){
         //TODO
