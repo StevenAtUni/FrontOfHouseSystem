@@ -57,11 +57,6 @@ public class BookableTable {
     }
 
     //Methods
-
-    public void bookTable(Booking booking){
-        //TODO
-    }
-
     public boolean checkAvailability(long time){
         //TODO
         return true;
