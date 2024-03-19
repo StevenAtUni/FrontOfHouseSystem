@@ -12,7 +12,7 @@ public class PhysicalTable {
     public PhysicalTable(int tableID, int childSeats) {
         this.tableID = tableID;
         this.childSeats = childSeats;
-        //TODO add this.assignedWaiters and this.tableCollection
+        this.tableCollection = new TableCollection();
     }
 
     //Getters
@@ -47,12 +47,6 @@ public class PhysicalTable {
         this.tableCollection = tableCollection;
     }
     //Methods
-    public void assignWaiter(Waiter waiter){
-        //TODO
-    }
-    public void removeWaiter(Waiter waiter){
-        //TODO
-    }
     public void connectTable(PhysicalTable table){
         //TODO
     }

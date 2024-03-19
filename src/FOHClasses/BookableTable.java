@@ -2,21 +2,33 @@ package FOHClasses;
 
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.TableCollection;
+import FOHClasses.Collection.WaiterCollection;
 
 public class BookableTable {
     private final int tableID;
     private int capacity;
     private long[] bookedTimes;
     private BookingCollection bookingCollection;
-    //isAccessibleTable" directly conveys the concept of being usable by people with disabilities
+    //isAccessibleTable directly conveys the concept of being usable by people with disabilities
     private boolean isAccessible;
     private TableCollection tableCollection;
+    private WaiterCollection assignedWaiters;
 
     public BookableTable(int tableID, int capacity, boolean isAccessible) {
         this.tableID = tableID;
         this.capacity = capacity;
         this.isAccessible = isAccessible;
-        //TODO add this.bookingCollection and this.tableCollection
+        this.bookingCollection = new BookingCollection();
+        this.assignedWaiters = new WaiterCollection();
+        this.tableCollection = new TableCollection();
+    }
+
+    public WaiterCollection getAssignedWaiters() {
+        return assignedWaiters;
+    }
+
+    public void setAssignedWaiters(WaiterCollection assignedWaiters) {
+        this.assignedWaiters = assignedWaiters;
     }
 
     //Getter
@@ -39,6 +51,11 @@ public class BookableTable {
     public boolean isAccessible() {
         return isAccessible;
     }
+
+    public TableCollection getTableCollection() {
+        return tableCollection;
+    }
+
     //Setters
     public void setCapacity(int capacity) {
         this.capacity = capacity;
@@ -52,16 +69,15 @@ public class BookableTable {
         this.bookingCollection = bookingCollection;
     }
 
+    public void setTableCollection(TableCollection tableCollection) {
+        this.tableCollection = tableCollection;
+    }
+
     public void setAccessible(boolean accessible) {
         isAccessible = accessible;
     }
 
     //Methods
-
-    public void bookTable(Booking booking){
-        //TODO
-    }
-
     public boolean checkAvailability(long time){
         //TODO
         return true;
@@ -82,6 +98,12 @@ public class BookableTable {
         //TODO
     }
     public void cancel(){
+        //TODO
+    }
+    public void assignWaiter(Waiter waiter){
+        //TODO
+    }
+    public void removeWaiter(Waiter waiter){
         //TODO
     }
 

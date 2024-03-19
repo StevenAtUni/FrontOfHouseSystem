@@ -1,30 +1,32 @@
 package FOHClasses;
 
+import FOHClasses.Collection.BookableTableCollection;
+import FOHClasses.Collection.OrderCollection;
+import FOHClasses.Collection.PhysicalTableCollection;
+
 public class Waiter {
     private final int staffID;
     private String name;
     private int pin;
     private String phoneNumber;
     private String waiterType;
-    private PhysicalTable tableCurrentlyWaiting;
+    private BookableTableCollection tablesWaiting;
     private float tipEarned;
     private String email;
-    private String payInfo;
-    private Order currentOrder;
+    private OrderCollection currentOrder;
 
-    public Waiter(int staffID, String name, int pin, String waiterType, PhysicalTable tableCurrentlyWaiting, float tipEarned, String email, String payInfo) {
+    public Waiter(int staffID, String name, int pin, String waiterType, String email) {
         this.staffID = staffID;
         this.name = name;
         this.pin = pin;
         this.waiterType = waiterType;
-        this.tableCurrentlyWaiting = tableCurrentlyWaiting;
-        this.tipEarned = tipEarned;
+        this.tablesWaiting = new BookableTableCollection();
+        this.currentOrder = new OrderCollection();
+        this.tipEarned = 0;
         this.email = email;
-        this.payInfo = payInfo;
     }
 
     //Getters
-
     public int getStaffID() {
         return staffID;
     }
@@ -45,8 +47,8 @@ public class Waiter {
         return waiterType;
     }
 
-    public PhysicalTable getTableCurrentlyWaiting() {
-        return tableCurrentlyWaiting;
+    public BookableTableCollection getTablesWaiting() {
+        return tablesWaiting;
     }
 
 
@@ -58,11 +60,8 @@ public class Waiter {
         return email;
     }
 
-    public String getPayInfo() {
-        return payInfo;
-    }
 
-    public Order getCurrentOrder() {
+    public OrderCollection getCurrentOrder() {
         return currentOrder;
     }
     //Setters
@@ -83,10 +82,9 @@ public class Waiter {
         this.waiterType = waiterType;
     }
 
-    public void setTableCurrentlyWaiting(PhysicalTable tableCurrentlyWaiting) {
-        this.tableCurrentlyWaiting = tableCurrentlyWaiting;
+    public void setTablesWaiting(BookableTableCollection tablesWaiting) {
+        this.tablesWaiting = tablesWaiting;
     }
-
 
     public void setTipEarned(float tipEarned) {
         this.tipEarned = tipEarned;
@@ -96,15 +94,15 @@ public class Waiter {
         this.email = email;
     }
 
-    public void setPayInfo(String payInfo) {
-        this.payInfo = payInfo;
-    }
-
-    public void setCurrentOrder(Order currentOrder) {
+    public void setCurrentOrder(OrderCollection currentOrder) {
         this.currentOrder = currentOrder;
     }
+
     //Methods
-    public void payWaiter(){
+    public void assignTable(BookableTable table){
+        //TODO
+    }
+    public  void unAssignTable(BookableTable table){
         //TODO
     }
     public void login(int StaffID, int pin){
