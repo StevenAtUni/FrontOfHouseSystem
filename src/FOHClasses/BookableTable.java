@@ -2,6 +2,7 @@ package FOHClasses;
 
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.TableCollection;
+import FOHClasses.Collection.WaiterCollection;
 
 public class BookableTable {
     private final int tableID;
@@ -11,13 +12,23 @@ public class BookableTable {
     //isAccessibleTable directly conveys the concept of being usable by people with disabilities
     private boolean isAccessible;
     private TableCollection tableCollection;
+    private WaiterCollection assignedWaiters;
 
     public BookableTable(int tableID, int capacity, boolean isAccessible) {
         this.tableID = tableID;
         this.capacity = capacity;
         this.isAccessible = isAccessible;
         this.bookingCollection = new BookingCollection();
+        this.assignedWaiters = new WaiterCollection();
         this.tableCollection = new TableCollection();
+    }
+
+    public WaiterCollection getAssignedWaiters() {
+        return assignedWaiters;
+    }
+
+    public void setAssignedWaiters(WaiterCollection assignedWaiters) {
+        this.assignedWaiters = assignedWaiters;
     }
 
     //Getter
@@ -87,6 +98,12 @@ public class BookableTable {
         //TODO
     }
     public void cancel(){
+        //TODO
+    }
+    public void assignWaiter(Waiter waiter){
+        //TODO
+    }
+    public void removeWaiter(Waiter waiter){
         //TODO
     }
 

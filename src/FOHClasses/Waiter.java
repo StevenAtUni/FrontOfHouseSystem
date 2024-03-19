@@ -1,5 +1,6 @@
 package FOHClasses;
 
+import FOHClasses.Collection.BookableTableCollection;
 import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
 
@@ -9,7 +10,7 @@ public class Waiter {
     private int pin;
     private String phoneNumber;
     private String waiterType;
-    private PhysicalTableCollection tableCurrentlyWaiting;
+    private BookableTableCollection tablesWaiting;
     private float tipEarned;
     private String email;
     private OrderCollection currentOrder;
@@ -19,7 +20,7 @@ public class Waiter {
         this.name = name;
         this.pin = pin;
         this.waiterType = waiterType;
-        this.tableCurrentlyWaiting = new PhysicalTableCollection();
+        this.tablesWaiting = new BookableTableCollection();
         this.currentOrder = new OrderCollection();
         this.tipEarned = 0;
         this.email = email;
@@ -46,8 +47,8 @@ public class Waiter {
         return waiterType;
     }
 
-    public PhysicalTableCollection getTableCurrentlyWaiting() {
-        return tableCurrentlyWaiting;
+    public BookableTableCollection getTablesWaiting() {
+        return tablesWaiting;
     }
 
 
@@ -81,8 +82,8 @@ public class Waiter {
         this.waiterType = waiterType;
     }
 
-    public void setTableCurrentlyWaiting(PhysicalTableCollection tableCurrentlyWaiting) {
-        this.tableCurrentlyWaiting = tableCurrentlyWaiting;
+    public void setTablesWaiting(BookableTableCollection tablesWaiting) {
+        this.tablesWaiting = tablesWaiting;
     }
 
     public void setTipEarned(float tipEarned) {
@@ -98,10 +99,10 @@ public class Waiter {
     }
 
     //Methods
-    public void assignTable(PhysicalTable table){
+    public void assignTable(BookableTable table){
         //TODO
     }
-    public  void unAssignTable(PhysicalTable table){
+    public  void unAssignTable(BookableTable table){
         //TODO
     }
     public void login(int StaffID, int pin){

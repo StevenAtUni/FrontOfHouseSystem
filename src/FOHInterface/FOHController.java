@@ -96,7 +96,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         table2.removeTable(table1);
     }
 
-    public void assignWaiterToTable(Waiter waiter, PhysicalTable table){
+    public void assignWaiterToTable(Waiter waiter, BookableTable table){
         // assign a waiter to a table and vice versa
         table.assignWaiter(waiter);
         waiter.assignTable(table);
