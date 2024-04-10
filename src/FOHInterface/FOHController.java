@@ -60,32 +60,48 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     }
 
 
-    public void makeBooking(Customer customer, int bookingID, BookableTable reservedTable, String note, int numberOfDiners, long time){
+    public Booking makeBooking(int bookingID ,String customer, String phoneNumber, int numberOfGuests, long time, int date){
         //This method creates a booking class and then is added in the booking collection for its respectable Bookable table and customer
-
-        if (!reservedTable.checkAvailability(time)){
-            //TODO: Indicate that there is no availability for this table at the given time.
-        }
-        else if (!reservedTable.isAccessible()){ //TODO: add conditions in the IF statement based on customer disabilities
-            //TODO: Indicate that the table is not accessible based on the customer
-        }
-        else {
-            Booking booking = new Booking(bookingID, time, customer, reservedTable, note, numberOfDiners);
-            //TODO: Send this information to the Database to store
-
-            //Storing the booking object within the booking collections
-            customer.addBooking(booking);
-            reservedTable.addBooking(booking);
-        }
-
+        //make a function to generate a unique ID
+        return new Booking(bookingID, customer, phoneNumber,numberOfGuests,time,date);
     }
+
+    public void submitBooking(Booking booking){
+        //connect to database and send the booking details
+    }
+
+    public void editBooking(int bookingId, String customer, String phoneNumber, int numberOfGuests, long time, int date){
+        //connect to the database and retrieve the booking info
+        Booking editedBooking = new Booking(bookingId,customer,phoneNumber,numberOfGuests,time,date);
+        submitBooking(editedBooking);
+    }
+
+    public Booking getBooking(int bookingId){
+        //connect to database and get the booking info
+        return null;
+    }
+
+    public void removeBooking(int bookingId){
+        //removes a booking from the database
+    }
+
+    public BookingCollection getBookings(){
+        //connect to database and get the list of booking ids
+        BookingCollection collection =  new BookingCollection();
+        int[] bookingIDs = new int[0];
+        for (int id: bookingIDs){
+            Booking booking = getBooking(id);
+            collection.add(booking);
+        }
+        return collection;
+    }
+
 
     public void addTableToBookable(PhysicalTable table, BookableTable bTable){
         //adds table to the table collection of bookable table
         bTable.addTable(table);
         table.setAssignedTable(bTable);
     }
-
 
     public void assignWaiterToTable(Waiter waiter, BookableTable table){
         // assign a waiter to a table and vice versa

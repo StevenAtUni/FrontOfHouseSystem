@@ -1,67 +1,73 @@
 package FOHClasses;
 
 public class Booking {
-    private final int bookingID;
+    private final int bookingId;
+    private String customerName;
+    private String phoneNumber;
+    private int numberOfGuests;
     private long time;
-    private final Customer customer;
-    private BookableTable reservedTable;
-    private String note;
-    private int numberOfDiners;
+    private int date;
+    private int tableNumber;
 
-
-    //constructor
-    public Booking(int bookingID, long time, Customer customer, BookableTable reservedTable, String note, int numberOfDiners) {
-        this.bookingID = bookingID;
+    public Booking(int bookingId, String customerName, String phoneNumber, int numberOfGuests,long time, int date) {
+        this.bookingId = bookingId;
+        this.customerName = customerName;
+        this.phoneNumber = phoneNumber;
+        this.numberOfGuests= numberOfGuests;
         this.time = time;
-        this.customer = customer;
-        this.reservedTable = reservedTable;
-        this.note = note;
-        this.numberOfDiners = numberOfDiners;
+        this.date = date;
+        this.tableNumber = 0;//table 0 means unassigned for now
     }
 
-    //Getters
-    public int getBookingID() {
-        return bookingID;
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public long getTime() {
         return time;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public BookableTable getReservedTable() {
-        return reservedTable;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public int getNumberOfDiners() {
-        return numberOfDiners;
-    }
-
-    //Setters
-
     public void setTime(long time) {
         this.time = time;
     }
 
-    public void setReservedTable(BookableTable reservedTable) {
-        this.reservedTable = reservedTable;
+    public int getDate() {
+        return date;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setDate(int date) {
+        this.date = date;
     }
 
-    public void setNumberOfDiners(int numberOfDiners) {
-        this.numberOfDiners = numberOfDiners;
+    public int getNumberOfGuests() {
+        return numberOfGuests;
     }
 
-    //Methods
-    //TODO add methods
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
 }
