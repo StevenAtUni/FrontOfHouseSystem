@@ -12,7 +12,10 @@ public class BookingCollection {
         this.bookings = new ArrayList<>();
     }
 
-    public void add(Booking booking){
+    public void addBooking(Booking booking){
         bookings.add(booking);
+    }
+    public void removeBooking(int bookingID){
+        bookings.removeIf(booking -> booking.getBookingId() == bookingID);
     }
 }

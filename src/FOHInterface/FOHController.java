@@ -91,7 +91,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         int[] bookingIDs = new int[0];
         for (int id: bookingIDs){
             Booking booking = getBooking(id);
-            collection.add(booking);
+            collection.addBooking(booking);
         }
         return collection;
     }
