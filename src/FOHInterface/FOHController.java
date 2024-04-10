@@ -2,6 +2,7 @@ package FOHInterface;
 
 import FOHClasses.*;
 import FOHClasses.Collection.BookingCollection;
+import FOHClasses.Collection.DishCollection;
 
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
@@ -78,6 +79,21 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
             reservedTable.addBooking(booking);
         }
 
+    }
+
+    public MenuItem getItem(int itemID){
+        //get item from database
+        return null;
+    }
+
+    public Menu makeMenu(){
+        //get list of menu id
+        DishCollection dishCollection = new DishCollection();
+        int[] menuIDs = new int[]{};
+        for (int id : menuIDs){
+            dishCollection.addItem(getItem(id));
+        }
+        return new Menu(dishCollection);
     }
 
     public void addTableToBookable(PhysicalTable table, BookableTable bTable){
