@@ -2,6 +2,8 @@ package FOHInterface;
 
 import FOHClasses.*;
 import FOHClasses.Collection.BookingCollection;
+import FOHClasses.Collection.OrderCollection;
+import FOHClasses.Collection.DishCollection;
 
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
@@ -93,9 +95,55 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
             Booking booking = getBooking(id);
             collection.addBooking(booking);
         }
+    }
+
+    public Order makeOrder(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter){
+        return new Order(orderId, customerName,tableNumber,items,notes,waiter);
+    }
+
+    public void submitOrder(Order order){
+        //send order to database
+    }
+
+    public void editOrder(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter){
+        Order editedOrder = makeOrder(orderId,customerName,tableNumber,items,notes,waiter);
+        submitOrder(editedOrder);
+
+    }
+
+    public void archiveOrder(int OrderId){
+        //remove the order and archive it from the database
+    }
+    public Order getOrder(int orderInt){
+        //get the order detail from database
+        return null;
+    }
+
+    public OrderCollection makeOrderCollection(){
+        OrderCollection collection = new OrderCollection();
+        //get list of orders
+        int[] orderIDs = new int[]{};
+        for (int id : orderIDs){
+            Order order = getOrder(id);
+            collection.addOrder(order);
+        }
         return collection;
     }
 
+    public MenuItem getItem(int itemID){
+        //get item from database
+        return null;
+    }
+
+    public Menu makeMenu(){
+        //get list of menu id
+        DishCollection dishCollection = new DishCollection();
+        int[] menuIDs = new int[]{};
+        for (int id : menuIDs){
+            dishCollection.addItem(getItem(id));
+        }
+        return new Menu(dishCollection);
+    }
 
     public void addTableToBookable(PhysicalTable table, BookableTable bTable){
         //adds table to the table collection of bookable table
@@ -108,5 +156,4 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         table.assignWaiter(waiter);
         waiter.assignTable(table);
     }
-
 }
