@@ -95,6 +95,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
             Booking booking = getBooking(id);
             collection.addBooking(booking);
         }
+        return collection;
     }
 
     public Order makeOrder(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter){
