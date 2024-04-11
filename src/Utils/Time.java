@@ -15,7 +15,16 @@ public class Time {
      * @param timestamp The desired time measured in seconds since the UNIX epoch
      * @return LocalDateTime object of the desired timestamp
      */
-    public static LocalDateTime unixToLocalDateTime(int timestamp) {
+    public static LocalDateTime unixToLocalDateTimeInt(int timestamp) {
+        return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.of("GMT"));
+    }
+
+    /**
+     * Generates a LocalDateTime object.
+     * @param timestamp The desired time measured in seconds since the UNIX epoch
+     * @return LocalDateTime object of the desired timestamp
+     */
+    public static LocalDateTime unixToLocalDateTimeLong(long timestamp) {
         return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.of("GMT"));
     }
 
