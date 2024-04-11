@@ -19,6 +19,6 @@ public class Menu {
 
     }
     public void removeDish(int itemID){
-        items.removeItem(itemID);
+        items.remove(itemID);
     }
 }
