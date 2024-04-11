@@ -3,7 +3,7 @@ package FOHInterface;
 import FOHClasses.*;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
-import FOHClasses.Collection.DishCollection;
+import FOHClasses.Collection.MenuItemCollection;
 
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
@@ -98,6 +98,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         return collection;
     }
 
+
     public Order makeOrder(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter){
         return new Order(orderId, customerName,tableNumber,items,notes,waiter);
     }
@@ -138,12 +139,12 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     public Menu makeMenu(){
         //get list of menu id
-        DishCollection dishCollection = new DishCollection();
+        MenuItemCollection menuItemCollection = new MenuItemCollection();
         int[] menuIDs = new int[]{};
         for (int id : menuIDs){
-            dishCollection.addItem(getItem(id));
+            menuItemCollection.add(getItem(id));
         }
-        return new Menu(dishCollection);
+        return new Menu(menuItemCollection);
     }
 
     public void addTableToBookable(PhysicalTable table, BookableTable bTable){
