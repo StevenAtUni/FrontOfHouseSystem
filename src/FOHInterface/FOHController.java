@@ -87,15 +87,15 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         //removes a booking from the database
     }
 
-    public BookingCollection getBookings(){
-        //connect to database and get the list of booking ids
-        BookingCollection collection =  new BookingCollection();
-        int[] bookingIDs = new int[0];
-        for (int id: bookingIDs){
-            Booking booking = getBooking(id);
-            collection.addBooking(booking);
-        }
-    }
+//    public BookingCollection getBookings(){
+//        //connect to database and get the list of booking ids
+//        BookingCollection collection =  new BookingCollection();
+//        int[] bookingIDs = new int[0];
+//        for (int id: bookingIDs){
+//            Booking booking = getBooking(id);
+//            collection.add(booking);
+//        }
+//    }
 
     public Order makeOrder(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter){
         return new Order(orderId, customerName,tableNumber,items,notes,waiter);
