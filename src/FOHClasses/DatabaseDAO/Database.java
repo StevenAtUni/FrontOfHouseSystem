@@ -1,4 +1,4 @@
-package FOHClasses;
+package FOHClasses.DatabaseDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,6 @@ public class Database {
     public static void  main(String[] args) {
         Database project = new Database();
         project.createConnection();
-
     }
 
     void createConnection() {
@@ -23,4 +22,5 @@ public class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
+
 }
