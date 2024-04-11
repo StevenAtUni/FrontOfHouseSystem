@@ -1,26 +1,24 @@
 package FOHClasses.Collection;
 
-import FOHClasses.BookableTable;
-import FOHClasses.Booking;
+import FOHClasses.MenuItem;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class BookableTableCollection {
-    private static final HashMap<Integer, BookableTable> tables = new HashMap<>();
+public class MenuItemCollection {
+    private static final HashMap<Integer, MenuItem> items = new HashMap<>();
 
     /**
      * Adds an entry to the hashmap
-     * @param table The entry to add
+     * @param menuItem The entry to add
      * @return Whether the operation succeeded (false if entry already exists)
      */
-    public static boolean add(BookableTable table){
-        int id = table.getTableID();
-        if (tables.containsKey(id)) return false; // Returns false if the booking already exists
-        tables.put(id, table);
+    public static boolean add(MenuItem menuItem){
+        int id = menuItem.getID();
+        if (items.containsKey(id)) return false; // Returns false if the booking already exists
+        items.put(id, menuItem);
         return true;
     }
 
@@ -30,7 +28,7 @@ public class BookableTableCollection {
      * @return Whether the operation succeeded
      */
     public static boolean remove(int tableId){
-        if (tables.remove(tableId) != null) return true; // Null if no value removed (booking ID didn't exist)
+        if (items.remove(tableId) != null) return true; // Null if no value removed (booking ID didn't exist)
         return false;
     }
 
@@ -38,7 +36,7 @@ public class BookableTableCollection {
      * Clears the hashmap.
      */
     public static void reset(){
-        tables.clear(); // Removes all entries
+        items.clear(); // Removes all entries
     }
 
     /**
@@ -46,22 +44,22 @@ public class BookableTableCollection {
      * @param tableId The id of the value to get
      * @return The requested value
      */
-    public static BookableTable get(int tableId){
-        return tables.get(tableId);
+    public static MenuItem get(int tableId){
+        return items.get(tableId);
     }
 
     /**
      * Returns all entries in ascending order by ID value.
      * @return A list of all entries.
      */
-    public static List<BookableTable> getAll(){
-        List<Integer> sortedKeys = new ArrayList<>(tables.keySet()); // Gets all keys
+    public static List<MenuItem> getAll(){
+        List<Integer> sortedKeys = new ArrayList<>(items.keySet()); // Gets all keys
         Collections.sort(sortedKeys); // Sorts keys
 
         // Adds bookings by order of the keys
-        List<BookableTable> sorted = new ArrayList<>();
+        List<MenuItem> sorted = new ArrayList<>();
         for (int key : sortedKeys) {
-            sorted.add(tables.get(key));
+            sorted.add(items.get(key));
         }
         return sorted;
     }

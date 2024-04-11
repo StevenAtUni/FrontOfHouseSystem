@@ -1,7 +1,5 @@
 package FOHClasses;
 
-import FOHClasses.Collection.DishCollection;
-
 public class Order {
     private final int orderId;
     private String customerName;

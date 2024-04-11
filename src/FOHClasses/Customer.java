@@ -5,16 +5,16 @@ import FOHClasses.Collection.BookingCollection;
 public class Customer {
     private final int customerID;
     private String name;
-    private BookingCollection bookings;
+    private BookingCollection bookingCollection;
 
     private String[] allergens;
 
     private String[] disabilities;
 
-    public Customer(int cutomerID, String name, BookingCollection bookings, String[] allergens, String[] disabilities) {
+    public Customer(int cutomerID, String name, BookingCollection bookingCollection, String[] allergens, String[] disabilities) {
         this.customerID = cutomerID;
         this.name = name;
-        this.bookings = bookings;
+        this.bookingCollection = bookingCollection;
         this.allergens = allergens;
         this.disabilities = disabilities;
     }
@@ -37,7 +37,7 @@ public class Customer {
     }
 
     public BookingCollection getBookings() {
-        return bookings;
+        return bookingCollection;
     }
 
 
@@ -55,8 +55,8 @@ public class Customer {
         this.name = name;
     }
 
-    public void setBookings(BookingCollection bookings) {
-        this.bookings = bookings;
+    public void setBookings(BookingCollection bookingCollection) {
+        this.bookingCollection = bookingCollection;
     }
 
 
