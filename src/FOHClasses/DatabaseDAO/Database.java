@@ -8,7 +8,7 @@ public class Database {
 
     public static void  main(String[] args) {
         BookingDAO.cancelConfirmedBooking(2);
-        BookingDAO.
+
     }
 
 
