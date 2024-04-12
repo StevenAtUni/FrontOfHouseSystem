@@ -90,7 +90,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     }
 
     public BookingCollection getBookings(){
-       //connect to database and get the list of booking ids
+        //connect to database and get the list of booking ids
         BookingCollection collection =  new BookingCollection();
         int[] bookingIDs = new int[0];
         for (int id: bookingIDs){
