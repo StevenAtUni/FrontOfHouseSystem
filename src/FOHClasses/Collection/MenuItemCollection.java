@@ -10,6 +10,10 @@ import java.util.List;
 public class MenuItemCollection {
     private static final HashMap<Integer, MenuItem> items = new HashMap<>();
 
+    public MenuItemCollection() {
+        throw new UnsupportedOperationException("This class should not be instantiated.");
+    }
+
     /**
      * Adds an entry to the hashmap
      * @param menuItem The entry to add
@@ -24,11 +28,11 @@ public class MenuItemCollection {
 
     /**
      * Removes an entry from the hashmap.
-     * @param tableId The id of the entry to remove
+     * @param itemId The id of the entry to remove
      * @return Whether the operation succeeded
      */
-    public static boolean remove(int tableId){
-        if (items.remove(tableId) != null) return true; // Null if no value removed (booking ID didn't exist)
+    public static boolean remove(int itemId){
+        if (items.remove(itemId) != null) return true; // Null if no value removed (booking ID didn't exist)
         return false;
     }
 
@@ -41,11 +45,11 @@ public class MenuItemCollection {
 
     /**
      * Get a value from the hashmap.
-     * @param tableId The id of the value to get
+     * @param itemId The id of the value to get
      * @return The requested value
      */
-    public static MenuItem get(int tableId){
-        return items.get(tableId);
+    public static MenuItem get(int itemId){
+        return items.get(itemId);
     }
 
     /**
