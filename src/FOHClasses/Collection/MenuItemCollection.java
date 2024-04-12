@@ -15,11 +15,10 @@ public class MenuItemCollection {
      * @param menuItem The entry to add
      * @return Whether the operation succeeded (false if entry already exists)
      */
-    public static boolean add(MenuItem menuItem){
+    public void add(MenuItem menuItem){
         int id = menuItem.getID();
-        if (items.containsKey(id)) return false; // Returns false if the booking already exists
         items.put(id, menuItem);
-        return true;
+        //lets say someone order multiple items
     }
 
     /**
@@ -41,18 +40,18 @@ public class MenuItemCollection {
 
     /**
      * Get a value from the hashmap.
-     * @param tableId The id of the value to get
+     * @param itemId The id of the value to get
      * @return The requested value
      */
-    public static MenuItem get(int tableId){
-        return items.get(tableId);
+    public static MenuItem get(int itemId){
+        return items.get(itemId);
     }
 
     /**
      * Returns all entries in ascending order by ID value.
      * @return A list of all entries.
      */
-    public static List<MenuItem> getAll(){
+    public List<MenuItem> getAll(){
         List<Integer> sortedKeys = new ArrayList<>(items.keySet()); // Gets all keys
         Collections.sort(sortedKeys); // Sorts keys
 

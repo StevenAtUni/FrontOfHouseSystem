@@ -1,20 +1,21 @@
 package FOHClasses;
 
-import FOHClasses.Collection.BookingCollection;
+
+import java.util.ArrayList;
 
 public class Customer {
     private final int customerID;
     private String name;
-    private BookingCollection bookingCollection;
+    private ArrayList<Integer> bookingIDs;
 
     private String[] allergens;
 
     private String[] disabilities;
 
-    public Customer(int cutomerID, String name, BookingCollection bookingCollection, String[] allergens, String[] disabilities) {
-        this.customerID = cutomerID;
+    public Customer(int customerID, String name, String[] allergens, String[] disabilities) {
+        this.customerID = customerID;
         this.name = name;
-        this.bookingCollection = bookingCollection;
+        this.bookingIDs = new ArrayList<Integer>();
         this.allergens = allergens;
         this.disabilities = disabilities;
     }
@@ -36,8 +37,8 @@ public class Customer {
         return name;
     }
 
-    public BookingCollection getBookings() {
-        return bookingCollection;
+    public ArrayList<Integer> getBookings() {
+        return bookingIDs;
     }
 
 
@@ -55,17 +56,17 @@ public class Customer {
         this.name = name;
     }
 
-    public void setBookings(BookingCollection bookingCollection) {
-        this.bookingCollection = bookingCollection;
+    public void setBookings(ArrayList<Integer> bookingCollection) {
+        this.bookingIDs = bookingCollection;
     }
 
 
     //Methods
-    public void addBooking(Booking booking){
-        //TODO
+    public void addBooking(int bookingID){
+        bookingIDs.add(bookingID);
     }
-    public void removeBooking(Booking booking){
-        //TODO
+    public void removeBooking(int bookingID){
+        bookingIDs.remove(bookingID);
     }
 
 }
