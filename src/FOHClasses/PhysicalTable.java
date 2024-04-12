@@ -3,15 +3,19 @@ package FOHClasses;
 import FOHClasses.Collection.TableCollection;
 import FOHClasses.Collection.WaiterCollection;
 
+import java.util.ArrayList;
+
 public class PhysicalTable {
     private final int tableID;
     private int childSeats;
     private BookableTable assignedTable;
+    private final ArrayList<Integer> currentOrder;
 
     public PhysicalTable(int tableID, int childSeats, BookableTable assignedTable) {
         this.tableID = tableID;
         this.childSeats = childSeats;
         this.assignedTable = assignedTable;
+        currentOrder = new ArrayList<>();
     }
 
     public BookableTable getAssignedTable() {
@@ -47,4 +51,15 @@ public class PhysicalTable {
         //TODO
     }
 
+    public ArrayList<Integer> getCurrentOrder() {
+        return currentOrder;
+    }
+
+    public void addOrder(int order){
+        currentOrder.add(order);
+    }
+
+    public void removeOrder(int order){
+        currentOrder.remove(order);
+    }
 }
