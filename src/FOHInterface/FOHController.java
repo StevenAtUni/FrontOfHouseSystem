@@ -5,6 +5,8 @@ import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Collection.MenuItemCollection;
 
+import java.util.ArrayList;
+
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
 
@@ -39,7 +41,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     public Customer createCustomer(int id, String name, String[] allergens, String[] disabilities){
         //this makes a customer class.
-        return new Customer(id, name, new BookingCollection(), allergens, disabilities);
+        return new Customer(id, name, allergens, disabilities);
         //TODO: Send this information to the Database to store
     }
 
@@ -87,15 +89,16 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         //removes a booking from the database
     }
 
-//    public BookingCollection getBookings(){
-//        //connect to database and get the list of booking ids
-//        BookingCollection collection =  new BookingCollection();
-//        int[] bookingIDs = new int[0];
-//        for (int id: bookingIDs){
-//            Booking booking = getBooking(id);
-//            collection.add(booking);
-//        }
-//    }
+    public BookingCollection getBookings(){
+       //connect to database and get the list of booking ids
+        BookingCollection collection =  new BookingCollection();
+        int[] bookingIDs = new int[0];
+        for (int id: bookingIDs){
+            Booking booking = getBooking(id);
+            collection.add(booking);
+        }
+        return collection;
+    }
 
     public Order makeOrder(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter){
         return new Order(orderId, customerName,tableNumber,items,notes,waiter);
@@ -119,10 +122,8 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         return null;
     }
 
-    public OrderCollection makeOrderCollection(){
+    public OrderCollection makeOrderCollection(int[] orderIDs){
         OrderCollection collection = new OrderCollection();
-        //get list of orders
-        int[] orderIDs = new int[]{};
         for (int id : orderIDs){
             Order order = getOrder(id);
             collection.addOrder(order);
@@ -131,6 +132,10 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     }
 
     public MenuItem getItem(int itemID){
+        //get item from database
+        return null;
+    }
+    public MenuItem getItem(String itemName){
         //get item from database
         return null;
     }
@@ -143,6 +148,39 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
             menuItemCollection.add(getItem(id));
         }
         return new Menu(menuItemCollection);
+    }
+
+    public int[] arrayListToArray(ArrayList<Integer> arrayList){
+        int[] intArray = new int[arrayList.size()];
+        for (int i = 0; i < arrayList.size(); i++) {
+            intArray[i] = arrayList.get(i);
+        }
+        return intArray;
+    }
+
+    public int getServiceCharge(){
+        return 0;//get the latest service charge
+    }
+    public Bill makeBill(int tableNumber, int waiterID, String paymentType){
+        // get the table stuff from database
+        int billID = 0;//generate a uniqueID
+        int total = 0;
+        PhysicalTable table = null;
+        int[] orderIDs = arrayListToArray(table.getCurrentOrder());
+        OrderCollection orders = makeOrderCollection(orderIDs);
+        MenuItemCollection items = new MenuItemCollection();
+        for (Order order : orders.getOrders()){
+            for (String item :  order.getItems()){
+                MenuItem orderedItem = getItem(item);
+                total += orderedItem.getPrice();
+                items.add(orderedItem);
+            }
+        }
+        return new Bill(billID, waiterID, paymentType, total,items,getServiceCharge());
+    }
+
+    public void sendBill(Bill bill){
+        //send the bill
     }
 
     public void addTableToBookable(PhysicalTable table, BookableTable bTable){

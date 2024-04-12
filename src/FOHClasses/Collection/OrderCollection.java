@@ -18,4 +18,8 @@ public class OrderCollection {
     public void removeOrder(int orderID){
         orders.removeIf(order -> order.getOrderId() == orderID);
     }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
 }
