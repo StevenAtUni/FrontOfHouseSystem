@@ -7,6 +7,10 @@ import java.util.*;
 public class BookingCollection {
     private static final HashMap<Integer, Booking> bookings = new HashMap<>();
 
+    public BookingCollection() {
+        throw new UnsupportedOperationException("This class should not be instantiated.");
+    }
+
     /**
      * Adds an entry to the hashmap
      * @param booking The entry to add

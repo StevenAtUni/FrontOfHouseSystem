@@ -125,7 +125,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         int[] orderIDs = new int[]{};
         for (int id : orderIDs){
             Order order = getOrder(id);
-            collection.addOrder(order);
+            collection.add(order);
         }
         return collection;
     }
