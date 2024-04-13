@@ -16,7 +16,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     }
 
     @Override
-    public int getAmountBooked(int timestamp) {
+    public int getAmountBooked(long timestamp) {
         return 0;
     }
 
