@@ -15,7 +15,16 @@ public class Time {
      * @param timestamp The desired time measured in seconds since the UNIX epoch
      * @return LocalDateTime object of the desired timestamp
      */
-    public static LocalDateTime unixToLocalDateTime(int timestamp) {
+    public static LocalDateTime unixToLocalDateTimeInt(int timestamp) {
+        return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.of("GMT"));
+    }
+
+    /**
+     * Generates a LocalDateTime object.
+     * @param timestamp The desired time measured in seconds since the UNIX epoch
+     * @return LocalDateTime object of the desired timestamp
+     */
+    public static LocalDateTime unixToLocalDateTimeLong(long timestamp) {
         return LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.of("GMT"));
     }
 
@@ -38,51 +47,56 @@ public class Time {
     }
 
     /**
-     * Obtains, as a string, the hours and minutes (HH:mm) of a LocalDateTime
-     * @param date The LocalDateTime object to convert
+     * Obtains, as a string, the hours and minutes (HH:mm) of a UNIX timestamp
+     * @param timestamp The desired time measured in seconds since the UNIX epoch
      * @return HH:mm String
      */
-    public static String localDateTimeToHHmm(LocalDateTime date) {
+    public static String unixToHHmm(long timestamp) {
+        LocalDateTime date = unixToLocalDateTimeLong(timestamp);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         return date.format(formatter);
     }
 
     /**
-     * Obtains, as a string, the hours and minutes (HH:mm:ss) of a LocalDateTime
-     * @param date The LocalDateTime object to convert
+     * Obtains, as a string, the hours and minutes (HH:mm:ss) of a UNIX timestamp
+     * @param timestamp The desired time measured in seconds since the UNIX epoch
      * @return HH:mm:ss String
      */
-    public static String localDateTimeToHHmmss(LocalDateTime date) {
+    public static String unixToHHmmss(long timestamp) {
+        LocalDateTime date = unixToLocalDateTimeLong(timestamp);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         return date.format(formatter);
     }
 
     /**
-     * Obtains, as a string, the hours, minutes, seconds, days, months, years (HH:mm:ss dd/MM/yyyy) of a LocalDateTime
-     * @param date The LocalDateTime object to convert
+     * Obtains, as a string, the hours, minutes, seconds, days, months, years (HH:mm:ss dd/MM/yyyy) of a UNIX timestamp
+     * @param timestamp The desired time measured in seconds since the UNIX epoch
      * @return HH:mm:ss dd/MM/yyyy String
      */
-    public static String localDateTimeToFull(LocalDateTime date) {
+    public static String unixToFull(long timestamp) {
+        LocalDateTime date = unixToLocalDateTimeLong(timestamp);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
         return date.format(formatter);
     }
 
     /**
-     * Obtains, as a string, the days, months, and years (dd/MM/yyyy) of a LocalDateTime
-     * @param date The LocalDateTime object to convert
+     * Obtains, as a string, the days, months, and years (dd/MM/yyyy) of a UNIX timestamp
+     * @param timestamp The desired time measured in seconds since the UNIX epoch
      * @return dd/MM/yyyy String
      */
-    public static String localDateTimeToDMY(LocalDateTime date) {
+    public static String unixToDMY(long timestamp) {
+        LocalDateTime date = unixToLocalDateTimeLong(timestamp);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return date.format(formatter);
     }
 
     /**
-     * Obtains, as a string, the hours, minutes, days, months, and years (HH:mm dd/MM/yyyy) of a LocalDateTime
-     * @param date The LocalDateTime object to convert
+     * Obtains, as a string, the hours, minutes, days, months, and years (HH:mm dd/MM/yyyy) of a UNIX timestamp
+     * @param timestamp The desired time measured in seconds since the UNIX epoch
      * @return HH:mm dd/MM/yyyy String
      */
-    public static String localDateTimeToHHmmDMY(LocalDateTime date) {
+    public static String unixToHHmmDMY(long timestamp) {
+        LocalDateTime date = unixToLocalDateTimeLong(timestamp);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         return date.format(formatter);
     }
