@@ -1,6 +1,7 @@
 package FOHClasses.DatabaseDAO;
 
 import java.sql.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +48,8 @@ public class BookingDAO {
                 Time bookingTime = resultSet.getTime("bookingTime");
                 int numOfPeople = resultSet.getInt("numOfPeople");
                 String note = resultSet.getString("Note");
-                Timestamp timestampDate =  new Timestamp(date.getTime());
-                LocalDateTime dateTime = timestampDate.toLocalDateTime();
-                Booking booking = new Booking(bookingID, customerID,numOfPeople,bookingTime.getTime() ,TimeConversion.localDateTimeToUnixInt(dateTime), note );
+
+                Booking booking = new Booking(bookingID, customerID,numOfPeople, Instant.now().getEpochSecond(), Math.toIntExact(bookingDate.getTime()), note );
                 bookings.add(booking);
             }
             selectBookings.close();

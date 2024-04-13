@@ -15,13 +15,6 @@ import java.util.List;
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
 
-    BookingDAO bookingDAO;
-    CustomerDAO customerDAO;
-    Database database;
-    MenuDAO menuDAO;
-    OrderDAO orderDAO;
-    WaiterDAO waiterDAO;
-
 
     //implemented methods
     @Override
@@ -55,7 +48,10 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     public Customer createCustomer(int id, String name, String[] allergens, String[] disabilities){
         //this makes a customer class.
         return new Customer(id, name, allergens, disabilities);
-        //TODO: Send this information to the Database to store
+    }
+
+    public void submitCustomer(Customer customer){
+        //CustomerDAO.insertCustomer(customer.getName(), );
     }
 
     public BookableTable createBookableTable (int tableID, int capacity, boolean isAccessible){
