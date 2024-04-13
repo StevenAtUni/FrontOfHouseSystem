@@ -1,5 +1,6 @@
 package FOHClasses.Collection;
 
+
 import FOHClasses.BookableTable;
 import FOHClasses.Booking;
 
@@ -22,10 +23,10 @@ public class BookableTableCollection {
      * @return Whether the operation succeeded (false if entry already exists)
      */
     public static boolean add(BookableTable table){
-        int id = table.getTableID();
-        if (tables.containsKey(id)) return false; // Returns false if the booking already exists
-        tables.put(id, table);
-        return true;
+//        int id = table.getTableID();
+//        if (tables.containsKey(id)) return false; // Returns false if the booking already exists
+//        tables.put(id, table);
+//        return true;
     }
 
     /**
