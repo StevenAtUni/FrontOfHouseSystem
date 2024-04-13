@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Provides type or format conversion of time.
  */
-public class Time {
+public class TimeHelper {
 
     /**
      * Generates a LocalDateTime object.
