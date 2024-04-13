@@ -45,6 +45,10 @@ public class Booking {
         return startTimestamp;
     }
 
+    public long getEndTimestamp() {
+        return endTimestamp;
+    }
+
     public int[] getTables() {
         int[] arr = new int[tables.size()];
         int i = 0;
