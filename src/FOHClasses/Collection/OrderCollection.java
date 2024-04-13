@@ -67,8 +67,4 @@ public class OrderCollection {
         }
         return sorted;
     }
-
-    public ArrayList<Order> getOrders() {
-        return orders;
-    }
 }
