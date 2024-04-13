@@ -16,7 +16,7 @@ public class PhysicalTable {
     public PhysicalTable() {
         this.tableId = nextId++;
 //        this.childSeats = 0;
-        this. bookedTimes = new HashMap<>();
+        this.bookedTimes = new HashMap<>();
 
         PhysicalTableCollection.add(this);
     }
