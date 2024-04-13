@@ -34,11 +34,8 @@ public class Terminal {
             table.book(startTimestamp, endTimeStamp);
         }
 
-        Booking booking = new Booking(customerName, phoneNumber, startTimestamp, endTimeStamp, tables);
-        for (int i = 0; i < covers; i++) {
-            booking.addCover(new Cover(startTimestamp, tables[0]).getCoverId()); // Creates a cover and adds the coverId to the booking
-        }
-        // Both bookings and covers add to the BookingCollection and CoverCollection via their constructors
+        new Booking(customerName, phoneNumber, startTimestamp, endTimeStamp, tables, covers);
+        // The constructor of Booker adds itself to the BookingCollection
         return true;
     }
 
