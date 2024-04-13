@@ -2,42 +2,47 @@ package FOHClasses;
 
 public class Booking {
     private final int bookingId;
-    private String customerName;
-    private String phoneNumber;
+    private int customerID;
     private int numberOfGuests;
     private long time;
     private int date;
     private int tableNumber;
+    private String note;
 
-    public Booking(int bookingId, String customerName, String phoneNumber, int numberOfGuests,long time, int date) {
+    public Booking(int bookingId, int customerName, int numberOfGuests,long time, int date, String note) {
         this.bookingId = bookingId;
-        this.customerName = customerName;
-        this.phoneNumber = phoneNumber;
+        this.customerID = customerName;
         this.numberOfGuests= numberOfGuests;
         this.time = time;
         this.date = date;
+        this.note = note;
         this.tableNumber = 0;//table 0 means unassigned for now
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public int getBookingId() {
         return bookingId;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerName(int customerName) {
+        this.customerID = customerName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public long getTime() {
         return time;

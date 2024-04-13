@@ -1,8 +1,12 @@
 package FOHClasses.DatabaseDAO;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import FOHClasses.Booking;
+import Utils.TimeConversion;
 
 public class BookingDAO {
     public static void createBooking(int customerID, Date bookingDate, Time bookingTime, int numOfPeople, String note) { // BookingDAO.createBooking(1, Date.valueOf("2024-04-15"), Time.valueOf("17:00:00"), 4, "None");
@@ -26,7 +30,7 @@ public class BookingDAO {
 
 
 
-    public static void findConfirmedBookingsByDate(Date date) { // BookingDAO.findConfirmedBookingsByDate(Date.valueOf("2024-04-15"));
+    public static List<Booking> findConfirmedBookingsByDate(Date date) { // BookingDAO.findConfirmedBookingsByDate(Date.valueOf("2024-04-15"));
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             PreparedStatement selectBookings = connection.prepareStatement(
                     "SELECT * FROM Booking WHERE BookingStatusbookingStatusID = 1 AND bookingDate = ?");
@@ -35,6 +39,7 @@ public class BookingDAO {
 
             ResultSet resultSet = selectBookings.executeQuery();
 
+            List<Booking> bookings = new ArrayList<>();
             while (resultSet.next()) {
                 int bookingID = resultSet.getInt("bookingID");
                 int customerID = resultSet.getInt("CustomercustomerID");
@@ -42,17 +47,19 @@ public class BookingDAO {
                 Time bookingTime = resultSet.getTime("bookingTime");
                 int numOfPeople = resultSet.getInt("numOfPeople");
                 String note = resultSet.getString("Note");
-
-                System.out.println("BookingID: " + bookingID + ", CustomerID: " + customerID +
-                        ", Date: " + bookingDate + ", Time: " + bookingTime +
-                        ", Number of People: " + numOfPeople + ", Note: " + note);
+                Timestamp timestampDate =  new Timestamp(date.getTime());
+                LocalDateTime dateTime = timestampDate.toLocalDateTime();
+                Booking booking = new Booking(bookingID, customerID,numOfPeople,bookingTime.getTime() ,TimeConversion.localDateTimeToUnixInt(dateTime), note );
+                bookings.add(booking);
             }
-
             selectBookings.close();
+            return bookings;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 
     public static void cancelConfirmedBooking(int bookingID) {

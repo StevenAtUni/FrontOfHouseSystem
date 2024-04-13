@@ -4,11 +4,24 @@ import FOHClasses.*;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Collection.MenuItemCollection;
+import FOHClasses.DatabaseDAO.*;
+import Utils.TimeConversion;
 
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
+
+    BookingDAO bookingDAO;
+    CustomerDAO customerDAO;
+    Database database;
+    MenuDAO menuDAO;
+    OrderDAO orderDAO;
+    WaiterDAO waiterDAO;
+
 
     //implemented methods
     @Override
@@ -64,24 +77,31 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     }
 
 
-    public Booking makeBooking(int bookingID ,String customer, String phoneNumber, int numberOfGuests, long time, int date){
+    public Booking makeBooking(int bookingID ,int customer, int numberOfGuests, long time, int date, String note){
         //This method creates a booking class and then is added in the booking collection for its respectable Bookable table and customer
         //make a function to generate a unique ID
-        return new Booking(bookingID, customer, phoneNumber,numberOfGuests,time,date);
+        return new Booking(bookingID, customer,numberOfGuests,time,date, note);
     }
 
     public void submitBooking(Booking booking){
+        LocalDateTime localDateTime = TimeConversion.unixToLocalDateTimeLong(booking.getDate());
+        BookingDAO.createBooking(booking.getCustomerID(), Date.valueOf(localDateTime.toLocalDate()),  new Time(booking.getTime()), booking.getNumberOfGuests(), booking.getNote());
         //connect to database and send the booking details
     }
 
-    public void editBooking(int bookingId, String customer, String phoneNumber, int numberOfGuests, long time, int date){
+    public void editBooking(int bookingId, int customer, int numberOfGuests, long time, int date, String note){
         //connect to the database and retrieve the booking info
-        Booking editedBooking = new Booking(bookingId,customer,phoneNumber,numberOfGuests,time,date);
+        Booking editedBooking = new Booking(bookingId,customer,numberOfGuests,time,date, note);
         submitBooking(editedBooking);
     }
 
-    public Booking getBooking(int bookingId){
+    public Booking getBooking(int bookingId , List<Booking> bookings){
         //connect to database and get the booking info
+        for (Booking booking : bookings){
+            if (booking.getBookingId() == bookingId){
+                return booking;
+            }
+        }
         return null;
     }
 
@@ -89,15 +109,10 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         //removes a booking from the database
     }
 
-    public BookingCollection getBookings(){
+    public List<Booking> getBookings(int date){
         //connect to database and get the list of booking ids
-        BookingCollection collection =  new BookingCollection();
-        int[] bookingIDs = new int[0];
-        for (int id: bookingIDs){
-            Booking booking = getBooking(id);
-            collection.add(booking);
-        }
-        return collection;
+        LocalDateTime localDateTime = TimeConversion.unixToLocalDateTimeLong(date);
+        return BookingDAO.findConfirmedBookingsByDate(Date.valueOf(localDateTime.toLocalDate()));
     }
 
     public Order makeOrder(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter){
