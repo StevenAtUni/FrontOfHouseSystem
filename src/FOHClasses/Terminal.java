@@ -7,9 +7,10 @@ import FOHClasses.Collection.PhysicalTableCollection;
 import java.util.Arrays;
 
 public class Terminal {
+    private static final int numOfTables = 15;
 
     public static void initialise() {
-        for (int i = 1; i <= 15; i++) {
+        for (int i = 1; i <= numOfTables; i++) {
             new PhysicalTable();
         }
     }
