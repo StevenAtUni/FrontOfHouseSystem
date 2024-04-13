@@ -16,7 +16,7 @@ public class Booking {
     private HashSet<Integer> covers;
     private int numberOfGuests;
 
-    public Booking(String customerName, String phoneNumber, long startTimestamp, long endTimestamp, int[] tables, int covers) {
+    public Booking(String customerName, String phoneNumber, long startTimestamp, long endTimestamp, int[] tables) {
         this.bookingId = nextId++;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
@@ -30,10 +30,6 @@ public class Booking {
 
         // Assigns the covers to the booking
         this.covers = new HashSet<>();
-        for (int i = 0; i < covers; i++) {
-            this.covers.add(new Cover(startTimestamp, tables[0]).getCoverId()); // Creates a cover and adds the coverId to the booking
-        }
-        this.numberOfGuests = this.covers.size();
         BookingCollection.add(this);
     }
 
@@ -61,6 +57,10 @@ public class Booking {
     public void addCover(int coverId) {
         this.covers.add(coverId);
         numberOfGuests = covers.size();
+    }
+
+    public void removeCover(int coverId) {
+
     }
 
     public int[] getCovers() {
