@@ -1,5 +1,6 @@
 package FOHClasses.Collection;
 
+import FOHClasses.Cover;
 import FOHClasses.PhysicalTable;
 
 import java.util.ArrayList;
@@ -15,10 +16,25 @@ public class PhysicalTableCollection {
     }
 
     /**
-     * Sets up the hashmap.
+     * Adds an entry to the hashmap
+     * @param table The entry to add
+     * @return Whether the operation succeeded (false if entry already exists)
      */
-    public static void initialise(){
-        // Initialises the hashmap
+    public static boolean add(PhysicalTable table){
+        int tableId = table.getTableId();
+        if (tables.containsKey(tableId)) return false; // Returns false if the cover already exists
+        tables.put(tableId, table);
+        return true;
+    }
+
+    /**
+     * Removes an entry from the hashmap.
+     * @param tableId The id of the entry to remove
+     * @return Whether the operation succeeded
+     */
+    public static boolean remove(int tableId){
+        if (tables.remove(tableId) != null) return true; // Null if no value removed (tableId didn't exist)
+        return false;
     }
 
     /**
