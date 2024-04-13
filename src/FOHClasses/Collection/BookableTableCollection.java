@@ -27,6 +27,7 @@ public class BookableTableCollection {
 //        if (tables.containsKey(id)) return false; // Returns false if the booking already exists
 //        tables.put(id, table);
 //        return true;
+        return false;
     }
 
     /**
