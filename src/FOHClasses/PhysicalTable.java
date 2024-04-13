@@ -1,65 +1,53 @@
 package FOHClasses;
 
+import FOHClasses.Collection.PhysicalTableCollection;
 import FOHClasses.Collection.TableCollection;
 import FOHClasses.Collection.WaiterCollection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PhysicalTable {
-    private final int tableID;
-    private int childSeats;
-    private BookableTable assignedTable;
-    private final ArrayList<Integer> currentOrder;
+    private static int nextId = 1;
+    private final int tableId;
+//    private int childSeats;
+    private HashMap<Long, Long> bookedTimes; // Key = startTimestamp, Value = endTimeStamp
 
-    public PhysicalTable(int tableID, int childSeats, BookableTable assignedTable) {
-        this.tableID = tableID;
-        this.childSeats = childSeats;
-        this.assignedTable = assignedTable;
-        currentOrder = new ArrayList<>();
+    public PhysicalTable() {
+        this.tableId = nextId++;
+//        this.childSeats = 0;
+        this. bookedTimes = new HashMap<>();
+
+        PhysicalTableCollection.add(this);
     }
 
-    public BookableTable getAssignedTable() {
-        return assignedTable;
+    public static void setNextId(int nextId) {
+        if (PhysicalTable.nextId < nextId) PhysicalTable.nextId = nextId; // Only allows nextId to be increased
     }
 
-    public void setAssignedTable(BookableTable assignedTable) {
-        this.assignedTable = assignedTable;
+    public int getTableId() {
+        return tableId;
     }
 
-    //Getters
-
-    public int getTableID() {
-        return tableID;
+    public boolean isAvailable(long startTimestamp, long endTimestamp) {
+        for (HashMap.Entry<Long, Long> booking : bookedTimes.entrySet()) {
+            if ((startTimestamp >= booking.getKey() && startTimestamp < booking.getValue()) ||
+                    (endTimestamp > booking.getKey() && endTimestamp < booking.getValue())) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public int getChildSeats() {
-        return childSeats;
+    public boolean book(long startTimestamp, long endTimestamp) {
+        if (isAvailable(startTimestamp, endTimestamp)) {
+            bookedTimes.put(startTimestamp, endTimestamp);
+            return true;
+        }
+        return false;
     }
 
-
-    //Setters
-
-    public void setChildSeats(int childSeats) {
-        this.childSeats = childSeats;
-    }
-
-    //Methods
-    public void connectTable(PhysicalTable table){
-        //TODO
-    }
-    public void removeTable(PhysicalTable table){
-        //TODO
-    }
-
-    public ArrayList<Integer> getCurrentOrder() {
-        return currentOrder;
-    }
-
-    public void addOrder(int order){
-        currentOrder.add(order);
-    }
-
-    public void removeOrder(int order){
-        currentOrder.remove(order);
+    public void unbook(long startTimestamp) {
+        bookedTimes.remove(startTimestamp);
     }
 }

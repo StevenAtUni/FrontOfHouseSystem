@@ -39,6 +39,8 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     //Methods
 
+    /*
+
     public Customer createCustomer(int id, String name, String[] allergens, String[] disabilities){
         //this makes a customer class.
         return new Customer(id, name, allergens, disabilities);
@@ -194,4 +196,6 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         table.assignWaiter(waiter);
         waiter.assignTable(table);
     }
+
+     */
 }

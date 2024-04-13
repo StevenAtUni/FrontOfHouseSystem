@@ -9,23 +9,25 @@ public class Booking {
     private final int bookingId;
     private String customerName;
     private String phoneNumber;
-    private int numberOfGuests;
-    private HashSet<Integer> covers;
-    private long timestamp;
-//    private int date;
+    private long startTimestamp;
+    private long endTimestamp;
     private int tableId;
+    private HashSet<Integer> tables;
+    private HashSet<Integer> covers;
+    private int numberOfGuests;
 
-    public Booking(String customerName, String phoneNumber, long timestamp, int tableId) {
+    public Booking(String customerName, String phoneNumber, long startTimestamp, long endTimestamp, int[] tables) {
         this.bookingId = nextId++;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
-//        this.numberOfGuests = numberOfGuests;
-        this.timestamp = timestamp;
-//        this.date = date;
-        this.tableId = tableId; //table 0 means unassigned for now
+        this.startTimestamp = startTimestamp;
+        this.endTimestamp = endTimestamp;
+        this.tableId = tables[0];
+        this.tables = new HashSet<>();
 
         // Assigns the covers to the booking
         this.covers = new HashSet<>();
+        this.numberOfGuests = 0;
         BookingCollection.add(this);
     }
 
@@ -37,56 +39,30 @@ public class Booking {
         return bookingId;
     }
 
+    public long getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public int[] getTables() {
+        int[] arr = new int[tables.size()];
+        int i = 0;
+        for (int id : tables) {
+            arr[i++] = id;
+        }
+        return arr;
+    }
+
     public void addCover(int coverId) {
         this.covers.add(coverId);
         numberOfGuests = covers.size();
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-//    public long getTime() {
-//        return time;
-//    }
-//
-//    public void setTime(long time) {
-//        this.time = time;
-//    }
-//
-//    public int getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(int date) {
-//        this.date = date;
-//    }
-
-    public int getNumberOfGuests() {
-        return numberOfGuests;
-    }
-
-    public void setNumberOfGuests(int numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
-
-    public int getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(int tableId) {
-        this.tableId = tableId;
+    public int[] getCovers() {
+        int[] arr = new int[covers.size()];
+        int i = 0;
+        for (int id : covers) {
+            arr[i++] = id;
+        }
+        return arr;
     }
 }
