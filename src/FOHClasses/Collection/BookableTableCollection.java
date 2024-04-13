@@ -12,6 +12,10 @@ import java.util.List;
 public class BookableTableCollection {
     private static final HashMap<Integer, BookableTable> tables = new HashMap<>();
 
+    public BookableTableCollection() {
+        throw new UnsupportedOperationException("This class should not be instantiated.");
+    }
+
     /**
      * Adds an entry to the hashmap
      * @param table The entry to add

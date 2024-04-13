@@ -126,7 +126,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         OrderCollection collection = new OrderCollection();
         for (int id : orderIDs){
             Order order = getOrder(id);
-            collection.addOrder(order);
+            collection.add(order);
         }
         return collection;
     }
@@ -169,7 +169,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         int[] orderIDs = arrayListToArray(table.getCurrentOrder());
         OrderCollection orders = makeOrderCollection(orderIDs);
         MenuItemCollection items = new MenuItemCollection();
-        for (Order order : orders.getOrders()){
+        for (Order order : orders.getAll()){
             for (String item :  order.getItems()){
                 MenuItem orderedItem = getItem(item);
                 total += orderedItem.getPrice();
