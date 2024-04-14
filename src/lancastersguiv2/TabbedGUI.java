@@ -70,12 +70,11 @@ public class TabbedGUI extends javax.swing.JFrame {
         bPrintBill = new javax.swing.JButton();
         bEditBill = new javax.swing.JButton();
         spSelectedBill = new javax.swing.JScrollPane();
-        listSelectedBill = new javax.swing.JTextArea();
+        taSelectedBill = new javax.swing.JTextArea();
         lSelectedBill = new javax.swing.JLabel();
         bBillHistory = new javax.swing.JButton();
         bSplitBill = new javax.swing.JButton();
         pOrder = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         lOrders = new javax.swing.JLabel();
         bOEdit = new javax.swing.JButton();
         bODelete = new javax.swing.JButton();
@@ -169,14 +168,25 @@ public class TabbedGUI extends javax.swing.JFrame {
         jButton15.setText("12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(810, 590));
+        setPreferredSize(new java.awt.Dimension(810, 590));
 
+        tpFOHGUIMain.setAutoscrolls(true);
+        tpFOHGUIMain.setMinimumSize(new java.awt.Dimension(810, 523));
+        tpFOHGUIMain.setPreferredSize(new java.awt.Dimension(810, 523));
+
+        pNotifications.setMinimumSize(new java.awt.Dimension(810, 523));
+        pNotifications.setPreferredSize(new java.awt.Dimension(810, 523));
+
+        listNotifications.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         listNotifications.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Item of food is unavailable", "Booking time has changed", "Restaurant nearing max capacity: 5", "Restaurant has reached max capacity", "Table layout changed", "Order Status (foods ready)", " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         spNotifications.setViewportView(listNotifications);
 
+        bNotificationDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bNotificationDelete.setText("Delete");
         bNotificationDelete.setActionCommand("");
         bNotificationDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -190,34 +200,53 @@ public class TabbedGUI extends javax.swing.JFrame {
         pNotificationsLayout.setHorizontalGroup(
                 pNotificationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(spNotifications)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNotificationsLayout.createSequentialGroup()
-                                .addContainerGap(356, Short.MAX_VALUE)
-                                .addComponent(bNotificationDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(350, 350, 350))
+                        .addGroup(pNotificationsLayout.createSequentialGroup()
+                                .addGap(346, 346, 346)
+                                .addComponent(bNotificationDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                .addGap(348, 348, 348))
         );
         pNotificationsLayout.setVerticalGroup(
                 pNotificationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pNotificationsLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(spNotifications, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
+                                .addComponent(spNotifications, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(bNotificationDelete)
-                                .addContainerGap(24, Short.MAX_VALUE))
+                                .addGap(17, 17, 17))
         );
 
         tpFOHGUIMain.addTab("Notifications", pNotifications);
 
+        pMenu.setMinimumSize(new java.awt.Dimension(810, 523));
+        pMenu.setPreferredSize(new java.awt.Dimension(810, 523));
+
+        tMenu.setAutoCreateRowSorter(true);
+        tMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tMenu.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
+                        {"Pizza", "9.50", "A delicate blend of europes finest tomato sauce and a delicately crafted 72 hour proven dough topped with your choice of premium toppings", "yeast, tomato, gluten, toppings"},
+                        {"Pasta", "34.00", "Some dried pasta made with sainsburys basics pasta sauce", "gluten, tomato"},
+                        {"Hot Dog", "6.00", "Sausage in bread", "gluten, pork"},
                         {null, null, null, null}
                 },
                 new String [] {
                         "Name", "Price", "Description", "Allergies"
                 }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                    false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tMenu.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tMenu.setRowHeight(40);
+        tMenu.setRowSelectionAllowed(false);
+        tMenu.setShowGrid(true);
+        tMenu.setUpdateSelectionOnSort(false);
+        tMenu.setVerifyInputWhenFocusTarget(false);
         spMenu.setViewportView(tMenu);
 
         javax.swing.GroupLayout pMenuLayout = new javax.swing.GroupLayout(pMenu);
@@ -226,18 +255,21 @@ public class TabbedGUI extends javax.swing.JFrame {
                 pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pMenuLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
+                                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         pMenuLayout.setVerticalGroup(
                 pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pMenuLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 
         tpFOHGUIMain.addTab("Menu", pMenu);
+
+        pBooking.setMinimumSize(new java.awt.Dimension(810, 523));
+        pBooking.setPreferredSize(new java.awt.Dimension(810, 523));
 
         pNewBooking.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "New Booking:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
@@ -268,21 +300,21 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         lNbTables.setText("Tables:");
 
-        cbNbDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        cbNbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        cbNbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
-        cbNbHour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbHour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", " " }));
 
-        cbNbMinute.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbMinute.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
 
-        cbNbNoGuests.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbNoGuests.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
 
         lNbBookingLength.setText("Booking Length:");
 
-        cbNbBookingLength.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbBookingLength.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1:00", "1:15", "1:30", "1:45", "2:00", "2:15", "2:30", "2:45", "3:00" }));
 
         tfTables.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,122 +324,130 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         lNbWaiter.setText("Waiter:");
 
-        cbNbWaiter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNbWaiter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alfonse", "Marshal", "Angela", "Patrice" }));
 
         javax.swing.GroupLayout pNewBookingLayout = new javax.swing.GroupLayout(pNewBooking);
         pNewBooking.setLayout(pNewBookingLayout);
         pNewBookingLayout.setHorizontalGroup(
                 pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNewBookingLayout.createSequentialGroup()
-                                .addGap(0, 66, Short.MAX_VALUE)
-                                .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfNbName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfNbPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(59, 59, 59))
                         .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(cbNbDay, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbNbMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbNbYear, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(130, 130, 130)
-                                                .addComponent(lNbName))
-                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(101, 101, 101)
-                                                .addComponent(lNbPhoneNumber))
-                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(129, 129, 129)
-                                                .addComponent(lNbDate))
-                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(129, 129, 129)
-                                                .addComponent(lNbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(123, 123, 123)
-                                                .addComponent(lNbTables, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(86, 86, 86)
+                                                .addGap(6, 6, 6)
+                                                .addComponent(cbNbBookingLength, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(36, 36, 36))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNewBookingLayout.createSequentialGroup()
                                                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(cbNbWaiter, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(bNbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(lNbBookingLength, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                                                .addGap(15, 15, 15)
+                                                                .addComponent(cbNbHour, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addGap(27, 27, 27)))
+                                .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lNbNoGuests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(122, 122, 122)
-                                                .addComponent(lNbWaiter))
+                                                .addComponent(cbNbNoGuests, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(27, 27, 27))
                                         .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                .addGap(37, 37, 37)
-                                                .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                                .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(cbNbBookingLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                                                .addGap(30, 30, 30)
-                                                                                .addComponent(cbNbHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                                                .addComponent(cbNbNoGuests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                                                .addComponent(cbNbMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                                .addComponent(lNbBookingLength)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(lNbNoGuests))
-                                                        .addGroup(pNewBookingLayout.createSequentialGroup()
-                                                                .addComponent(cbNbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(cbNbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(cbNbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNewBookingLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(tfTables, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(cbNbMinute, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(19, 19, 19)))
+                                .addGap(15, 15, 15))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addComponent(lNbName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(98, 98, 98))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(lNbPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(69, 69, 69))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(105, 105, 105)
+                                .addComponent(lNbDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(102, 102, 102))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(tfTables)
+                                .addGap(55, 55, 55))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(tfNbPhoneNumber)
+                                        .addComponent(tfNbName))
+                                .addGap(31, 31, 31))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(lNbTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(94, 94, 94))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(bNbSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbNbWaiter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(66, 66, 66))
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(92, 92, 92)
+                                .addComponent(lNbWaiter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+                        .addGroup(pNewBookingLayout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(lNbTables, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         pNewBookingLayout.setVerticalGroup(
                 pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pNewBookingLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lNbName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lNbName, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tfNbName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lNbPhoneNumber)
+                                .addComponent(lNbPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tfNbPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lNbDate)
+                                .addComponent(lNbDate, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(cbNbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cbNbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cbNbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lNbTime)
+                                .addComponent(lNbTime, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(cbNbHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cbNbMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbNbMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbNbHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lNbBookingLength)
-                                        .addComponent(lNbNoGuests))
+                                        .addComponent(lNbBookingLength, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lNbNoGuests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(cbNbBookingLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cbNbNoGuests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lNbTables)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lNbTables, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tfTables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lNbWaiter)
+                                .addGap(18, 18, 18)
+                                .addComponent(lNbWaiter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbNbWaiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(bNbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(11, Short.MAX_VALUE))
+                                .addGap(31, 31, 31)
+                                .addComponent(bNbSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         pEditBooking.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edit Booking:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        pEditBooking.setAutoscrolls(true);
 
         bBookingDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bBookingDelete.setText("DELETE");
@@ -417,20 +457,21 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
         });
 
+        tBookings.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         tBookings.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null}
+                        {"Jeremiah", "0928304809", "6", "16:15", "21/04/2024", "2,3,4", "Alfonse", "1:15"},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null}
                 },
                 new String [] {
-                        "Name", "Phone No", "No. Guests", "Time", "Date", "Table"
+                        "Name", "Phone No", "No. Guests", "Time", "Date", "Table", "Waiter", "Length"
                 }
         ));
         spEditBooking.setViewportView(tBookings);
 
-        cbBookingsSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tonights Bookings", "All Bookings" }));
+        cbBookingsSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tonight's Bookings", "Tomorrow's Bookings", "All Bookings" }));
 
         bBookingEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bBookingEdit.setText("EDIT");
@@ -439,17 +480,17 @@ public class TabbedGUI extends javax.swing.JFrame {
         pEditBooking.setLayout(pEditBookingLayout);
         pEditBookingLayout.setHorizontalGroup(
                 pEditBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(spEditBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pEditBookingLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbBookingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(163, 163, 163))
+                        .addComponent(spEditBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                         .addGroup(pEditBookingLayout.createSequentialGroup()
                                 .addGap(62, 62, 62)
-                                .addComponent(bBookingDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bBookingEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bBookingDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(145, 145, 145)
+                                .addComponent(bBookingEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(73, 73, 73))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pEditBookingLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbBookingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(179, 179, 179))
         );
         pEditBookingLayout.setVerticalGroup(
                 pEditBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,12 +498,12 @@ public class TabbedGUI extends javax.swing.JFrame {
                                 .addGap(15, 15, 15)
                                 .addComponent(cbBookingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spEditBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spEditBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addGroup(pEditBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(bBookingDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                                        .addComponent(bBookingEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(pEditBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(bBookingDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bBookingEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout pBookingLayout = new javax.swing.GroupLayout(pBooking);
@@ -488,11 +529,18 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         tpFOHGUIMain.addTab("Booking", pBooking);
 
+        pPayment.setMinimumSize(new java.awt.Dimension(810, 523));
+        pPayment.setPreferredSize(new java.awt.Dimension(810, 523));
+
+        listUnpaidOrders.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         listUnpaidOrders.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Table 1", "Table 2", "Table3" };
+            String[] strings = { "Table 1 £45.50", "Table 2 £80.20", "Table 3 £30.00" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listUnpaidOrders.setMaximumSize(new java.awt.Dimension(10000, 10000));
+        listUnpaidOrders.setMinimumSize(new java.awt.Dimension(332, 280));
+        listUnpaidOrders.setPreferredSize(new java.awt.Dimension(332, 280));
         spUnpaidOrders.setViewportView(listUnpaidOrders);
 
         lUnpaidOrders.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -512,9 +560,12 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
         });
 
-        listSelectedBill.setColumns(20);
-        listSelectedBill.setRows(5);
-        spSelectedBill.setViewportView(listSelectedBill);
+        taSelectedBill.setColumns(20);
+        taSelectedBill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        taSelectedBill.setRows(5);
+        taSelectedBill.setMinimumSize(new java.awt.Dimension(332, 280));
+        taSelectedBill.setPreferredSize(new java.awt.Dimension(332, 280));
+        spSelectedBill.setViewportView(taSelectedBill);
 
         lSelectedBill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lSelectedBill.setText("Selected Bill:");
@@ -529,50 +580,53 @@ public class TabbedGUI extends javax.swing.JFrame {
                 pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pPaymentLayout.createSequentialGroup()
                                 .addGap(88, 88, 88)
-                                .addComponent(lUnpaidOrders)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lSelectedBill)
-                                .addGap(129, 129, 129))
+                                .addComponent(lUnpaidOrders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(395, 395, 395)
+                                .addComponent(lSelectedBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(139, 139, 139))
                         .addGroup(pPaymentLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(spUnpaidOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addGroup(pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(bBillHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bSplitBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bPrintBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bEditBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addComponent(spSelectedBill, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addGap(20, 20, 20)
+                                .addComponent(spUnpaidOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(61, 61, 61)
+                                .addGroup(pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(bEditBill, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bPrintBill, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bSplitBill, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bBillHistory))
+                                .addGap(63, 63, 63)
+                                .addComponent(spSelectedBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(29, 29, 29))
         );
         pPaymentLayout.setVerticalGroup(
                 pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pPaymentLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addGroup(pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lUnpaidOrders, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lSelectedBill, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(lUnpaidOrders, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lSelectedBill, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(pPaymentLayout.createSequentialGroup()
-                                                .addGap(100, 100, 100)
-                                                .addComponent(bEditBill)
-                                                .addGap(43, 43, 43)
-                                                .addComponent(bPrintBill)
-                                                .addGap(46, 46, 46)
-                                                .addComponent(bSplitBill)
-                                                .addGap(45, 45, 45)
-                                                .addComponent(bBillHistory)
-                                                .addGap(0, 95, Short.MAX_VALUE))
-                                        .addGroup(pPaymentLayout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(spSelectedBill)
-                                                        .addComponent(spUnpaidOrders))))
-                                .addContainerGap())
+                                                        .addComponent(spUnpaidOrders, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+                                                .addGap(41, 41, 41))
+                                        .addGroup(pPaymentLayout.createSequentialGroup()
+                                                .addGap(89, 89, 89)
+                                                .addComponent(bEditBill)
+                                                .addGap(42, 42, 42)
+                                                .addComponent(bPrintBill)
+                                                .addGap(52, 52, 52)
+                                                .addComponent(bSplitBill)
+                                                .addGap(48, 48, 48)
+                                                .addComponent(bBillHistory)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         tpFOHGUIMain.addTab("Payment", pPayment);
+
+        pOrder.setMinimumSize(new java.awt.Dimension(810, 523));
+        pOrder.setPreferredSize(new java.awt.Dimension(810, 523));
 
         lOrders.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lOrders.setText("Orders:");
@@ -597,15 +651,25 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         tOrders.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null},
+                        {"4", "1 Pizza, 2 Pasta", "allergic to cheese", "Alfonse"},
                         {null, null, null, null},
                         {null, null, null, null},
                         {null, null, null, null}
                 },
                 new String [] {
-                        "Title 1", "Title 2", "Title 3", "Title 4"
+                        "Table", "Items", "Note", "Waiter"
                 }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                    false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tOrders.setMinimumSize(new java.awt.Dimension(300, 390));
+        tOrders.setPreferredSize(new java.awt.Dimension(300, 390));
         spOrders.setViewportView(tOrders);
 
         javax.swing.GroupLayout pOrderLayout = new javax.swing.GroupLayout(pOrder);
@@ -613,49 +677,46 @@ public class TabbedGUI extends javax.swing.JFrame {
         pOrderLayout.setHorizontalGroup(
                 pOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pOrderLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
-                                .addGap(107, 107, 107))
-                        .addGroup(pOrderLayout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addComponent(bOEdit)
-                                .addGap(97, 97, 97)
-                                .addComponent(bODelete)
-                                .addGap(102, 102, 102)
-                                .addComponent(bOArchive)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bONewOrder)
-                                .addGap(97, 97, 97))
-                        .addGroup(pOrderLayout.createSequentialGroup()
                                 .addGroup(pOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(pOrderLayout.createSequentialGroup()
-                                                .addGap(28, 28, 28)
-                                                .addComponent(spOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pOrderLayout.createSequentialGroup()
                                                 .addGap(346, 346, 346)
-                                                .addComponent(lOrders)))
-                                .addContainerGap(35, Short.MAX_VALUE))
+                                                .addComponent(lOrders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(363, 363, 363))
+                                        .addGroup(pOrderLayout.createSequentialGroup()
+                                                .addGap(28, 28, 28)
+                                                .addComponent(spOrders)))
+                                .addGap(39, 39, 39))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pOrderLayout.createSequentialGroup()
+                                .addGap(113, 113, 113)
+                                .addComponent(bOEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(91, 91, 91)
+                                .addComponent(bODelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(78, 78, 78)
+                                .addComponent(bOArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(79, 79, 79)
+                                .addComponent(bONewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(101, 101, 101))
         );
         pOrderLayout.setVerticalGroup(
                 pOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pOrderLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(lOrders)
+                                .addContainerGap()
+                                .addComponent(lOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(spOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
+                                .addComponent(spOrders, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addGroup(pOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(bOEdit)
-                                        .addComponent(bODelete)
-                                        .addComponent(bOArchive)
-                                        .addComponent(bONewOrder))
-                                .addContainerGap(22, Short.MAX_VALUE))
+                                        .addComponent(bOEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bODelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bOArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bONewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(31, 31, 31))
         );
 
         tpFOHGUIMain.addTab("Order", pOrder);
 
+        pTablePlan.setMinimumSize(new java.awt.Dimension(810, 523));
+        pTablePlan.setPreferredSize(new java.awt.Dimension(810, 523));
         pTablePlan.setLayout(null);
 
         bTable9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -733,13 +794,13 @@ public class TabbedGUI extends javax.swing.JFrame {
         pTablePlan.add(bTable7);
         bTable7.setBounds(18, 186, 112, 64);
 
-        cbTpDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "21/03/2024", "22/03/2024", "23/03/2024", "24/03/2024", "25/03/2024" }));
+        cbTpDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year", "2023", "2024", "2025", "2026", "2027", "2028", "2029" }));
         pTablePlan.add(cbTpDay);
-        cbTpDay.setBounds(620, 310, 70, 22);
+        cbTpDay.setBounds(632, 330, 70, 22);
 
-        cbTpYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Time", "12:00", "12:30", "13:00", "13:30" }));
+        cbTpYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         pTablePlan.add(cbTpYear);
-        cbTpYear.setBounds(436, 310, 72, 22);
+        cbTpYear.setBounds(438, 330, 72, 22);
 
         tbTp1S.setText("S");
         pTablePlan.add(tbTp1S);
@@ -941,105 +1002,105 @@ public class TabbedGUI extends javax.swing.JFrame {
         pTablePlan.add(tbTp12D);
         tbTp12D.setBounds(744, 256, 38, 23);
 
-        cbTpMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTpMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         pTablePlan.add(cbTpMonth);
-        cbTpMonth.setBounds(530, 310, 72, 22);
+        cbTpMonth.setBounds(536, 330, 72, 22);
 
-        cbTpHour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "21/03/2024", "22/03/2024", "23/03/2024", "24/03/2024", "25/03/2024" }));
+        cbTpHour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21" }));
         pTablePlan.add(cbTpHour);
-        cbTpHour.setBounds(486, 352, 70, 22);
+        cbTpHour.setBounds(486, 370, 70, 22);
 
-        cbTpMinutes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "21/03/2024", "22/03/2024", "23/03/2024", "24/03/2024", "25/03/2024" }));
+        cbTpMinutes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minutes", "00", "15", "30", "45" }));
         pTablePlan.add(cbTpMinutes);
-        cbTpMinutes.setBounds(578, 352, 70, 22);
+        cbTpMinutes.setBounds(582, 370, 78, 22);
 
         lTp15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp15.setText("wiater");
+        lTp15.setText("Angela");
         pTablePlan.add(lTp15);
         lTp15.setBounds(292, 308, 86, 16);
 
         lTp1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp1.setText("wiater");
+        lTp1.setText("Angela");
         pTablePlan.add(lTp1);
         lTp1.setBounds(30, 14, 86, 20);
 
         lTp2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp2.setText("wiater");
+        lTp2.setText("Patrice");
         pTablePlan.add(lTp2);
         lTp2.setBounds(162, 14, 86, 16);
 
         lTp3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp3.setText("wiater");
+        lTp3.setText("Patrice");
         pTablePlan.add(lTp3);
         lTp3.setBounds(292, 14, 86, 16);
 
         lTp4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp4.setText("wiater");
+        lTp4.setText("Alfonse");
         pTablePlan.add(lTp4);
         lTp4.setBounds(418, 16, 86, 16);
 
         lTp5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp5.setText("wiater");
+        lTp5.setText("Alfonse");
         pTablePlan.add(lTp5);
         lTp5.setBounds(550, 16, 86, 16);
 
         lTp6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp6.setText("wiater");
+        lTp6.setText("Angela");
         pTablePlan.add(lTp6);
         lTp6.setBounds(682, 16, 86, 16);
 
         lTp7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp7.setText("wiater");
+        lTp7.setText("Angela");
         pTablePlan.add(lTp7);
         lTp7.setBounds(32, 164, 86, 16);
 
         lTp8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp8.setText("wiater");
+        lTp8.setText("Angela");
         pTablePlan.add(lTp8);
         lTp8.setBounds(162, 166, 86, 16);
 
         lTp9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp9.setText("wiater");
+        lTp9.setText("Patrice");
         pTablePlan.add(lTp9);
         lTp9.setBounds(292, 166, 86, 16);
 
         lTp10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp10.setText("wiater");
+        lTp10.setText("Angela");
         pTablePlan.add(lTp10);
         lTp10.setBounds(422, 166, 86, 16);
 
         lTp11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp11.setText("wiater");
+        lTp11.setText("Angela");
         pTablePlan.add(lTp11);
         lTp11.setBounds(550, 166, 86, 16);
 
         lTp12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp12.setText("wiater");
+        lTp12.setText("Patrice");
         pTablePlan.add(lTp12);
         lTp12.setBounds(682, 166, 86, 16);
 
         lTp13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp13.setText("wiater");
+        lTp13.setText("Alfonse");
         pTablePlan.add(lTp13);
         lTp13.setBounds(32, 310, 86, 16);
 
         lTp14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lTp14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTp14.setText("wiater");
+        lTp14.setText("Alfonse");
         pTablePlan.add(lTp14);
         lTp14.setBounds(162, 310, 86, 16);
 
@@ -1049,11 +1110,11 @@ public class TabbedGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tpFOHGUIMain, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tpFOHGUIMain, javax.swing.GroupLayout.PREFERRED_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tpFOHGUIMain)
+                        .addComponent(tpFOHGUIMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1191,7 +1252,6 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbTpMonth;
     private javax.swing.JComboBox<String> cbTpYear;
     private javax.swing.JButton jButton15;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lNbBookingLength;
     private javax.swing.JLabel lNbDate;
     private javax.swing.JLabel lNbName;
@@ -1219,7 +1279,6 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lTp9;
     private javax.swing.JLabel lUnpaidOrders;
     private javax.swing.JList<String> listNotifications;
-    private javax.swing.JTextArea listSelectedBill;
     private javax.swing.JList<String> listUnpaidOrders;
     private javax.swing.JPanel pBooking;
     private javax.swing.JPanel pEditBooking;
@@ -1238,6 +1297,7 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JTable tBookings;
     private javax.swing.JTable tMenu;
     private javax.swing.JTable tOrders;
+    private javax.swing.JTextArea taSelectedBill;
     private javax.swing.JToggleButton tbTp10D;
     private javax.swing.JToggleButton tbTp10M;
     private javax.swing.JToggleButton tbTp10S;
