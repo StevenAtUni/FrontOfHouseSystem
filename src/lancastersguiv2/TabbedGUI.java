@@ -1185,6 +1185,7 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tbTp7DActionPerformed
 
+
     private void bNbSubmitActionPerformed(java.awt.event.ActionEvent evt) {
         // Retrieve values from form components
         String customerName = tfNbName.getText();
