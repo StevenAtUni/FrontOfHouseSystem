@@ -4,20 +4,27 @@
  */
 package lancastersguiv2;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author josep
  */
 public class NewOrder extends javax.swing.JFrame {
+    
+    DefaultListModel model1, model2;
 
     /**
      * Creates new form NewOrder
      */
     public NewOrder() {
         initComponents();
+        model1 = new DefaultListModel();
+        model2 = new DefaultListModel();
+        //add menu items to model1
+        
+        
     }
 
     /**
@@ -88,8 +95,18 @@ public class NewOrder extends javax.swing.JFrame {
         );
 
         bNoAdd.setText("ADD");
+        bNoAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNoAddActionPerformed(evt);
+            }
+        });
 
         bNoDelete.setText("DELETE");
+        bNoDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNoDeleteActionPerformed(evt);
+            }
+        });
 
         bNoNote.setText("NOTE");
         bNoNote.addActionListener(new java.awt.event.ActionListener() {
@@ -251,21 +268,30 @@ public class NewOrder extends javax.swing.JFrame {
     private void bNoConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoConfirmActionPerformed
         // TODO add your handling code here:
         //send order to database
-        List<String> orderItems = new ArrayList<>();
-        int iComponentCount = listNoOrders.getComponentCount();
-        for (int i = 0; i < iComponentCount;i++){
-            orderItems.add(listNoOrders.getComponent(i).toString());
-        }
-
-
-
-
         this.setVisible(false);
     }//GEN-LAST:event_bNoConfirmActionPerformed
 
     private void bNoNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoNoteActionPerformed
         // TODO add your handling code here:
+        Note note = new Note();
+        note.setVisible(true);
     }//GEN-LAST:event_bNoNoteActionPerformed
+
+    private void bNoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoAddActionPerformed
+        // TODO add your handling code here:
+        if(listNoMenu.getSelectedValue() != null){
+            model2.addElement(listNoMenu.getSelectedValue());
+            listNoOrders.setModel(model2);
+        }
+    }//GEN-LAST:event_bNoAddActionPerformed
+
+    private void bNoDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoDeleteActionPerformed
+        // TODO add your handling code here:
+        if(listNoOrders.getSelectedValue() != null){
+            model2.remove(listNoOrders.getSelectedIndex());
+            listNoOrders.setModel(model2);
+        }
+    }//GEN-LAST:event_bNoDeleteActionPerformed
 
     /**
      * @param args the command line arguments

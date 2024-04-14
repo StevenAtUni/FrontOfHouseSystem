@@ -7,13 +7,13 @@ package lancastersguiv2;
 
 import FOHClasses.DatabaseDAO.WaiterDAO;
 
+import static FOHClasses.DatabaseDAO.WaiterDAO.checkPassword;
+
 /**
  *
  * @author josep
  */
 public class Login extends javax.swing.JFrame {
-
-    int userID;
 
     /**
      * Creates new form Login
@@ -81,11 +81,11 @@ public class Login extends javax.swing.JFrame {
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
         String pWord = password.getText();
-        int pWordCheck = WaiterDAO.checkPassword(pWord);
+        int userID = WaiterDAO.checkPassword(pWord);
+
         
         if (userID != -1)
         {
-            userID = pWordCheck;
             TabbedGUI gui = new TabbedGUI();
             gui.setVisible(true);
             this.setVisible(false);
