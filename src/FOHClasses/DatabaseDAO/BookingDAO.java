@@ -5,24 +5,60 @@ import java.sql.*;
 import FOHClasses.Booking;
 
 public class BookingDAO {
-    public static void createBooking(int customerID, Date bookingDate, Time bookingTime, int numOfPeople, String note) { // BookingDAO.createBooking(1, Date.valueOf("2024-04-15"), Time.valueOf("17:00:00"), 4, "None");
+    public static void createBooking(int numOfPeople, String customerName, String contactNumber, long startTime, long endTime, int[] tableIDs) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
+            // Insert into Bookings table
             PreparedStatement createBooking = connection.prepareStatement(
-                    "INSERT INTO Booking (CustomercustomerID, bookingDate, bookingTime, numOfPeople, BookingStatusbookingStatusID, Note) " +
-                            "VALUES (?, ?, ?, ?, 1, ?)"); // Default BookingStatusbookingStatusID to 1 (Confirmed)
+                    "INSERT INTO Bookings (numOfPeople, customerName, contactNumber, startTime, endTime) " +
+                            "VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 
-            createBooking.setInt(1, customerID);
-            createBooking.setDate(2, bookingDate);
-            createBooking.setTime(3, bookingTime);
-            createBooking.setInt(4, numOfPeople);
-            createBooking.setString(5, note);
+            Timestamp tstartTime = new Timestamp(startTime * 1000L);
+            Timestamp tendTime = new Timestamp(endTime * 1000L);
 
-            createBooking.executeUpdate();
+            createBooking.setInt(1, numOfPeople);
+            createBooking.setString(2, customerName);
+            createBooking.setString(3, contactNumber);
+            createBooking.setTimestamp(4, tstartTime);
+            createBooking.setTimestamp(5, tendTime);
+
+            int rowsAffected = createBooking.executeUpdate();
+            int bookingID = -1; // Initialize bookingID
+
+            if (rowsAffected == 0) {
+                System.out.println("Failed to create new booking.");
+            } else {
+                // Retrieve the generated bookingID
+                ResultSet generatedKeys = createBooking.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    bookingID = generatedKeys.getInt(1);
+                    System.out.println("Booking created successfully with ID: " + bookingID);
+                }
+            }
+
             createBooking.close();
+
+            // Insert into Bookings_Tables table
+            if (bookingID != -1) {
+                PreparedStatement insertBookingTables = connection.prepareStatement(
+                        "INSERT INTO Bookings_Tables (BookingsbookingID, TablestableID) VALUES (?, ?)");
+
+                // Insert each table ID associated with the booking
+                for (int tableID : tableIDs) {
+                    insertBookingTables.setInt(1, bookingID);
+                    insertBookingTables.setInt(2, tableID);
+                    insertBookingTables.addBatch();
+                }
+
+                insertBookingTables.executeBatch();
+                insertBookingTables.close();
+            } else {
+                System.out.println("Failed to insert tables for the booking");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 
 
