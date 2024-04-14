@@ -119,6 +119,8 @@ public class Terminal {
     public static void newOrder(int bookingId, int coverId, int[] items, String notes) {
         Booking booking = BookingCollection.get(bookingId);
         Order order = new Order(booking.getTableId(), items, notes);
+        Cover cover = CoverCollection.get(coverId);
+        cover.addOrder(order.getOrderId());
 
         // TODO Call database add here
         
