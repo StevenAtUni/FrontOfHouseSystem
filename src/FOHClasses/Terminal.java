@@ -4,6 +4,7 @@ import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
 import FOHInterface.ManagementInterface.IRecord;
+import orders.FOHImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,9 +117,12 @@ public class Terminal {
 
     // For creating a new order from the UI
     public static void newOrder(int tableId, int[] items, String notes) {
-        new Order(tableId, items, notes);
+        Order order = new Order(tableId, items, notes);
 
         // TODO Call database add here
+        
+        // Sends order to the kitchen
+        FOHImpl.getInstance().makeOrder(order.getOrderId(), tableId, items, notes);
     }
 
     // For loading bookings from the database
