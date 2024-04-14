@@ -7,15 +7,15 @@ import java.util.HashSet;
 public class Cover {
     private static int nextId = 1;
     private final int coverId;
+    private int tableId;
     private long startTimestamp;
     private long endTimestamp;
-    private int tableId;
     private HashSet<Integer> orders;
 
     public Cover(long startTimestamp, int tableId) {
         this.coverId = nextId++; // Increments for the next available ID
-        this.startTimestamp = startTimestamp;
         this.tableId = tableId;
+        this.startTimestamp = startTimestamp;
         this.orders = new HashSet<>();
 
         CoverCollection.add(this); // Adds itself to the cover collection
@@ -23,14 +23,6 @@ public class Cover {
 
     public static void setNextId(int nextId) {
         if (Cover.nextId < nextId) Cover.nextId = nextId; // Only allows nextId to be increased
-    }
-
-    public int getCoverId() {
-        return coverId;
-    }
-
-    public int getTableId() {
-        return tableId;
     }
 
     public boolean addOrder(int orderId){
@@ -45,5 +37,21 @@ public class Cover {
             return true;
         }
         return false;
+    }
+
+    public int getCoverId() {
+        return coverId;
+    }
+
+    public int getTableId() {
+        return tableId;
+    }
+
+    public long getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public long getEndTimestamp() {
+        return endTimestamp;
     }
 }
