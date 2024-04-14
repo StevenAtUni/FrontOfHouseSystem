@@ -1,23 +1,24 @@
 package FOHClasses;
 
-import FOHClasses.Collection.DishCollection;
+import FOHClasses.Collection.MenuItemCollection;
 
 public class Menu {
-    private final DishCollection dishes;
+    private final MenuItemCollection items;
 
-    public Menu(DishCollection dishes) {
-        this.dishes = dishes;
+    public Menu(MenuItemCollection dishes) {
+        this.items = dishes;
     }
     //Getters
-    public DishCollection getDishes() {
-        return dishes;
+    public MenuItemCollection getDishes() {
+        return items;
     }
 
     //Methods
-    public void addDish(Dish dish){
-        //TODO
+    public void addDish(MenuItem dish){
+        items.add(dish);
+
     }
-    public void removeDish(Dish dish){
-        //TODO
+    public void removeDish(int itemID){
+        items.remove(itemID);
     }
 }

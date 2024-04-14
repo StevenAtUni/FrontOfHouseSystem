@@ -1,26 +1,27 @@
 package FOHClasses;
 
-import FOHClasses.Collection.DishCollection;
+
+import FOHClasses.Collection.MenuItemCollection;
 
 public class Bill {
     private final int billID;
-    private final Waiter waiter;
+    private final int waiterID;
     private final String paymentType;
     private final int totalPrice;
-    private final DishCollection items;
+    private final MenuItemCollection items;
     private final int serviceCharge;
 
-    public Bill(int billID, Waiter waiter, String paymentType, int totalPrice, DishCollection items, int serviceCharge) {
+    public Bill(int billID, int waiter, String paymentType, int totalPrice, MenuItemCollection items, int serviceCharge) {
         this.billID = billID;
-        this.waiter = waiter;
+        this.waiterID = waiter;
         this.paymentType = paymentType;
         this.totalPrice = totalPrice;
         this.items = items;
         this.serviceCharge = serviceCharge;
     }
 
-    public Waiter getWaiter() {
-        return waiter;
+    public int getWaiter() {
+        return waiterID;
     }
 
     public String getPaymentType() {
@@ -31,7 +32,7 @@ public class Bill {
         return totalPrice;
     }
 
-    public DishCollection getItems() {
+    public MenuItemCollection getItems() {
         return items;
     }
 

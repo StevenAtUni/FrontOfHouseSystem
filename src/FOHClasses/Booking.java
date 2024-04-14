@@ -1,67 +1,78 @@
 package FOHClasses;
 
+import FOHClasses.Collection.BookingCollection;
+
+import java.util.HashSet;
+
 public class Booking {
-    private final int bookingID;
-    private long time;
-    private final Customer customer;
-    private BookableTable reservedTable;
-    private String note;
-    private int numberOfDiners;
+    private static int nextId = 1;
+    private final int bookingId;
+    private String customerName;
+    private String phoneNumber;
+    private long startTimestamp;
+    private long endTimestamp;
+    private int tableId;
+    private HashSet<Integer> tables;
+    private HashSet<Integer> covers;
+    private int numberOfGuests;
 
+    public Booking(String customerName, String phoneNumber, long startTimestamp, long endTimestamp, int[] tables) {
+        this.bookingId = nextId++;
+        this.customerName = customerName;
+        this.phoneNumber = phoneNumber;
+        this.startTimestamp = startTimestamp;
+        this.endTimestamp = endTimestamp;
+        this.tableId = tables[0];
+        this.tables = new HashSet<>();
+        for (int tableId : tables) {
+            this.tables.add(tableId);
+        }
 
-    //constructor
-    public Booking(int bookingID, long time, Customer customer, BookableTable reservedTable, String note, int numberOfDiners) {
-        this.bookingID = bookingID;
-        this.time = time;
-        this.customer = customer;
-        this.reservedTable = reservedTable;
-        this.note = note;
-        this.numberOfDiners = numberOfDiners;
+        // Assigns the covers to the booking
+        this.covers = new HashSet<>();
+        BookingCollection.add(this);
     }
 
-    //Getters
-    public int getBookingID() {
-        return bookingID;
+    public static void setNextId(int nextId) {
+        if (Booking.nextId < nextId) Booking.nextId = nextId; // Only allows nextId to be increased
     }
 
-    public long getTime() {
-        return time;
+    public int getBookingId() {
+        return bookingId;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public long getStartTimestamp() {
+        return startTimestamp;
     }
 
-    public BookableTable getReservedTable() {
-        return reservedTable;
+    public long getEndTimestamp() {
+        return endTimestamp;
     }
 
-    public String getNote() {
-        return note;
+    public int[] getTables() {
+        int[] arr = new int[tables.size()];
+        int i = 0;
+        for (int id : tables) {
+            arr[i++] = id;
+        }
+        return arr;
     }
 
-    public int getNumberOfDiners() {
-        return numberOfDiners;
+    public void addCover(int coverId) {
+        this.covers.add(coverId);
+        numberOfGuests = covers.size();
     }
 
-    //Setters
+    public void removeCover(int coverId) {
 
-    public void setTime(long time) {
-        this.time = time;
     }
 
-    public void setReservedTable(BookableTable reservedTable) {
-        this.reservedTable = reservedTable;
+    public int[] getCovers() {
+        int[] arr = new int[covers.size()];
+        int i = 0;
+        for (int id : covers) {
+            arr[i++] = id;
+        }
+        return arr;
     }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public void setNumberOfDiners(int numberOfDiners) {
-        this.numberOfDiners = numberOfDiners;
-    }
-
-    //Methods
-    //TODO add methods
 }

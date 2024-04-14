@@ -1,78 +1,63 @@
 package FOHClasses;
 
-import FOHClasses.Collection.DishCollection;
-
 public class Order {
-    private final int orderID;
-    private DishCollection items;
-    private String orderNotes;
-    private String orderStatus;
-    private  int tableID;
-    private final Customer customer;
-    private Waiter server;
+    private final int orderId;
+    private String customerName;
+    private int tableNumber;
+    private String[] items;
+    private String notes;
+    private String waiter;
 
-    public Order(int orderID, String orderNotes, int tableID, Customer customer, Waiter server) {
-        this.orderID = orderID;
-        this.orderNotes = orderNotes;
-        this.orderStatus = "taking order";
-        this.tableID = tableID;
-        this.customer = customer;
-        this.server = server;
-        //TODO add this.items
-    }
-    //Getter
-    public int getOrderID() {
-        return orderID;
+    public Order(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter) {
+        this.orderId = orderId;
+        this.customerName = customerName;
+        this.tableNumber = tableNumber;
+        this.items = items;
+        this.notes = notes;
+        this.waiter = waiter;
     }
 
-    public DishCollection getItems() {
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public String[] getItems() {
         return items;
     }
 
-    public String getOrderNotes() {
-        return orderNotes;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public int getTableID() {
-        return tableID;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public Waiter getServer() {
-        return server;
-    }
-    //Setter
-
-    public void setTableID(int tableID ){
-        this.tableID=tableID;
-    }
-    public void setItems(DishCollection items) {
+    public void setItems(String[] items) {
         this.items = items;
     }
 
-    public void setOrderNotes(String orderNotes) {
-        this.orderNotes = orderNotes;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    public void setServer(Waiter server) {
-        this.server = server;
+    public String getWaiter() {
+        return waiter;
     }
-    //Methods
-    public void addItem(Dish dish){
-        //TODO
-    }
-    public void removeItem(Dish dish){
-        //TODO
+
+    public void setWaiter(String waiter) {
+        this.waiter = waiter;
     }
 }
