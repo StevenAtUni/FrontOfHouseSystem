@@ -26,16 +26,15 @@ public class TabbedGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-
         jButton15 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        notifsList = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        menuTable = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         bookingName = new javax.swing.JTextField();
@@ -52,29 +51,29 @@ public class TabbedGUI extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         deleteBookingButton = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        bookingsTable = new javax.swing.JTable();
+        bookingsDateSelect = new javax.swing.JComboBox<>();
         editBookingButton = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
+        unpaidOrdersLIst = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
+        printBillButton = new javax.swing.JButton();
+        editBillButton = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        selectedBill = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
+        billHistoryButton = new javax.swing.JButton();
+        splitBillButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        editOrderButton = new javax.swing.JButton();
+        deleteOrderButton = new javax.swing.JButton();
+        archiveOrderButton = new javax.swing.JButton();
         newOrderButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        ordersList = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         table9 = new javax.swing.JButton();
         table13 = new javax.swing.JButton();
@@ -91,20 +90,20 @@ public class TabbedGUI extends javax.swing.JFrame {
         table11 = new javax.swing.JButton();
         table3 = new javax.swing.JButton();
         table7 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        tableDateSelect = new javax.swing.JComboBox<>();
+        tableTimeSelect = new javax.swing.JComboBox<>();
 
         jButton15.setBackground(new java.awt.Color(255, 0, 0));
         jButton15.setText("12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        notifsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(notifsList);
 
         jButton1.setText("Delete");
         jButton1.setActionCommand("");
@@ -136,7 +135,7 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Notifications", jPanel1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        menuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -147,7 +146,7 @@ public class TabbedGUI extends javax.swing.JFrame {
                 "Name", "Price", "Description", "Allergies"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(menuTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,7 +279,7 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        bookingsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -291,9 +290,9 @@ public class TabbedGUI extends javax.swing.JFrame {
                 "Name", "Phone Number", "No. Guests", "Time", "Date", "Table"
             }
         ));
-        jScrollPane6.setViewportView(jTable2);
+        jScrollPane6.setViewportView(bookingsTable);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tonights Bookings", "All Bookings" }));
+        bookingsDateSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tonights Bookings", "All Bookings" }));
 
         editBookingButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         editBookingButton.setText("EDIT");
@@ -305,7 +304,7 @@ public class TabbedGUI extends javax.swing.JFrame {
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bookingsDateSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(163, 163, 163))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
@@ -318,7 +317,7 @@ public class TabbedGUI extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bookingsDateSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -351,40 +350,40 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Booking", jPanel9);
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        unpaidOrdersLIst.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Table 1", "Table 2", "Table3" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane5.setViewportView(jList4);
+        jScrollPane5.setViewportView(unpaidOrdersLIst);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Unpaid Orders:");
 
-        jButton22.setText("Print Bill");
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
+        printBillButton.setText("Print Bill");
+        printBillButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
+                printBillButtonActionPerformed(evt);
             }
         });
 
-        jButton23.setText("Edit Bill");
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
+        editBillButton.setText("Edit Bill");
+        editBillButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
+                editBillButtonActionPerformed(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane7.setViewportView(jTextArea1);
+        selectedBill.setColumns(20);
+        selectedBill.setRows(5);
+        jScrollPane7.setViewportView(selectedBill);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Selected Bill:");
 
-        jButton24.setText("Bill History");
+        billHistoryButton.setText("Bill History");
 
-        jButton25.setText("Split Bill");
+        splitBillButton.setText("Split Bill");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -401,10 +400,10 @@ public class TabbedGUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton23)
-                    .addComponent(jButton22)
-                    .addComponent(jButton25)
-                    .addComponent(jButton24))
+                    .addComponent(editBillButton)
+                    .addComponent(printBillButton)
+                    .addComponent(splitBillButton)
+                    .addComponent(billHistoryButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -419,13 +418,13 @@ public class TabbedGUI extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jButton23)
+                        .addComponent(editBillButton)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton22)
+                        .addComponent(printBillButton)
                         .addGap(41, 41, 41)
-                        .addComponent(jButton25)
+                        .addComponent(splitBillButton)
                         .addGap(49, 49, 49)
-                        .addComponent(jButton24)
+                        .addComponent(billHistoryButton)
                         .addGap(0, 114, Short.MAX_VALUE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -440,19 +439,19 @@ public class TabbedGUI extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("Orders:");
 
-        jButton2.setText("Edit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        editOrderButton.setText("Edit");
+        editOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                editOrderButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Delete");
+        deleteOrderButton.setText("Delete");
 
-        jButton4.setText("Archive");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        archiveOrderButton.setText("Archive");
+        archiveOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                archiveOrderButtonActionPerformed(evt);
             }
         });
 
@@ -463,7 +462,7 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
         });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        ordersList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -474,7 +473,7 @@ public class TabbedGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(ordersList);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -486,11 +485,11 @@ public class TabbedGUI extends javax.swing.JFrame {
                 .addGap(107, 107, 107))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
-                .addComponent(jButton2)
+                .addComponent(editOrderButton)
                 .addGap(97, 97, 97)
-                .addComponent(jButton3)
+                .addComponent(deleteOrderButton)
                 .addGap(102, 102, 102)
-                .addComponent(jButton4)
+                .addComponent(archiveOrderButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(newOrderButton)
                 .addGap(97, 97, 97))
@@ -515,9 +514,9 @@ public class TabbedGUI extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
+                    .addComponent(editOrderButton)
+                    .addComponent(deleteOrderButton)
+                    .addComponent(archiveOrderButton)
                     .addComponent(newOrderButton))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
@@ -569,9 +568,9 @@ public class TabbedGUI extends javax.swing.JFrame {
         table7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         table7.setText("7");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "21/03/2024", "22/03/2024", "23/03/2024", "24/03/2024", "25/03/2024" }));
+        tableDateSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "21/03/2024", "22/03/2024", "23/03/2024", "24/03/2024", "25/03/2024" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Time", "12:00", "12:30", "13:00", "13:30" }));
+        tableTimeSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Time", "12:00", "12:30", "13:00", "13:30" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -617,9 +616,9 @@ public class TabbedGUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(table15, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(102, 102, 102)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tableDateSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tableTimeSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
         );
         jPanel4Layout.setVerticalGroup(
@@ -647,8 +646,8 @@ public class TabbedGUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tableDateSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tableTimeSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(table13, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(table14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -687,17 +686,17 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bookingPhoneActionPerformed
 
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+    private void printBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBillButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton22ActionPerformed
+    }//GEN-LAST:event_printBillButtonActionPerformed
 
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+    private void editBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBillButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton23ActionPerformed
+    }//GEN-LAST:event_editBillButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void editOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_editOrderButtonActionPerformed
 
     private void newOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderButtonActionPerformed
         // TODO add your handling code here:
@@ -705,9 +704,9 @@ public class TabbedGUI extends javax.swing.JFrame {
         newOrderWindow.setVisible(true); // Make the NewOrder window visible
     }//GEN-LAST:event_newOrderButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void archiveOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveOrderButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_archiveOrderButtonActionPerformed
 
     private void bookingSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingSubmitActionPerformed
         // TODO add your handling code here:
@@ -757,26 +756,23 @@ public class TabbedGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton archiveOrderButton;
+    private javax.swing.JButton billHistoryButton;
     private javax.swing.JTextField bookingDate;
     private javax.swing.JTextField bookingGuests;
     private javax.swing.JTextField bookingName;
     private javax.swing.JTextField bookingPhone;
     private javax.swing.JButton bookingSubmit;
     private javax.swing.JTextField bookingTime;
+    private javax.swing.JComboBox<String> bookingsDateSelect;
+    private javax.swing.JTable bookingsTable;
     private javax.swing.JButton deleteBookingButton;
+    private javax.swing.JButton deleteOrderButton;
+    private javax.swing.JButton editBillButton;
     private javax.swing.JButton editBookingButton;
+    private javax.swing.JButton editOrderButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -786,8 +782,6 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -803,11 +797,13 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable menuTable;
     private javax.swing.JButton newOrderButton;
+    private javax.swing.JList<String> notifsList;
+    private javax.swing.JTable ordersList;
+    private javax.swing.JButton printBillButton;
+    private javax.swing.JTextArea selectedBill;
+    private javax.swing.JButton splitBillButton;
     private javax.swing.JButton table1;
     private javax.swing.JButton table10;
     private javax.swing.JButton table11;
@@ -823,5 +819,8 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JButton table7;
     private javax.swing.JButton table8;
     private javax.swing.JButton table9;
+    private javax.swing.JComboBox<String> tableDateSelect;
+    private javax.swing.JComboBox<String> tableTimeSelect;
+    private javax.swing.JList<String> unpaidOrdersLIst;
     // End of variables declaration//GEN-END:variables
 }
