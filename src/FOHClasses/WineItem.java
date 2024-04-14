@@ -4,8 +4,8 @@ public class WineItem extends MenuItem {
 
     private final int vintage;
 
-    public WineItem(int ID, String name, String allergens, String description, int price, int vintage) {
-        super(ID, name, allergens, description, price); // Calls parent method's constructor
+    public WineItem(int itemId, String name, int price, String description, String allergens, int vintage) {
+        super(itemId, name, price, description, allergens); // Calls parent method's constructor
         this.vintage = vintage;
     }
 }

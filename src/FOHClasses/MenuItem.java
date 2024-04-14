@@ -1,55 +1,23 @@
 package FOHClasses;
 
 public class MenuItem {
-    private final int ID;
-    private final String name;
-//    private final String ingredients;
-    private final String allergens;
-    private final String description;
-    private final int price;
+    private static int nextId = 1;
+    private final int itemId;
+    private String name;
+    private int price;
+    private String description;
+    private String allergens;
     private boolean isAvailable;
 
-    public MenuItem(int ID, String name, String allergens, String description, int price) {
-        this.ID = ID;
+    public MenuItem(int itemId, String name, int price, String description, String allergens) {
+        this.itemId = itemId;
         this.name = name;
-        this.allergens = allergens;
-        this.description = description;
-//        this.ingredients = ingredients;
         this.price = price;
+        this.description = description;
+        this.allergens = allergens;
         this.isAvailable = true;
     }
 
-    //Getters
-
-    public int getID() {
-        return ID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAllergens() {
-        return allergens;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-//    public String getIngredients() {
-//        return ingredients;
-//    }
-
-    //Setters
     public void setAvailable(boolean available) {
         isAvailable = available;
     }

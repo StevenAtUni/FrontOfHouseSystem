@@ -9,17 +9,19 @@ public class Booking {
     private final int bookingId;
     private String customerName;
     private String phoneNumber;
+    private int waiterId;
     private long startTimestamp;
     private long endTimestamp;
     private int tableId;
-    private HashSet<Integer> tables;
-    private HashSet<Integer> covers;
+    private final HashSet<Integer> tables;
+    private final HashSet<Integer> covers;
     private int numberOfGuests;
 
-    public Booking(String customerName, String phoneNumber, long startTimestamp, long endTimestamp, int[] tables) {
+    public Booking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables) {
         this.bookingId = nextId++;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
+        this.waiterId = waiterId;
         this.startTimestamp = startTimestamp;
         this.endTimestamp = endTimestamp;
         this.tableId = tables[0];
