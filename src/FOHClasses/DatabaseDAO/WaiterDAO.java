@@ -22,4 +22,8 @@ public class WaiterDAO {
         System.out.println("Not found");
         return -1; // Return -1 if no matching password is found
     }
+
+
+
+
 }
