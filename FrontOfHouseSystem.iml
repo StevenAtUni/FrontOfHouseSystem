@@ -16,7 +16,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Kitchen" level="project" />
+    <orderEntry type="library" name="Kitchen" level="application" />
     <orderEntry type="library" name="java" level="project" />
   </component>
 </module>
