@@ -31,8 +31,8 @@ public class PhysicalTable {
 
     public boolean isAvailable(long startTimestamp, long endTimestamp) {
         for (HashMap.Entry<Long, Long> booking : bookedTimes.entrySet()) {
-            if ((startTimestamp >= booking.getKey() && startTimestamp < booking.getValue()) ||
-                    (endTimestamp > booking.getKey() && endTimestamp < booking.getValue())) {
+            if ((booking.getKey() <= startTimestamp && startTimestamp < booking.getValue()) ||
+                    (booking.getKey() < endTimestamp && endTimestamp < booking.getValue())) {
                 return false;
             }
         }
