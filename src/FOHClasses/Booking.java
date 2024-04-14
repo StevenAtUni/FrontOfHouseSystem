@@ -37,8 +37,26 @@ public class Booking {
         if (Booking.nextId < nextId) Booking.nextId = nextId; // Only allows nextId to be increased
     }
 
+    public void addCover(int coverId) {
+        covers.add(coverId);
+        numberOfGuests = covers.size();
+    }
+
+    public void removeCover(int coverId) {
+        covers.remove(coverId);
+        numberOfGuests = covers.size();
+    }
+
     public int getBookingId() {
         return bookingId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public long getStartTimestamp() {
@@ -47,6 +65,10 @@ public class Booking {
 
     public long getEndTimestamp() {
         return endTimestamp;
+    }
+
+    public int getTableId() {
+        return tableId;
     }
 
     public int[] getTables() {
@@ -58,15 +80,6 @@ public class Booking {
         return arr;
     }
 
-    public void addCover(int coverId) {
-        this.covers.add(coverId);
-        numberOfGuests = covers.size();
-    }
-
-    public void removeCover(int coverId) {
-
-    }
-
     public int[] getCovers() {
         int[] arr = new int[covers.size()];
         int i = 0;
@@ -74,5 +87,9 @@ public class Booking {
             arr[i++] = id;
         }
         return arr;
+    }
+
+    public int getNumberOfGuests() {
+        return numberOfGuests;
     }
 }
