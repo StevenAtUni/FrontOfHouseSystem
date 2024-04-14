@@ -21,6 +21,7 @@ public class Order {
 //        this.waiter = waiter;
         this.complete = false;
 
+
         this.items = new ArrayList<>();
         for (int itemId : items) {
             this.items.add(itemId);

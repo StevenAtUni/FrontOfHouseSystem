@@ -15,6 +15,8 @@ import static FOHClasses.DatabaseDAO.WaiterDAO.checkPassword;
  */
 public class Login extends javax.swing.JFrame {
 
+    int userID = -1;
+
     /**
      * Creates new form Login
      */
@@ -81,11 +83,11 @@ public class Login extends javax.swing.JFrame {
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
         String pWord = password.getText();
-        int userID = WaiterDAO.checkPassword(pWord);
-
+        int pWordCheck = WaiterDAO.checkPassword(pWord);
         
-        if (userID != -1)
+        if (pWordCheck != -1)
         {
+            userID = pWordCheck;
             TabbedGUI gui = new TabbedGUI();
             gui.setVisible(true);
             this.setVisible(false);
