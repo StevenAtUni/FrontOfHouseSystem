@@ -97,6 +97,8 @@ public class Note extends javax.swing.JFrame {
 
     private void bSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitActionPerformed
         // TODO add your handling code here:
+        //TODO: add note to order
+        this.setVisible(false);
     }//GEN-LAST:event_bSubmitActionPerformed
 
     /**
