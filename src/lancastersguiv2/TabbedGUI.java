@@ -297,6 +297,11 @@ public class TabbedGUI extends javax.swing.JFrame {
         lNbDate.setText("Date:");
 
         bNbSubmit.setText("SUBMIT");
+        bNbSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNbSubmitActionPerformed(evt);
+            }
+        });
 
         lNbTables.setText("Tables:");
 
@@ -1173,6 +1178,10 @@ public class TabbedGUI extends javax.swing.JFrame {
     private void tbTp7DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbTp7DActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tbTp7DActionPerformed
+
+    private void bNbSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNbSubmitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bNbSubmitActionPerformed
 
     /**
      * @param args the command line arguments
