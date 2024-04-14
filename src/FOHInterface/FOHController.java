@@ -5,7 +5,12 @@ import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Collection.MenuItemCollection;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
@@ -17,7 +22,14 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     @Override
     public int getAmountBooked(long timestamp) {
-        return 0;
+        List<Booking> bookings = BookingCollection.getAll();
+        int amountBooked = 0;
+        for (Booking booking : bookings){
+            if (booking.getStartTimestamp() < timestamp && timestamp < booking.getEndTimestamp()){
+                amountBooked += 1;
+            }
+        }
+        return amountBooked;
     }
 
     @Override
@@ -26,10 +38,20 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     @Override
     public void markItemComplete(int orderID, int itemID) {
+
+
     }
 
     @Override
     public void markItemUnavailable(int itemID) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Dishes SET availabilty = 0 WHERE dishID = ?");
+            preparedStatement.setInt(1, itemID);
+            MenuItemCollection.get(itemID).setAvailable(false);
+        }
+        catch (SQLException e){
+            System.out.println("fail");
+        }
     }
 
     @Override
