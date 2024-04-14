@@ -56,4 +56,27 @@ public class DishDAO {
         }
     }
 
+    public static void setDishUnavailable(int dishID) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_a","rXwsW4mUvPU");) {
+            PreparedStatement updateDishAvailability = connection.prepareStatement(
+                    "UPDATE Dishes SET availability = 0 WHERE dishID = ?");
+
+            updateDishAvailability.setInt(1, dishID);
+
+            int rowsAffected = updateDishAvailability.executeUpdate();
+
+            if (rowsAffected == 0) {
+                // If no rows were affected, it means the dish with the specified ID was not found
+                System.out.println("No dish found with ID: " + dishID);
+            } else {
+                System.out.println("Dish availability updated successfully for dishID: " + dishID);
+            }
+
+            updateDishAvailability.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
