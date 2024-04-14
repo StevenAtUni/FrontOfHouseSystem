@@ -3,7 +3,9 @@ package FOHClasses;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
+import FOHInterface.ManagementInterface.IRecord;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Terminal {
@@ -122,5 +124,43 @@ public class Terminal {
     // For loading bookings from the database
     public static void loadOrder(int tableId, int[] items, String notes) {
         new Order(tableId, items, notes);
+    }
+
+    public static void payWholeBill(int bookingId, boolean isCash) {
+        Booking booking = BookingCollection.get(bookingId);
+        int[] covers = booking.getCovers();
+
+        ArrayList<Integer> items = new ArrayList<>();
+        for (int coverId : covers) {
+            Cover cover = CoverCollection.get(coverId);
+            int[] orders = cover.getOrders();
+            for (int itemId : orders) {
+                items.add(itemId);
+            }
+        }
+
+        createBill(booking, isCash, items, true);
+    }
+
+    public static void paySplitBill(int bookingId, boolean isCash) {
+        Booking booking = BookingCollection.get(bookingId);
+        int[] covers = booking.getCovers();
+
+        for (int coverId : covers) {
+            ArrayList<Integer> items = new ArrayList<>();
+            Cover cover = CoverCollection.get(coverId);
+            int[] orders = cover.getOrders();
+            for (int itemId : orders) {
+                items.add(itemId);
+            }
+            createBill(booking, isCash, items, true);
+        }
+    }
+
+    private static void createBill(Booking booking, boolean isCash, ArrayList<Integer> items, boolean applyServiceCharge) {
+        Bill bill = new Bill(booking.getWaiterId(), booking.getStartTimestamp(), booking.getEndTimestamp(), isCash, items, applyServiceCharge);
+
+        // TODO Sends to management
+//        IRecord.sendReceipt((int) booking.getStartTimestamp(), (int) booking.getEndTimestamp(), booking.getNumberOfGuests(), items, 0, bill.getServiceCharge());
     }
 }
