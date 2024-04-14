@@ -50,10 +50,13 @@ public class NewOrder extends javax.swing.JFrame {
         lNoMenu.setText("MENU:");
 
         listNoMenu.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Pizza", "Pasta", "Hot Dog", "Chicken and Rice" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listNoMenu.setMaximumSize(new java.awt.Dimension(100000, 10000));
+        listNoMenu.setMinimumSize(new java.awt.Dimension(200, 300));
+        listNoMenu.setPreferredSize(new java.awt.Dimension(200, 300));
         spNoMenu.setViewportView(listNoMenu);
 
         javax.swing.GroupLayout pNoMenuLayout = new javax.swing.GroupLayout(pNoMenu);
@@ -61,21 +64,21 @@ public class NewOrder extends javax.swing.JFrame {
         pNoMenuLayout.setHorizontalGroup(
                 pNoMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pNoMenuLayout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(lNoMenu)
-                                .addContainerGap(86, Short.MAX_VALUE))
-                        .addGroup(pNoMenuLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(spNoMenu)
+                                .addComponent(spNoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())
+                        .addGroup(pNoMenuLayout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(lNoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(74, Short.MAX_VALUE))
         );
         pNoMenuLayout.setVerticalGroup(
                 pNoMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNoMenuLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lNoMenu)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spNoMenu)
+                                .addComponent(lNoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(spNoMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 
@@ -96,60 +99,56 @@ public class NewOrder extends javax.swing.JFrame {
                 pNoAddDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pNoAddDeleteLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addGroup(pNoAddDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(bNoNote, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addGroup(pNoAddDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(bNoDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                                .addComponent(bNoAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                                .addContainerGap(15, Short.MAX_VALUE))
+                                .addGroup(pNoAddDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(bNoNote, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bNoDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bNoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(15, 15, 15))
         );
         pNoAddDeleteLayout.setVerticalGroup(
                 pNoAddDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pNoAddDeleteLayout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addComponent(bNoAdd)
-                                .addGap(43, 43, 43)
+                                .addGap(34, 34, 34)
                                 .addComponent(bNoDelete)
-                                .addGap(41, 41, 41)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                                 .addComponent(bNoNote)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(90, 90, 90))
         );
 
         lNoOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lNoOrder.setText("ORDER:");
 
-        listNoOrders.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listNoOrders.setMaximumSize(new java.awt.Dimension(100000, 100000));
+        listNoOrders.setMinimumSize(new java.awt.Dimension(200, 300));
+        listNoOrders.setPreferredSize(new java.awt.Dimension(200, 300));
         spNoOrder.setViewportView(listNoOrders);
 
         javax.swing.GroupLayout pNoOrderLayout = new javax.swing.GroupLayout(pNoOrder);
         pNoOrder.setLayout(pNoOrderLayout);
         pNoOrderLayout.setHorizontalGroup(
                 pNoOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pNoOrderLayout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(lNoOrder)
-                                .addContainerGap(78, Short.MAX_VALUE))
-                        .addGroup(pNoOrderLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNoOrderLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(spNoOrder)
-                                .addContainerGap())
+                                .addComponent(spNoOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(pNoOrderLayout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(lNoOrder)
+                                .addGap(0, 91, Short.MAX_VALUE))
         );
         pNoOrderLayout.setVerticalGroup(
                 pNoOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNoOrderLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lNoOrder)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spNoOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addContainerGap()
+                                .addComponent(lNoOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spNoOrder)
+                                .addGap(12, 12, 12))
         );
 
         cbNoTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbNoTable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNoTable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
 
         bNoConfirm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bNoConfirm.setText("Confirm");
@@ -168,21 +167,25 @@ public class NewOrder extends javax.swing.JFrame {
                 pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pNoTableLayout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addComponent(lNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lNoTable)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(228, 228, 228)
-                                .addComponent(bNoConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(56, Short.MAX_VALUE))
+                                .addComponent(bNoConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(36, Short.MAX_VALUE))
         );
         pNoTableLayout.setVerticalGroup(
                 pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNoTableLayout.createSequentialGroup()
-                                .addContainerGap(31, Short.MAX_VALUE)
+                                .addGap(31, 31, 31)
                                 .addGroup(pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(cbNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(bNoConfirm)
-                                        .addComponent(lNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pNoTableLayout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addComponent(cbNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pNoTableLayout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addComponent(bNoConfirm))
+                                        .addComponent(lNoTable))
                                 .addGap(32, 32, 32))
         );
 
@@ -191,27 +194,26 @@ public class NewOrder extends javax.swing.JFrame {
         pNewOrderLayout.setHorizontalGroup(
                 pNewOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNewOrderLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(pNoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pNoAddDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pNoOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNewOrderLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(pNewOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(pNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(pNewOrderLayout.createSequentialGroup()
-                                                .addComponent(pNoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(pNoAddDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(13, 13, 13)
-                                                .addComponent(pNoOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(265, 265, 265))
+                                .addComponent(pNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16))
         );
         pNewOrderLayout.setVerticalGroup(
                 pNewOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pNewOrderLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(pNewOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(pNoAddDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(pNoAddDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(pNoMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(pNewOrderLayout.createSequentialGroup()
-                                                .addComponent(pNoOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 6, Short.MAX_VALUE)))
+                                        .addComponent(pNoOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addComponent(pNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(16, 16, 16))
@@ -221,21 +223,13 @@ public class NewOrder extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 594, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(pNewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 582, Short.MAX_VALUE)
-                                        .addContainerGap()))
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(pNewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 492, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(pNewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pNewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

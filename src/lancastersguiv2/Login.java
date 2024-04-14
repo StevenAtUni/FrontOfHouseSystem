@@ -5,6 +5,8 @@
 package lancastersguiv2;
 
 
+import FOHClasses.DatabaseDAO.WaiterDAO;
+
 /**
  *
  * @author josep
@@ -74,9 +76,9 @@ public class Login extends javax.swing.JFrame {
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         String pWord = password.getText();
-        //int userId = WaiterDAO.checkPassword(pWord);
+        int userId = WaiterDAO.checkPassword(pWord);
 
-        if (pWord == "yes")
+        if (pWord == "1234")
         {
             TabbedGUI gui = new TabbedGUI();
             gui.setVisible(true);
