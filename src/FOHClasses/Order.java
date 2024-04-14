@@ -1,63 +1,65 @@
 package FOHClasses;
 
-public class Order {
-    private final int orderId;
-    private String customerName;
-    private int tableNumber;
-    private String[] items;
-    private String notes;
-    private String waiter;
+import FOHClasses.Collection.OrderCollection;
 
-    public Order(int orderId, String customerName, int tableNumber, String[] items, String notes, String waiter) {
-        this.orderId = orderId;
-        this.customerName = customerName;
-        this.tableNumber = tableNumber;
-        this.items = items;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Order {
+    private static int nextId = 1;
+    private final int orderId;
+    private int tableId;
+    private String notes;
+//    private String waiter;
+    private List<Integer> items;
+
+    public Order(int tableId, int[] items, String notes) {
+        this.orderId = nextId++;
+        this.tableId = tableId;
         this.notes = notes;
-        this.waiter = waiter;
+//        this.waiter = waiter;
+
+        this.items = new ArrayList<>();
+        for (int itemId : items) {
+            this.items.add(itemId);
+        }
+        OrderCollection.add(this);
+    }
+
+    public static void setNextId(int nextId) {
+        if (Order.nextId < nextId) Order.nextId = nextId; // Only allows nextId to be increased
+    }
+
+    public void addItem(int itemId) {
+        this.items.add(itemId);
+    }
+
+    public void removeItem(int itemId) {
+        this.items.remove(itemId);
+    }
+
+    public void amendNotes(String notes) {
+        this.notes = notes;
     }
 
     public int getOrderId() {
         return orderId;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public int getTableNumber() {
-        return tableNumber;
-    }
-
-    public void setTableNumber(int tableNumber) {
-        this.tableNumber = tableNumber;
-    }
-
-    public String[] getItems() {
-        return items;
-    }
-
-    public void setItems(String[] items) {
-        this.items = items;
+    public int getTableId() {
+        return tableId;
     }
 
     public String getNotes() {
         return notes;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String getWaiter() {
-        return waiter;
-    }
-
-    public void setWaiter(String waiter) {
-        this.waiter = waiter;
+    public int[] getItems() {
+        int[] arr = new int[items.size()];
+        int i = 0;
+        for (int id : items) {
+            arr[i++] = id;
+        }
+        return arr;
     }
 }
