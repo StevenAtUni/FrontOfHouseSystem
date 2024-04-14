@@ -11,6 +11,7 @@ public class Order {
     private int tableId;
     private String notes;
 //    private String waiter;
+    private boolean complete;
     private List<Integer> items;
 
     public Order(int tableId, int[] items, String notes) {
@@ -18,6 +19,7 @@ public class Order {
         this.tableId = tableId;
         this.notes = notes;
 //        this.waiter = waiter;
+        this.complete = false;
 
         this.items = new ArrayList<>();
         for (int itemId : items) {
@@ -40,6 +42,10 @@ public class Order {
 
     public void amendNotes(String notes) {
         this.notes = notes;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     public int getOrderId() {

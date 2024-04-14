@@ -4,7 +4,7 @@ public interface FOHKitchenInterface {
 
     // Method for the kitchen to indicate an order is complete.
     // FoH's implementation will work out when a course has been fully assembled at the pass to notify for serving
-    void markItemComplete(int orderID, int itemID);
+    void markOrderComplete(int orderID);
 
     // Method to notify the FoH System which menu items to display as no longer available to order
     void markItemUnavailable(int itemID);

@@ -37,7 +37,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     }
 
     @Override
-    public void markItemComplete(int orderID, int itemID) {
+    public void markOrderComplete(int orderID) {
 
 
     }
