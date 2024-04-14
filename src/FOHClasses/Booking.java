@@ -2,6 +2,7 @@ package FOHClasses;
 
 import FOHClasses.Collection.BookingCollection;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class Booking {
@@ -89,6 +90,7 @@ public class Booking {
         for (int id : tables) {
             arr[i++] = id;
         }
+        Arrays.sort(arr);
         return arr;
     }
 

@@ -656,17 +656,17 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         tOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"4", "1 Pizza, 2 Pasta", "allergic to cheese", "Alfonse"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, "4", "1 Pizza, 2 Pasta", "allergic to cheese", "Alfonse"},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Table", "Items", "Note", "Waiter"
+                "BookingID", "Cover", "Table", "Items", "Note", "Waiter"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
