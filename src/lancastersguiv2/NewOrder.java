@@ -40,9 +40,11 @@ public class NewOrder extends javax.swing.JFrame {
         spNoOrder = new javax.swing.JScrollPane();
         listNoOrders = new javax.swing.JList<>();
         pNoTable = new javax.swing.JPanel();
-        cbNoTable = new javax.swing.JComboBox<>();
+        cbNoBooking = new javax.swing.JComboBox<>();
         bNoConfirm = new javax.swing.JButton();
-        lNoTable = new javax.swing.JLabel();
+        lNoBooking = new javax.swing.JLabel();
+        lNoCover = new javax.swing.JLabel();
+        cbNoCover = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,7 +80,7 @@ public class NewOrder extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lNoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(spNoMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addComponent(spNoMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -147,8 +149,8 @@ public class NewOrder extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        cbNoTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbNoTable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
+        cbNoBooking.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbNoBooking.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
 
         bNoConfirm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bNoConfirm.setText("Confirm");
@@ -158,8 +160,13 @@ public class NewOrder extends javax.swing.JFrame {
             }
         });
 
-        lNoTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lNoTable.setText("Table:");
+        lNoBooking.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lNoBooking.setText("Booking:");
+
+        lNoCover.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lNoCover.setText("Cover:");
+
+        cbNoCover.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pNoTableLayout = new javax.swing.GroupLayout(pNoTable);
         pNoTable.setLayout(pNoTableLayout);
@@ -167,25 +174,28 @@ public class NewOrder extends javax.swing.JFrame {
             pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pNoTableLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(lNoTable)
+                .addComponent(lNoBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(228, 228, 228)
-                .addComponent(bNoConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(cbNoBooking, 0, 92, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lNoCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbNoCover, 0, 92, Short.MAX_VALUE)
+                .addGap(69, 69, 69)
+                .addComponent(bNoConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
         );
         pNoTableLayout.setVerticalGroup(
             pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNoTableLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addGroup(pNoTableLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(cbNoTable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pNoTableLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(bNoConfirm))
-                    .addComponent(lNoTable))
+                .addGap(32, 32, 32)
+                .addGroup(pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pNoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbNoBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lNoBooking)
+                        .addComponent(lNoCover)
+                        .addComponent(cbNoCover, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bNoConfirm))
                 .addGap(32, 32, 32))
         );
 
@@ -225,7 +235,7 @@ public class NewOrder extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pNewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,10 +295,12 @@ public class NewOrder extends javax.swing.JFrame {
     private javax.swing.JButton bNoConfirm;
     private javax.swing.JButton bNoDelete;
     private javax.swing.JButton bNoNote;
-    private javax.swing.JComboBox<String> cbNoTable;
+    private javax.swing.JComboBox<String> cbNoBooking;
+    private javax.swing.JComboBox<String> cbNoCover;
+    private javax.swing.JLabel lNoBooking;
+    private javax.swing.JLabel lNoCover;
     private javax.swing.JLabel lNoMenu;
     private javax.swing.JLabel lNoOrder;
-    private javax.swing.JLabel lNoTable;
     private javax.swing.JList<String> listNoMenu;
     private javax.swing.JList<String> listNoOrders;
     private javax.swing.JPanel pNewOrder;
