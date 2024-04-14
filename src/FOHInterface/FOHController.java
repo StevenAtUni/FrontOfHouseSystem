@@ -4,6 +4,7 @@ import FOHClasses.*;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Collection.MenuItemCollection;
+import FOHClasses.DatabaseDAO.DishDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,6 +35,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     @Override
     public void setServiceCharge(int newCharge) {
+        Bill.setServiceChargePercentage(newCharge);
     }
 
     @Override
@@ -44,14 +46,8 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     @Override
     public void markItemUnavailable(int itemID) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Dishes SET availabilty = 0 WHERE dishID = ?");
-            preparedStatement.setInt(1, itemID);
-            MenuItemCollection.get(itemID).setAvailable(false);
-        }
-        catch (SQLException e){
-            System.out.println("fail");
-        }
+        DishDAO.setDishUnavailable(itemID);
+        MenuItemCollection.get(itemID).setAvailable(false);
     }
 
     @Override
