@@ -21,4 +21,28 @@ public class MenuItem {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getAllergens() {
+        return allergens;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
 }

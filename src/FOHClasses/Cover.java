@@ -54,4 +54,13 @@ public class Cover {
     public long getEndTimestamp() {
         return endTimestamp;
     }
+
+    public int[] getOrders() {
+        int[] arr = new int[orders.size()];
+        int i = 0;
+        for (int id : orders) {
+            arr[i++] = id;
+        }
+        return arr;
+    }
 }

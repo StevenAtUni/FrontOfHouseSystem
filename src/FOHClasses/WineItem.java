@@ -8,4 +8,8 @@ public class WineItem extends MenuItem {
         super(itemId, name, price, description, allergens); // Calls parent method's constructor
         this.vintage = vintage;
     }
+
+    public int getVintage() {
+        return vintage;
+    }
 }
