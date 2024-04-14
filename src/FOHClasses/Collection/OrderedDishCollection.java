@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderedDishCollection {
     private static final HashMap<Integer, OrderedDish> dishes = new HashMap<>();
 
-    public BookingCollection() {
+    public OrderedDishCollection() {
         throw new UnsupportedOperationException("This class should not be instantiated.");
     }
 
@@ -33,7 +33,7 @@ public class OrderedDishCollection {
      * @return Whether the operation succeeded
      */
     public static boolean remove(int orderedDishID){
-        if (dishes.remove(bookingId) != null) return true; // Null if no value removed (booking ID didn't exist)
+        if (dishes.remove(orderedDishID) != null) return true; // Null if no value removed (booking ID didn't exist)
         return false;
     }
 
@@ -46,11 +46,11 @@ public class OrderedDishCollection {
 
     /**
      * Get a value from the hashmap.
-     * @param bookingId The id of the value to get
+     * @param orderedDishID The id of the value to get
      * @return The requested value
      */
-    public static OrderedDish get(int bookingId){
-        return dishes.get(bookingId);
+    public static OrderedDish get(int orderedDishID){
+        return dishes.get(orderedDishID);
     }
 
     /**

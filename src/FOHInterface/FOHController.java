@@ -42,8 +42,12 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     @Override
     public void markItemComplete(int orderID, int itemID) {
-        OrderedDishCollection.get(itemID).setReady(true);
         List <OrderedDish> allOrderedDishes = OrderedDishCollection.getAll();//get all dishes
+        for (OrderedDish orderedDish: allOrderedDishes){
+            if (orderedDish.getOrderID() == orderID && orderedDish.getMenuItemID() == itemID){
+                OrderedDishCollection.get(orderedDish.getId()).setReady(true);
+            }
+        }
         List <OrderedDish> dishesInOrder = new ArrayList<>();//get dishes within the order
 
         for (OrderedDish orderedDish : allOrderedDishes){
@@ -53,8 +57,9 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         }
         boolean orderIsComplete = true;
         for (OrderedDish orderedDish : dishesInOrder){
-            if (!orderedDish.isReady()){
-                orderIsComplete= false;
+            if (!orderedDish.isReady()) {
+                orderIsComplete = false;
+                break;
             }
         }
         if (orderIsComplete){
