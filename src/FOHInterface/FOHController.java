@@ -47,7 +47,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     public void markOrderComplete(int orderID) {
         OrderCollection.get(orderID).setComplete(true);
         OrderDAO.setOrderStatusToReady(orderID);
-        String notification = "The Order: " +  OrderCollection.get(orderID).getOrderId() + " is ready to collect.";
+        String notification = "The Order: " +  orderID + " is ready to collect.";
         Notification.addNotification(notification);
     }
 
@@ -55,7 +55,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     public void markItemUnavailable(int itemID) {
         DishDAO.setDishUnavailable(itemID);
         MenuItemCollection.get(itemID).setAvailable(false);
-        String notification = "The dish: " +  MenuItemCollection.get(itemID).getName() + " is unavailable.";
+        String notification = "The dish: " +  MenuItemCollection.get(itemID).getName() + "-" + itemID + " is unavailable.";
         Notification.addNotification(notification);
     }
 
