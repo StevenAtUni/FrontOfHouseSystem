@@ -4,6 +4,8 @@
  */
 package lancastersguiv2;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -268,6 +270,15 @@ public class NewOrder extends javax.swing.JFrame {
     private void bNoConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoConfirmActionPerformed
         // TODO add your handling code here:
         //send order to database
+        List<String> orderItems = new ArrayList<>();
+        int iComponentCount = listNoOrders.getComponentCount();
+        for (int i = 0; i < iComponentCount;i++){
+            orderItems.add(listNoOrders.getComponent(i).toString());
+        }
+
+
+
+
         this.setVisible(false);
     }//GEN-LAST:event_bNoConfirmActionPerformed
 
