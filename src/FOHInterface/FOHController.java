@@ -5,6 +5,7 @@ import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Collection.MenuItemCollection;
 import FOHClasses.DatabaseDAO.DishDAO;
+import FOHClasses.DatabaseDAO.OrderDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -40,8 +41,8 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     @Override
     public void markOrderComplete(int orderID) {
-
-
+        OrderCollection.get(orderID).setComplete(true);
+        OrderDAO.setOrderStatusToReady(orderID);
     }
 
     @Override
@@ -52,7 +53,15 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
 
     @Override
     public Object[][] getOrders() {
-        return null;
+        List<Order> orders = OrderCollection.getAll();
+        Object[][] ordersToSend = new Object[orders.size()][4];
+        for (int i = 0; i < orders.size(); i++){
+            ordersToSend[i][0] = orders.get(i).getOrderId();
+            ordersToSend[i][1] = orders.get(i).getTableId();
+            ordersToSend[i][2] = orders.get(i).getItems();
+            ordersToSend[i][3] = orders.get(i).getNotes();
+        }
+        return ordersToSend;
     }
 
     //Methods
