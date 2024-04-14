@@ -116,13 +116,16 @@ public class Terminal {
     }
 
     // For creating a new order from the UI
-    public static void newOrder(int tableId, int[] items, String notes) {
-        Order order = new Order(tableId, items, notes);
+    public static void newOrder(int bookingId, int coverId, int[] items, String notes) {
+        Booking booking = BookingCollection.get(bookingId);
+        Order order = new Order(booking.getTableId(), items, notes);
+        Cover cover = CoverCollection.get(coverId);
+        cover.addOrder(order.getOrderId());
 
         // TODO Call database add here
         
         // Sends order to the kitchen
-        FOHImpl.getInstance().makeOrder(order.getOrderId(), tableId, items, notes);
+        FOHImpl.getInstance().makeOrder(order.getOrderId(), order.getTableId(), items, notes);
     }
 
     // For loading bookings from the database

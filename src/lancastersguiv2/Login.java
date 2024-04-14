@@ -7,13 +7,15 @@ package lancastersguiv2;
 
 import FOHClasses.DatabaseDAO.WaiterDAO;
 
+import static FOHClasses.DatabaseDAO.WaiterDAO.checkPassword;
+
 /**
  *
  * @author josep
  */
 public class Login extends javax.swing.JFrame {
 
-    int userID;
+    int userID = -1;
 
     /**
      * Creates new form Login
@@ -83,7 +85,7 @@ public class Login extends javax.swing.JFrame {
         String pWord = password.getText();
         int pWordCheck = WaiterDAO.checkPassword(pWord);
         
-        if (userID != -1)
+        if (pWordCheck != -1)
         {
             userID = pWordCheck;
             TabbedGUI gui = new TabbedGUI();
