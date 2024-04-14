@@ -9,17 +9,20 @@ public class Booking {
     private final int bookingId;
     private String customerName;
     private String phoneNumber;
+    private int waiterId;
     private long startTimestamp;
     private long endTimestamp;
     private int tableId;
-    private HashSet<Integer> tables;
-    private HashSet<Integer> covers;
+    private final HashSet<Integer> tables;
+    private final HashSet<Integer> covers;
     private int numberOfGuests;
+    private boolean paid;
 
-    public Booking(String customerName, String phoneNumber, long startTimestamp, long endTimestamp, int[] tables) {
+    public Booking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables) {
         this.bookingId = nextId++;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
+        this.waiterId = waiterId;
         this.startTimestamp = startTimestamp;
         this.endTimestamp = endTimestamp;
         this.tableId = tables[0];
@@ -30,6 +33,7 @@ public class Booking {
 
         // Assigns the covers to the booking
         this.covers = new HashSet<>();
+        this.paid = false;
         BookingCollection.add(this);
     }
 
@@ -47,6 +51,10 @@ public class Booking {
         numberOfGuests = covers.size();
     }
 
+    public void setPaid(boolean paid) {
+        if (paid) this.paid = true; // Doesn't allow something to become unpaid
+    }
+
     public int getBookingId() {
         return bookingId;
     }
@@ -57,6 +65,10 @@ public class Booking {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public int getWaiterId() {
+        return waiterId;
     }
 
     public long getStartTimestamp() {
@@ -91,5 +103,9 @@ public class Booking {
 
     public int getNumberOfGuests() {
         return numberOfGuests;
+    }
+
+    public boolean isPaid() {
+        return paid;
     }
 }

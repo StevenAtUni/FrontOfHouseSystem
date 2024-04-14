@@ -20,7 +20,7 @@ public class MenuItemCollection {
      * @return Whether the operation succeeded (false if entry already exists)
      */
     public void add(MenuItem menuItem){
-        int id = menuItem.getID();
+        int id = menuItem.getItemId();
         items.put(id, menuItem);
         //lets say someone order multiple items
     }

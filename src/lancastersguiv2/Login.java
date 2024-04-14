@@ -29,35 +29,62 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        lpLogin = new javax.swing.JLayeredPane();
+        password = new javax.swing.JPasswordField();
+        bLogin = new javax.swing.JButton();
+        lBackgroundImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(575, 470));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesLancasters/LancastersLogin1.jpg"))); // NOI18N
-        jLayeredPane1.setLayer(jLabel2, 1);
-        jLayeredPane1.add(jLabel2);
-        jLabel2.setBounds(-4, 2, 580, 468);
-        jLayeredPane1.setLayer(jPasswordField1, 2);
-        jLayeredPane1.add(jPasswordField1);
-        jPasswordField1.setBounds(230, 320, 110, 40);
+        password.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        password.setToolTipText("");
+        lpLogin.setLayer(password, 2);
+        lpLogin.add(password);
+        password.setBounds(228, 294, 110, 40);
+
+        bLogin.setText("Login");
+        bLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLoginActionPerformed(evt);
+            }
+        });
+        lpLogin.setLayer(bLogin, javax.swing.JLayeredPane.PALETTE_LAYER);
+        lpLogin.add(bLogin);
+        bLogin.setBounds(244, 355, 80, 28);
+
+        lBackgroundImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBackgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesLancasters/LancastersLogin1.jpg"))); // NOI18N
+        lpLogin.setLayer(lBackgroundImage, 1);
+        lpLogin.add(lBackgroundImage);
+        lBackgroundImage.setBounds(0, 0, 580, 468);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lpLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(lpLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
+        // TODO add your handling code here:
+        String pWord = password.getText();
+        
+        if (pWord.equals("1234"))
+        {
+            TabbedGUI gui = new TabbedGUI();
+            gui.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_bLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,8 +122,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JButton bLogin;
+    private javax.swing.JLabel lBackgroundImage;
+    private javax.swing.JLayeredPane lpLogin;
+    private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
 }
