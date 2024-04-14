@@ -1,9 +1,5 @@
 package FOHClasses;
 
-import FOHClasses.Collection.BookingCollection;
-import FOHClasses.Collection.TableCollection;
-import FOHClasses.Collection.WaiterCollection;
-
 public class BookableTable {
     private static int nextId = 1;
     private final int tableID;
@@ -28,4 +24,6 @@ public class BookableTable {
         if (BookableTable.nextId < nextId) BookableTable.nextId = nextId; // Only allows nextId to be increased
     }
 
+    public static class OrderedDishes {
+    }
 }

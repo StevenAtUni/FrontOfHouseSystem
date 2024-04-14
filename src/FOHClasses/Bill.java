@@ -9,15 +9,15 @@ public class Bill {
     private final String paymentType;
     private final int totalPrice;
     private final MenuItemCollection items;
-    private final int serviceCharge;
+    private int serviceCharge;
 
-    public Bill(int billID, int waiter, String paymentType, int totalPrice, MenuItemCollection items, int serviceCharge) {
+    public Bill(int billID, int waiter, String paymentType, int totalPrice, MenuItemCollection items) {
         this.billID = billID;
         this.waiterID = waiter;
         this.paymentType = paymentType;
         this.totalPrice = totalPrice;
         this.items = items;
-        this.serviceCharge = serviceCharge;
+        this.serviceCharge = 0;
     }
 
     public int getWaiter() {
@@ -40,4 +40,12 @@ public class Bill {
         return serviceCharge;
     }
     public int getBillID(){return billID;}
+
+    public int getWaiterID() {
+        return waiterID;
+    }
+
+    public void setServiceCharge(int serviceCharge) {
+        this.serviceCharge = serviceCharge;
+    }
 }
