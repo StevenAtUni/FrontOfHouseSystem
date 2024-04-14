@@ -68,4 +68,8 @@ public class Order {
         }
         return arr;
     }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
