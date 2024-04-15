@@ -12,7 +12,6 @@ public class Notification {
         return notification;
     }
 
-
     public static void addNotification(String notification){
         Notification.notification.add(notification);
         TabbedGUI.newNotification(notification);

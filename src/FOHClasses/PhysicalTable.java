@@ -1,8 +1,6 @@
 package FOHClasses;
 
 import FOHClasses.Collection.PhysicalTableCollection;
-import FOHClasses.Collection.TableCollection;
-import FOHClasses.Collection.WaiterCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +12,7 @@ public class PhysicalTable {
     private HashMap<Long, Long> bookedTimes; // Key = startTimestamp, Value = endTimeStamp
 
     public PhysicalTable() {
-        this.tableId = nextId++;
+        this.tableId = nextId++; // Auto-increments the tableId
 //        this.childSeats = 0;
         this.bookedTimes = new HashMap<>();
 
@@ -29,6 +27,12 @@ public class PhysicalTable {
         return tableId;
     }
 
+    /**
+     * Checks if the table is available during the provided timeframe.
+     * @param startTimestamp The start of the range to check in seconds since the UNIX epoch
+     * @param endTimestamp The end of the range to check in seconds since the UNIX epoch
+     * @return True if the table is available during the provided time range
+     */
     public boolean isAvailable(long startTimestamp, long endTimestamp) {
         for (HashMap.Entry<Long, Long> booking : bookedTimes.entrySet()) {
             if ((booking.getKey() <= startTimestamp && startTimestamp < booking.getValue()) ||
@@ -39,6 +43,12 @@ public class PhysicalTable {
         return true;
     }
 
+    /**
+     * Reserves a table for the provided timeframe. Also checks if available during the time before booking.
+     * @param startTimestamp The start time of the booking in seconds since the UNIX epoch
+     * @param endTimestamp The end time of the booking in seconds since the UNIX epoch
+     * @return True if the reservation was successful
+     */
     public boolean book(long startTimestamp, long endTimestamp) {
         if (isAvailable(startTimestamp, endTimestamp)) {
             bookedTimes.put(startTimestamp, endTimestamp);
@@ -47,6 +57,7 @@ public class PhysicalTable {
         return false;
     }
 
+    // Releases a reservation.
     public void unbook(long startTimestamp) {
         bookedTimes.remove(startTimestamp);
     }

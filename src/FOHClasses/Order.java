@@ -12,7 +12,7 @@ public class Order {
     private String notes;
 //    private String waiter;
     private boolean complete;
-    private List<Integer> items;
+    private List<Integer> items; // Stores the ids of the menuItems ordered
 
     public Order(int orderId, int tableId, int[] items, String notes) {
 //        this.orderId = nextId++;
@@ -62,6 +62,7 @@ public class Order {
         return notes;
     }
 
+    // Returns all itemIds
     public int[] getItems() {
         int[] arr = new int[items.size()];
         int i = 0;
