@@ -24,6 +24,7 @@ public class OrderTableManager {
         int bookingID = 0;
         int coverID = 0;
         int tableID = 0;
+        int orderID = 0;
         String note = "";
         int waiterID = 0;
         String bookingIDs = "";
@@ -48,6 +49,8 @@ public class OrderTableManager {
                 }
             }
 
+            orderID = order.getOrderId();
+
             items = order.getItemString();
 
             tableID = order.getTableId();
@@ -65,6 +68,7 @@ public class OrderTableManager {
             model.addRow(new Object[]{
                     bookingIDs,
                     coverIDs,
+                    orderID,
                     tableIDs,
                     items,
                     note,
@@ -73,4 +77,5 @@ public class OrderTableManager {
         }
 
     }
+
 }

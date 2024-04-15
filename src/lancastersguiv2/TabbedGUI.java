@@ -10,6 +10,7 @@ import FOHClasses.Collection.OrderCollection;
 //import FOHClasses.Order;
 import FOHInterface.FOHController;
 
+import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         unpaidBookingList();
 
+        for(Order order : OrderCollection.getAll()){
+            System.out.println(order.getItemString());
+        }
 
         updateOrderTable(tOrders);
 
@@ -698,6 +702,11 @@ public class TabbedGUI extends javax.swing.JFrame {
         });
 
         bODelete.setText("Delete");
+        bOEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bODeleteActionPerformed(evt);
+            }
+        });
 
         bONewOrder.setText("New Order");
         bONewOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -1173,9 +1182,25 @@ public class TabbedGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+    private void bODeleteActionPerformed(ActionEvent evt) {
+        int row = tOrders.getSelectedRow();
+        if (row != -1) {
+            OrderCollection.remove((int) tOrders.getValueAt(row, 2));
+        }
+        tUpdate();
+    }
+
+    private void tUpdate() {
+        updateOrderTable(tOrders);
+        updateMenuTable(tMenu);
+        updateBookingTable(tBookings);
+        unpaidBookingList();
+    }
+
     private void bNotificationDeleteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         listNotifications.remove(listNotifications.getSelectedIndex());
+        tUpdate();
     }
 
     private void bBookingDeleteActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1228,33 +1253,33 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
             taSelectedBill.append("Total Booking Cost: " + totalBookingCost + "\n");
         }
-        unpaidBookingList();
+        tUpdate();
     }
     private void bPayWholeBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (booking != null){
             Terminal.payWholeBill(booking.getBookingId(), false);
         }
-
+        tUpdate();
     }
     private void bPaySplitBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (booking != null){
             Terminal.paySplitBill(booking.getBookingId(), false);
         }
-
+        tUpdate();
     }
 
     private void bOEditActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        updateOrderTable(tOrders);
-        updateMenuTable(tMenu);
+        tUpdate();
     }
 
     private void bONewOrderActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         NewOrder order = new NewOrder();
         order.setVisible(true);
+        tUpdate();
     }
 
     private void tfTablesActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1321,7 +1346,7 @@ public class TabbedGUI extends javax.swing.JFrame {
             if (success) {
                 JOptionPane.showMessageDialog(null, "Booking successfully created!");
                 // Update the booking table
-                updateBookingTable(tBookings);  // Assuming 'tBookings' is your JTable variable
+                tUpdate();  // Assuming 'tBookings' is your JTable variable
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to create booking.");
             }
