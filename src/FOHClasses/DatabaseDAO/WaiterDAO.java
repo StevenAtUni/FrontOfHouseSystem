@@ -1,6 +1,8 @@
 package FOHClasses.DatabaseDAO;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WaiterDAO {
     public static int checkPassword(String passwordToCheck) {
@@ -40,6 +42,32 @@ public class WaiterDAO {
         }
     }
 
+
+    public static int[] returnAllWaiterIDs() {
+        List<Integer> waiterIDs = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT waiterID FROM Waiter");
+
+            while (resultSet.next()) {
+                int waiterID = resultSet.getInt("waiterID");
+                waiterIDs.add(waiterID);
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to retrieve waiter IDs", e);
+        }
+
+        // Convert list to array
+        int[] waiterIDArray = new int[waiterIDs.size()];
+        for (int i = 0; i < waiterIDs.size(); i++) {
+            waiterIDArray[i] = waiterIDs.get(i);
+        }
+
+        return waiterIDArray;
+    }
 
 
 
