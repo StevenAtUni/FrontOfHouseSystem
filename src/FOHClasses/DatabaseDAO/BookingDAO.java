@@ -16,8 +16,8 @@ public class BookingDAO {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             // Insert into Bookings table
             PreparedStatement createBooking = connection.prepareStatement(
-                    "INSERT INTO Bookings (numOfPeople, customerName, contactNumber, startTime, endTime) " +
-                            "VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    "INSERT INTO Bookings (numOfPeople, customerName, contactNumber, startTime, endTime, WaiterwaiterID) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             // System.out.println(startTime);
             Timestamp tstartTime = new Timestamp(startTime * 1000L);
             Timestamp tendTime = new Timestamp(endTime * 1000L);
@@ -27,6 +27,7 @@ public class BookingDAO {
             createBooking.setString(3, contactNumber);
             createBooking.setTimestamp(4, tstartTime);
             createBooking.setTimestamp(5, tendTime);
+            createBooking.setInt(6, waiterID);
 
             int rowsAffected = createBooking.executeUpdate();
 
@@ -107,10 +108,15 @@ public class BookingDAO {
                 boolean paymentStatus = resultSet.getBoolean("paymentStatus");
                 int statusID = resultSet.getInt("BookingStatusbookingStatusID");
 
+                // Assuming you have waiterId, tables, and covers available from somewhere
+                int waiterId = 1; // Change this to the actual waiter ID
+                int[] tables = {1, 2}; // Change this to the actual table IDs
+                int[] covers = {1, 2}; // Change this to the actual cover ID
+
                 long startTimeUnix = startTime.getTime() / 1000;
                 long endTimeUnix = endTime.getTime() / 1000;
 
-                // Terminal.loadBooking(customerName, contactNumber,startTimeUnix,endTimeUnix);
+                //Terminal.loadBooking();
 
                 System.out.println("BookingID: " + bookingID + ", Num of People: " + numOfPeople +
                         ", Customer Name: " + customerName + ", Contact Number: " + contactNumber +
