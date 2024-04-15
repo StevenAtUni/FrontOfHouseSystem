@@ -48,7 +48,7 @@ public class OrderDAO {
                     System.out.println("New order with ID " + generatedOrderID + " has been successfully created.");
                     // Add dishes to OrderedDishes table
                     PreparedStatement addOrderedDish = connection.prepareStatement(
-                            "INSERT INTO OrderedDishes (OrderorderID, DishesdishID) VALUES (?, ?, ?)");
+                            "INSERT INTO OrderedDishes (OrderorderID, DishesdishID, Quantity) VALUES (?, ?, ?)");
 
                     for (int key : countMap.keySet()) {
                         int count = countMap.get(key);
