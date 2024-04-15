@@ -35,7 +35,7 @@ public class Terminal {
             if (!table.isAvailable(startTimestamp, endTimestamp)) return false; // Fails if table not available
         }
 
-        int[] ids = BookingDAO.createBooking(covers, customerName, phoneNumber, startTimestamp, endTimestamp, tables);
+        int[] ids = BookingDAO.createBooking(covers, waiterId, customerName, phoneNumber, startTimestamp, endTimestamp, tables);
 
         Booking booking = createBooking(ids[0], customerName, phoneNumber, waiterId, startTimestamp, endTimestamp, tables);
         if (booking == null) return false;
