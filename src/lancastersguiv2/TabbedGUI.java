@@ -32,11 +32,11 @@ public class TabbedGUI extends javax.swing.JFrame {
     public TabbedGUI() {
         initComponents();
 
+        /*
         for (Booking booking : BookingCollection.getAll()) {
-            if(!booking.isPaid()){
+            if (!booking.isPaid()) {
                 unpaidModel.addElement(booking.getBookingId());
             }
-
         }
 
         for (Order order : OrderCollection.getAll()) {
@@ -44,7 +44,13 @@ public class TabbedGUI extends javax.swing.JFrame {
         }
         listUnpaidOrders.setModel(unpaidModel);
         tOrders.setModel(ordersModel);
+        listUnpaidOrders.setModel(unpaidModel);
+        */
+
+        // Use the utility class to populate the waiter dropdown
+        GUIUtils.populateWaiterDropdown(cbNbWaiter);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
