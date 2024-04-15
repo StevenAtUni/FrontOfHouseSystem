@@ -16,15 +16,30 @@ public class MenuDAO {
                     "INSERT INTO Menus () VALUES ();", PreparedStatement.RETURN_GENERATED_KEYS);
 
             int rowsAffected = addMenu.executeUpdate();
+            int generatedMenuID = -1;
+
 
             if (rowsAffected == 0) {
                 // If no rows were affected, it means the menu was not added
                 System.out.println("Failed to add menu with ID ");
             } else {
-                System.out.println("Menu with ID  has been successfully added.");
+                // Retrieve the generated menuID
+                ResultSet generatedKeys = addMenu.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    generatedMenuID = generatedKeys.getInt(1);
+                    System.out.println("Created a menu with ID: " + generatedMenuID);
+                } else {
+                    System.out.println("Failed to retrieve generated menu ID.");
+                    return;
+                }
             }
 
             addMenu.close();
+
+            for (MenuItem item : Items) {
+                DishDAO.addDish(item.getName(), item.getPrice(), item.getDescription(), item.getAllergens(), generatedMenuID, item.getItemId());
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
