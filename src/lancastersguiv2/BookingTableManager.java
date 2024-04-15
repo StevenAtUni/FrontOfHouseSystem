@@ -37,8 +37,12 @@ public class BookingTableManager {
     }
 
     private static String calculateBookingLength(long startTimestamp, long endTimestamp) {
-        long durationMillis = endTimestamp - startTimestamp;
-        long minutes = (durationMillis / 1000) / 60;
+        if (endTimestamp < startTimestamp) {
+            System.out.println("Error: End timestamp is less than start timestamp.");
+            return "Error in timestamps";
+        }
+        long durationSeconds = endTimestamp - startTimestamp;
+        long minutes = durationSeconds / 60;
         long hours = minutes / 60;
         minutes = minutes % 60;
         return String.format("%d:%02d", hours, minutes);
