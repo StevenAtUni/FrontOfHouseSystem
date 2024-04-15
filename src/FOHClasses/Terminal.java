@@ -5,6 +5,7 @@ import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.MenuItemCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
 import FOHClasses.DatabaseDAO.BookingDAO;
+import FOHClasses.DatabaseDAO.OrderDAO;
 import FOHInterface.ManagementInterface.IRecord;
 //import orders.FOHImpl;
 
@@ -128,19 +129,18 @@ public class Terminal {
     // For creating a new order from the UI
     public static void newOrder(int bookingId, int coverId, int[] items, String notes) {
         Booking booking = BookingCollection.get(bookingId);
-        Order order = new Order(booking.getTableId(), items, notes);
+        int orderId = OrderDAO.createOrder(coverId, notes, items);
+        Order order = new Order(orderId, booking.getTableId(), items, notes);
         Cover cover = CoverCollection.get(coverId);
         cover.addOrder(order.getOrderId());
-
-        // TODO Call database add here
         
         // Sends order to the kitchen
 //        FOHImpl.getInstance().makeOrder(order.getOrderId(), order.getTableId(), items, notes);
     }
 
     // For loading bookings from the database
-    public static void loadOrder(int tableId, int[] items, String notes) {
-        new Order(tableId, items, notes);
+    public static void loadOrder(int orderId, int tableId, int[] items, String notes) {
+        new Order(orderId, tableId, items, notes);
     }
 
     public static void payWholeBill(int bookingId, boolean isCash) {
