@@ -21,7 +21,7 @@ public class Terminal {
         }
 
         // Dummy data
-        newBooking("John Smith", "12345678910", 100, 1706814000, 1706817600, new int[]{6,7}, 3);
+        newBooking("John Smith", "12345678910", 1, 1706814000, 1706817600, new int[]{6,7}, 3);
         MenuItemCollection.add(new MenuItem(1, "DemoDish1", 1000, "This is a dish.", "Allergen1"));
         MenuItemCollection.add(new MenuItem(2, "DemoDish2", 2500, "A meal.", "Allergen1, Allergen2"));
     }
