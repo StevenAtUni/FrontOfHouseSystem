@@ -14,3 +14,9 @@
     <li>Taz - SQL Developer</li>
     <li>Joseph - UI Developer</li>
 </ul>
+
+<h4>Entry Points</h4>
+<ul>
+    <li>Run out/artifacts/FrontOfHouseSystem_jar/FrontOfHouseSystem.jar</li>
+    <li>Run src/lancastersguiv2/Login.java</li>
+</ul>
