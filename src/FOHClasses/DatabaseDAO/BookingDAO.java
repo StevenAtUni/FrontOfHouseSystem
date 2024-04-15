@@ -87,7 +87,7 @@ public class BookingDAO {
         for (int i = 0; i < coverIDs.size(); i++) {
             result[i + 1] = coverIDs.get(i);
         }
-
+//
         return result;
     }
 
