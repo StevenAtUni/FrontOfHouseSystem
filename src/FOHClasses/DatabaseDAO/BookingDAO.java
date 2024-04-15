@@ -18,7 +18,7 @@ public class BookingDAO {
             PreparedStatement createBooking = connection.prepareStatement(
                     "INSERT INTO Bookings (numOfPeople, customerName, contactNumber, startTime, endTime) " +
                             "VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-
+            // System.out.println(startTime);
             Timestamp tstartTime = new Timestamp(startTime * 1000L);
             Timestamp tendTime = new Timestamp(endTime * 1000L);
 

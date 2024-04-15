@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lancastersguiv2;
+import FOHClasses.Terminal;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import static lancastersguiv2.BookingTableManager.updateBookingTable;
+
 
 /**
  *
@@ -202,14 +209,14 @@ public class TabbedGUI extends javax.swing.JFrame {
             .addComponent(spNotifications)
             .addGroup(pNotificationsLayout.createSequentialGroup()
                 .addGap(346, 346, 346)
-                .addComponent(bNotificationDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(bNotificationDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                 .addGap(348, 348, 348))
         );
         pNotificationsLayout.setVerticalGroup(
             pNotificationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pNotificationsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spNotifications, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addComponent(spNotifications, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(bNotificationDelete)
                 .addGap(17, 17, 17))
@@ -255,14 +262,14 @@ public class TabbedGUI extends javax.swing.JFrame {
             pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pMenuLayout.setVerticalGroup(
             pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addComponent(spMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -329,7 +336,7 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         lNbWaiter.setText("Waiter:");
 
-        cbNbWaiter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alfonse", "Marshal", "Angela", "Patrice" }));
+        cbNbWaiter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1111", "2222", "3333", "4444", "5555" }));
 
         javax.swing.GroupLayout pNewBookingLayout = new javax.swing.GroupLayout(pNewBooking);
         pNewBooking.setLayout(pNewBookingLayout);
@@ -410,22 +417,22 @@ public class TabbedGUI extends javax.swing.JFrame {
             pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pNewBookingLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lNbName, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                .addComponent(lNbName, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNbName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lNbPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                .addComponent(lNbPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNbPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lNbDate, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                .addComponent(lNbDate, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbNbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbNbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbNbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lNbTime, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                .addComponent(lNbTime, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pNewBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbNbMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -439,7 +446,7 @@ public class TabbedGUI extends javax.swing.JFrame {
                     .addComponent(cbNbBookingLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbNbNoGuests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lNbTables, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                .addComponent(lNbTables, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfTables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -485,7 +492,7 @@ public class TabbedGUI extends javax.swing.JFrame {
         pEditBooking.setLayout(pEditBookingLayout);
         pEditBookingLayout.setHorizontalGroup(
             pEditBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spEditBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+            .addComponent(spEditBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
             .addGroup(pEditBookingLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(bBookingDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -503,7 +510,7 @@ public class TabbedGUI extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(cbBookingsSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spEditBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(spEditBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(pEditBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bBookingDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,7 +621,7 @@ public class TabbedGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pPaymentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spSelectedBill)
-                            .addComponent(spUnpaidOrders, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+                            .addComponent(spUnpaidOrders, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
                         .addGap(41, 41, 41))
                     .addGroup(pPaymentLayout.createSequentialGroup()
                         .addGap(89, 89, 89)
@@ -708,7 +715,7 @@ public class TabbedGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(spOrders, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addComponent(spOrders, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(pOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bOEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1115,7 +1122,7 @@ public class TabbedGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpFOHGUIMain, javax.swing.GroupLayout.PREFERRED_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(tpFOHGUIMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1179,14 +1186,66 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tbTp7DActionPerformed
 
-    private void bNbSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNbSubmitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bNbSubmitActionPerformed
+
+
+    private void bNbSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+        // Retrieve values from form components
+        String customerName = tfNbName.getText();
+        String phoneNumber = tfNbPhoneNumber.getText();
+        int waiterId = Integer.parseInt(cbNbWaiter.getSelectedItem().toString()); // Parse the waiter ID from the dropdown
+
+        // Combine date and time to create a start timestamp
+        String date = cbNbYear.getSelectedItem().toString() + "-" +
+                cbNbMonth.getSelectedItem().toString() + "-" +
+                cbNbDay.getSelectedItem().toString();
+        String time = cbNbHour.getSelectedItem().toString() + ":" +
+                cbNbMinute.getSelectedItem().toString();
+
+        // Convert date and time strings to timestamp
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date parsedDate = dateFormat.parse(date + " " + time);
+            long startTimestamp = parsedDate.getTime() / 1000;  // Convert milliseconds to seconds
+
+            // Assume booking length is in hours and minutes (HH:mm), and calculate end timestamp in seconds
+            String[] bookingLengthParts = cbNbBookingLength.getSelectedItem().toString().split(":");
+            long bookingLengthSeconds = Integer.parseInt(bookingLengthParts[0]) * 3600 + // Hours to seconds
+                    Integer.parseInt(bookingLengthParts[1]) * 60;     // Minutes to seconds
+            long endTimeStamp = startTimestamp + bookingLengthSeconds;
+
+            // Parse the number of guests
+            int covers = Integer.parseInt(cbNbNoGuests.getSelectedItem().toString());
+
+            // Parse table numbers from textField into an array of integers
+            String[] tableStrings = tfTables.getText().split(",");
+            int[] tables = new int[tableStrings.length];
+            for (int i = 0; i < tableStrings.length; i++) {
+                tables[i] = Integer.parseInt(tableStrings[i].trim());
+            }
+
+            // Call the newBooking method from Terminal class
+            boolean success = Terminal.newBooking(customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables, covers);
+
+            // Handle the response
+            if (success) {
+                JOptionPane.showMessageDialog(null, "Booking successfully created!");
+                // Update the booking table
+                updateBookingTable(tBookings);  // Assuming 'tBookings' is your JTable variable
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to create booking.");
+            }
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Failed to parse date/time.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid number format in inputs.");
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Terminal.initialise();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
