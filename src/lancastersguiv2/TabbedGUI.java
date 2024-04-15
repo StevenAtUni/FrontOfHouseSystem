@@ -19,6 +19,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import static lancastersguiv2.BookingTableManager.updateBookingTable;
+import static lancastersguiv2.OrderTableManager.updateOrderTable;
+import static lancastersguiv2.MenuTableManager.updateMenuTable;
 
 
 /**
@@ -29,7 +31,6 @@ public class TabbedGUI extends javax.swing.JFrame {
 
     DefaultListModel unpaidModel = new DefaultListModel();
     static DefaultListModel notificationModel = new DefaultListModel();
-    DefaultTableModel ordersModel = new DefaultTableModel();
     static List<String> notificationList;
     Booking booking;
     /**
@@ -39,76 +40,33 @@ public class TabbedGUI extends javax.swing.JFrame {
         initComponents();
 
 
-        for (Booking booking : BookingCollection.getAll()) {
-            if (!booking.isPaid()) {
-                unpaidModel.addElement(booking.getBookingId());
-            }
-        }
-
-        String[] sa = {"BookingID", "Cover", "Table", "Items", "Note", "Waiter"};
-        ordersModel.addColumn(sa);
-        String[] sa2 = {"", "", "", "", "", ""};
-        int bookingID = 0;
-        int coverID = 0;
-        int tableID;
-        int[] items;
-        String note;
-        int waiterID;
-
-        for (Order order : OrderCollection.getAll()) {
-            for (Booking booking: BookingCollection.getAll()){
-                if (booking.getTableId() == order.getTableId()){
-                    bookingID = booking.getBookingId();
-                    waiterID = booking.getWaiterId();
-                }
-
-            }
-            for (Cover cover: CoverCollection.getAll()){
-                for (int i:cover.getOrders()){
-                    if (i == order.getOrderId()){
-                        coverID = cover.getCoverId();
-                    }
-                }
-            }
-
-            tableID = order.getTableId();
-
-            items = order.getItems();
-
-            note = order.getNotes();
-
-            String bookingIDs = "";
-            String coverIDs = "";
-            String tableIDs = "";
-            String noteme = "";
-            String waiterIDs = "" ;
-            String itemss = "";
-
-            bookingIDs = String.valueOf(bookingID);
-
-            coverIDs = String.valueOf(coverID);
-
-            tableIDs = String.valueOf(tableID);
-
-            for (int i = 0; i < items.length; i ++){
-                itemss = itemss + String.valueOf(items[i]);
-            }
+        unpaidBookingList();
 
 
-            sa2 = new String[]{bookingIDs, coverIDs, tableIDs, itemss, noteme, waiterIDs};
-            ordersModel.addRow(sa2);
-        }
+        updateOrderTable(tOrders);
+
+        updateMenuTable(tMenu);
+
 
         notificationList = new ArrayList<>();
         FOHController controller = new FOHController();
 //        controller.markItemUnavailable(1); // TODO Manual call to demo notifications
 
         listUnpaidOrders.setModel(unpaidModel);
-        tOrders.setModel(ordersModel);
+
 //        listNotifications.setModel(notificationModel);
 
         // Use the utility class to populate the waiter dropdown
         GUIUtils.populateWaiterDropdown(cbNbWaiter);
+    }
+
+    public void unpaidBookingList() {
+        unpaidModel.clear();
+        for (Booking booking : BookingCollection.getAll()) {
+            if (!booking.isPaid() && booking.hasOrder()) {
+                unpaidModel.addElement(booking.getBookingId());
+            }
+        }
     }
 
     public static void newNotification(String notification) {
@@ -1236,16 +1194,41 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
+    //produces and displays a the bill for the selected booking
     private void bSelectBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        int bookingId = listUnpaidOrders.getSelectedValue();
-        booking =BookingCollection.get(bookingId);
-        int[] covers = booking.getCovers();
-        int coversLength = covers.length;
-        for (int i = 0; i < coversLength; i++) {
-            taSelectedBill.append((i+1) + ". " + covers[i] + "\n");
+        taSelectedBill.removeAll();
+        int bookingId = 0;
+        boolean checkInt = true;
+        if (listUnpaidOrders.getSelectedValue() == null){
+            checkInt = false;
+        }else{
+            bookingId = ((int) unpaidModel.elementAt(listUnpaidOrders.getSelectedIndex()));
         }
 
+
+
+        if(checkInt){
+
+            int totalBookingCost = 0;
+            int coverCost = 0;
+
+            booking = BookingCollection.get(bookingId);
+            int[] covers = booking.getCovers();
+            int coversLength = covers.length;
+            taSelectedBill.append("Booking: " + bookingId + "\n");
+            for (int i = 0; i < coversLength; i++) {
+                taSelectedBill.append("Cover " + (i+1) + ":\n");
+                for (int orderID : CoverCollection.get(covers[i]).getOrders()) {
+                    taSelectedBill.append(OrderCollection.get(orderID).getItemString() + "\n");
+                    coverCost += OrderCollection.get(orderID).getTotalCost();
+                    totalBookingCost += OrderCollection.get(orderID).getTotalCost();
+                }
+                taSelectedBill.append("Total Cover Cost: " + coverCost + "\n");
+            }
+            taSelectedBill.append("Total Booking Cost: " + totalBookingCost + "\n");
+        }
+        unpaidBookingList();
     }
     private void bPayWholeBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -1264,6 +1247,8 @@ public class TabbedGUI extends javax.swing.JFrame {
 
     private void bOEditActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        updateOrderTable(tOrders);
+        updateMenuTable(tMenu);
     }
 
     private void bONewOrderActionPerformed(java.awt.event.ActionEvent evt) {

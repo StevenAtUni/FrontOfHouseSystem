@@ -1,6 +1,7 @@
 package FOHClasses;
 
 import FOHClasses.Collection.BookingCollection;
+import FOHClasses.Collection.CoverCollection;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -110,5 +111,12 @@ public class Booking {
 
     public boolean isPaid() {
         return paid;
+    }
+
+    public boolean hasOrder() {
+        for (int coverID : covers){
+            if(CoverCollection.get(coverID).getOrders().length > 0){return true;}
+        }
+        return false;
     }
 }

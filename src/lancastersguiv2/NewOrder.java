@@ -331,7 +331,9 @@ public class NewOrder extends javax.swing.JFrame {
 
         Terminal.newOrder(bookingID, coverID, orders, noteMessage);
 
+
         noteMessage = "";
+
 
         this.setVisible(false);
     }

@@ -1,5 +1,6 @@
 package FOHClasses;
 
+import FOHClasses.Collection.MenuItemCollection;
 import FOHClasses.Collection.OrderCollection;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ public class Order {
 //    private String waiter;
     private boolean complete;
     private List<Integer> items;
+    private String itemString;
+    private int totalCost;
 
     public Order(int orderId, int tableId, int[] items, String notes) {
 //        this.orderId = nextId++;
@@ -26,7 +29,12 @@ public class Order {
         this.items = new ArrayList<>();
         for (int itemId : items) {
             this.items.add(itemId);
+            MenuItem m = MenuItemCollection.get(itemId);
+            this.setItemString(m.getName());
         }
+
+        setTotalCost();
+
         OrderCollection.add(this);
     }
 
@@ -36,6 +44,8 @@ public class Order {
 
     public void addItem(int itemId) {
         this.items.add(itemId);
+        MenuItem m = MenuItemCollection.get(itemId);
+        this.setItemString(m.getName());
     }
 
     public void removeItem(int itemId) {
@@ -73,6 +83,18 @@ public class Order {
 
     public boolean isComplete() {
         return complete;
+    }
+
+    public String getItemString() {return itemString;}
+
+    public void setItemString(String string) {itemString = itemString + ", " + string;}
+
+    public int getTotalCost() {return totalCost;}
+
+    private void setTotalCost() {
+        for (Integer id : items) {
+            totalCost += MenuItemCollection.get(id).getPrice();
+        }
     }
 }
 
