@@ -62,6 +62,7 @@ public class MenuDAO {
 
                 map.put(resultSet.getInt("dishId"), strings);
             }
+            MenuItemCollection.newMenu((HashMap<Integer, List<String>>) map);
 
             addMenu.close();
         }
