@@ -4,16 +4,17 @@ import java.sql.*;
 
 public class DishDAO {
 
-    public static void addDish(String name, double price, String description, String allergens, int menuID) {
+    public static void addDish(String name, int price, String description, String allergens, int menuID, int dishID) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             PreparedStatement addDish = connection.prepareStatement(
-                    "INSERT INTO Dishes (name, price, description, allergens, MenumenuID) VALUES (?, ?, ?, ?, ?)");
+                    "INSERT INTO Dishes (name, price, description, allergens, MenumenuID, dishID) VALUES (?, ?, ?, ?, ?)");
 
             addDish.setString(1, name);
             addDish.setDouble(2, price);
             addDish.setString(3, description);
             addDish.setString(4, allergens);
             addDish.setInt(5, menuID);
+            addDish.setInt(6, dishID);
 
             int rowsAffected = addDish.executeUpdate();
 
