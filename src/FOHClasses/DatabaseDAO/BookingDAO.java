@@ -107,16 +107,16 @@ public class BookingDAO {
                 Timestamp endTime = resultSet.getTimestamp("endTime");
                 boolean paymentStatus = resultSet.getBoolean("paymentStatus");
                 int statusID = resultSet.getInt("BookingStatusbookingStatusID");
+                int waiterID = resultSet.getInt("WaiterwaiterID");
 
                 // Assuming you have waiterId, tables, and covers available from somewhere
-                int waiterId = 1; // Change this to the actual waiter ID
-                int[] tables = {1, 2}; // Change this to the actual table IDs
-                int[] covers = {1, 2}; // Change this to the actual cover ID
+                int[] tables = TablesDAO.getTablesByBookingID(bookingID);
+                int[] covers = CoverDAO.getCoversByBookingID(bookingID);
 
                 long startTimeUnix = startTime.getTime() / 1000;
                 long endTimeUnix = endTime.getTime() / 1000;
 
-                Terminal.loadBooking();
+                Terminal.loadBooking(bookingID, customerName, contactNumber, waiterID, startTimeUnix, endTimeUnix,tables,covers);
 
                 System.out.println("BookingID: " + bookingID + ", Num of People: " + numOfPeople +
                         ", Customer Name: " + customerName + ", Contact Number: " + contactNumber +
