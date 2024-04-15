@@ -26,6 +26,17 @@ public class MenuItemCollection {
         MenuDAO.addMenu();
     }
 
+    public static void loadMenu(HashMap<Integer, List<String>> dishMenu) {
+        MenuItemCollection.reset();
+        for (HashMap.Entry<Integer, List<String>> dish : dishMenu.entrySet()) {
+            int dishId = dish.getKey();
+            List<String> value = dish.getValue();
+
+            MenuItemCollection.add(new MenuItem(dishId, value.get(0), Integer.parseInt(value.get(1)), value.get(2), value.get(3)));
+        }
+//        MenuDAO.addMenu();
+    }
+
     /**
      * Adds an entry to the hashmap
      * @param menuItem The entry to add

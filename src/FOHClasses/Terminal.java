@@ -27,10 +27,8 @@ public class Terminal {
         MenuItemCollection.add(new MenuItem(1, "DemoDish1", 1000, "This is a dish.", "Allergen1"));
         MenuItemCollection.add(new MenuItem(2, "DemoDish2", 2500, "A meal.", "Allergen1, Allergen2"));
         BookingDAO.returnBookings();
-//        MenuDAO.getMenu();
-
-//        FOHController controller = new FOHController();
-//        controller.markItemUnavailable(1);
+//        newOrder(1,1,new int[]{1},"Test");
+        MenuDAO.getMenu();
     }
 
     // For creating a new booking from the UI
