@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class Booking {
-    private static int nextId = 1;
     private final int bookingId;
     private String customerName;
     private String phoneNumber;
@@ -20,7 +19,6 @@ public class Booking {
     private boolean paid;
 
     public Booking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables) {
-//        this.bookingId = nextId++;
         this.bookingId = bookingId;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
@@ -37,10 +35,6 @@ public class Booking {
         this.covers = new HashSet<>();
         this.paid = false;
         BookingCollection.add(this);
-    }
-
-    public static void setNextId(int nextId) {
-        if (Booking.nextId < nextId) Booking.nextId = nextId; // Only allows nextId to be increased
     }
 
     public void addCover(int coverId) {

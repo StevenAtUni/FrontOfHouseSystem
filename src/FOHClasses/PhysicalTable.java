@@ -1,8 +1,6 @@
 package FOHClasses;
 
 import FOHClasses.Collection.PhysicalTableCollection;
-import FOHClasses.Collection.TableCollection;
-import FOHClasses.Collection.WaiterCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
