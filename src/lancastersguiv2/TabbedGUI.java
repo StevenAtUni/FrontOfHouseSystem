@@ -22,20 +22,18 @@ import static lancastersguiv2.BookingTableManager.updateBookingTable;
  */
 public class TabbedGUI extends javax.swing.JFrame {
 
-    DefaultListModel unpaidModel = new DefaultListModel();
-    /**
-     * Creates new form TabbedGUI
-     */
     public TabbedGUI() {
         initComponents();
 
-        for (Booking booking : BookingCollection.getAll()) {
-            if(!booking.isPaid()){
+        /*for (Booking booking : BookingCollection.getAll()) {
+            if (!booking.isPaid()) {
                 unpaidModel.addElement(booking.getBookingId());
             }
-
         }
-        listUnpaidOrders.setModel(unpaidModel);
+        listUnpaidOrders.setModel(unpaidModel);*/
+
+        // Use the utility class to populate the waiter dropdown
+        GUIUtils.populateWaiterDropdown(cbNbWaiter);
     }
 
     /**
