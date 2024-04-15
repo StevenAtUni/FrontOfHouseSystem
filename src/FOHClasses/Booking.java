@@ -10,11 +10,11 @@ public class Booking {
     private String customerName;
     private String phoneNumber;
     private int waiterId;
-    private long startTimestamp;
-    private long endTimestamp;
-    private int tableId;
-    private final HashSet<Integer> tables;
-    private final HashSet<Integer> covers;
+    private long startTimestamp; // Start time of the booking in seconds since UNIX epoch
+    private long endTimestamp; // End time of the booking in seconds since UNIX epoch
+    private int tableId; // Lowest tableId represents the collective joined tables
+    private final HashSet<Integer> tables; // The tableIds of the booked tables
+    private final HashSet<Integer> covers; // The coverIds of the covers belonging to this booking
     private int numberOfGuests;
     private boolean paid;
 
@@ -79,6 +79,7 @@ public class Booking {
         return tableId;
     }
 
+    // Returns all tableIds
     public int[] getTables() {
         int[] arr = new int[tables.size()];
         int i = 0;
@@ -89,6 +90,7 @@ public class Booking {
         return arr;
     }
 
+    // Returns all coverIds
     public int[] getCovers() {
         int[] arr = new int[covers.size()];
         int i = 0;

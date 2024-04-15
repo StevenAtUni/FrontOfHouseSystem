@@ -9,7 +9,7 @@ public class Cover {
     private int tableId;
     private long startTimestamp;
     private long endTimestamp;
-    private HashSet<Integer> orders;
+    private HashSet<Integer> orders; // Stores the orderIds belonging to this cover
 
     public Cover(int coverId, long startTimestamp, int tableId) {
         this.coverId = coverId;
@@ -50,6 +50,7 @@ public class Cover {
         return endTimestamp;
     }
 
+    // Returns all orderIds
     public int[] getOrders() {
         int[] arr = new int[orders.size()];
         int i = 0;

@@ -63,6 +63,7 @@ public class Terminal {
         return true;
     }
 
+    // Instantiates new booking objects for local storage and usage
     private static Booking createBooking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables) {
         Arrays.sort(tables); // Ensures sorted into ascending order
 
@@ -126,6 +127,7 @@ public class Terminal {
     }
      */
 
+    // Checks if enough tables have been booked for the desired covers.
     public static boolean checkArrangement(int tables, int covers) {
         if ((covers / 2f) > tables) return false; // Returns false if more covers than table can sit
         return true;
@@ -143,11 +145,12 @@ public class Terminal {
 //        FOHImpl.getInstance().makeOrder(order.getOrderId(), order.getTableId(), items, notes);
     }
 
-    // For loading bookings from the database
+    // For loading orders from the database
     public static void loadOrder(int orderId, int tableId, int[] items, String notes) {
         new Order(orderId, tableId, items, notes);
     }
 
+    // Pays for all the covers/orders of the booking
     public static void payWholeBill(int bookingId, boolean isCash) {
         Booking booking = BookingCollection.get(bookingId);
         int[] covers = booking.getCovers();
@@ -164,6 +167,7 @@ public class Terminal {
         createBill(booking, isCash, items, true);
     }
 
+    // Splits payment/billing into individual covers
     public static void paySplitBill(int bookingId, boolean isCash) {
         Booking booking = BookingCollection.get(bookingId);
         int[] covers = booking.getCovers();
@@ -179,6 +183,7 @@ public class Terminal {
         }
     }
 
+    // Creates the bill and sends for storage by management
     private static void createBill(Booking booking, boolean isCash, ArrayList<Integer> items, boolean applyServiceCharge) {
         Bill bill = new Bill(booking.getWaiterId(), booking.getStartTimestamp(), booking.getEndTimestamp(), isCash, items, applyServiceCharge);
 
