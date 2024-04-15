@@ -12,8 +12,9 @@ public class Cover {
     private long endTimestamp;
     private HashSet<Integer> orders;
 
-    public Cover(long startTimestamp, int tableId) {
-        this.coverId = nextId++; // Increments for the next available ID
+    public Cover(int coverId, long startTimestamp, int tableId) {
+//        this.coverId = nextId++; // Increments for the next available ID
+        this.coverId = coverId;
         this.tableId = tableId;
         this.startTimestamp = startTimestamp;
         this.orders = new HashSet<>();

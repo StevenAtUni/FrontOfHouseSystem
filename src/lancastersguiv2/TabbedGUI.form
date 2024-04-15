@@ -39,7 +39,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tpFOHGUIMain" pref="800" max="32767" attributes="0"/>
+          <Component id="tpFOHGUIMain" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -85,7 +85,7 @@
                   <Component id="spNotifications" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="346" max="-2" attributes="0"/>
-                      <Component id="bNotificationDelete" pref="106" max="32767" attributes="0"/>
+                      <Component id="bNotificationDelete" pref="116" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -94,7 +94,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="spNotifications" pref="415" max="32767" attributes="0"/>
+                      <Component id="spNotifications" pref="482" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="bNotificationDelete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -169,7 +169,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="spMenu" pref="788" max="32767" attributes="0"/>
+                      <Component id="spMenu" pref="798" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -178,7 +178,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="spMenu" pref="476" max="32767" attributes="0"/>
+                      <Component id="spMenu" pref="543" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -392,15 +392,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lNbName" pref="19" max="32767" attributes="0"/>
+                          <Component id="lNbName" pref="29" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="tfNbName" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lNbPhoneNumber" pref="17" max="32767" attributes="0"/>
+                          <Component id="lNbPhoneNumber" pref="27" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="tfNbPhoneNumber" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lNbDate" pref="17" max="32767" attributes="0"/>
+                          <Component id="lNbDate" pref="27" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbNbMonth" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -408,7 +408,7 @@
                               <Component id="cbNbYear" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lNbTime" pref="17" max="32767" attributes="0"/>
+                          <Component id="lNbTime" pref="27" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbNbMinute" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -425,7 +425,7 @@
                               <Component id="cbNbNoGuests" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="lNbTables" pref="17" max="32767" attributes="0"/>
+                          <Component id="lNbTables" pref="27" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="tfTables" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -692,11 +692,12 @@
                 <Component class="javax.swing.JComboBox" name="cbNbWaiter">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Alfonse"/>
-                        <StringItem index="1" value="Marshal"/>
-                        <StringItem index="2" value="Angela"/>
-                        <StringItem index="3" value="Patrice"/>
+                      <StringArray count="5">
+                        <StringItem index="0" value="1111"/>
+                        <StringItem index="1" value="2222"/>
+                        <StringItem index="2" value="3333"/>
+                        <StringItem index="3" value="4444"/>
+                        <StringItem index="4" value="5555"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -721,7 +722,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="spEditBooking" alignment="0" pref="528" max="32767" attributes="0"/>
+                      <Component id="spEditBooking" alignment="0" pref="537" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                           <Component id="bBookingDelete" max="32767" attributes="0"/>
@@ -742,7 +743,7 @@
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Component id="cbBookingsSelect" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="spEditBooking" pref="309" max="32767" attributes="0"/>
+                          <Component id="spEditBooking" pref="376" max="32767" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="bBookingDelete" min="-2" pref="43" max="-2" attributes="0"/>
@@ -952,7 +953,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="spSelectedBill" max="32767" attributes="0"/>
-                                  <Component id="spUnpaidOrders" pref="395" max="32767" attributes="0"/>
+                                  <Component id="spUnpaidOrders" pref="462" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
@@ -1129,7 +1130,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lOrders" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="spOrders" pref="350" max="32767" attributes="0"/>
+                      <Component id="spOrders" pref="417" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="bOEdit" alignment="3" max="32767" attributes="0"/>
