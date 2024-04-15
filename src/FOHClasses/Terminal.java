@@ -2,6 +2,7 @@ package FOHClasses;
 
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.CoverCollection;
+import FOHClasses.Collection.MenuItemCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
 import FOHClasses.DatabaseDAO.BookingDAO;
 import FOHInterface.ManagementInterface.IRecord;
@@ -17,6 +18,10 @@ public class Terminal {
         for (int i = 1; i <= numOfTables; i++) {
             new PhysicalTable();
         }
+
+        // Dummy data
+        MenuItemCollection.add(new MenuItem(1, "DemoDish1", 1000, "This is a dish.", "Allergen1"));
+        MenuItemCollection.add(new MenuItem(2, "DemoDish2", 2500, "A meal.", "Allergen1, Allergen2"));
     }
 
     // For creating a new booking from the UI
