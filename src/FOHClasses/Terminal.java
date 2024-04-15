@@ -2,8 +2,10 @@ package FOHClasses;
 
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.CoverCollection;
+import FOHClasses.Collection.MenuItemCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
 import FOHClasses.DatabaseDAO.BookingDAO;
+import FOHClasses.DatabaseDAO.OrderDAO;
 import FOHInterface.ManagementInterface.IRecord;
 //import orders.FOHImpl;
 
@@ -17,6 +19,11 @@ public class Terminal {
         for (int i = 1; i <= numOfTables; i++) {
             new PhysicalTable();
         }
+
+        // Dummy data
+        newBooking("John Smith", "12345678910", 100, 1706814000, 1706817600, new int[]{6,7}, 3);
+        MenuItemCollection.add(new MenuItem(1, "DemoDish1", 1000, "This is a dish.", "Allergen1"));
+        MenuItemCollection.add(new MenuItem(2, "DemoDish2", 2500, "A meal.", "Allergen1, Allergen2"));
     }
 
     // For creating a new booking from the UI
@@ -28,7 +35,7 @@ public class Terminal {
             if (!table.isAvailable(startTimestamp, endTimestamp)) return false; // Fails if table not available
         }
 
-        int[] ids = BookingDAO.createBooking(covers, customerName, phoneNumber, startTimestamp, endTimestamp, tables);
+        int[] ids = BookingDAO.createBooking(covers, waiterId, customerName, phoneNumber, startTimestamp, endTimestamp, tables);
 
         Booking booking = createBooking(ids[0], customerName, phoneNumber, waiterId, startTimestamp, endTimestamp, tables);
         if (booking == null) return false;
@@ -122,19 +129,18 @@ public class Terminal {
     // For creating a new order from the UI
     public static void newOrder(int bookingId, int coverId, int[] items, String notes) {
         Booking booking = BookingCollection.get(bookingId);
-        Order order = new Order(booking.getTableId(), items, notes);
+        int orderId = OrderDAO.createOrder(coverId, notes, items);
+        Order order = new Order(orderId, booking.getTableId(), items, notes);
         Cover cover = CoverCollection.get(coverId);
         cover.addOrder(order.getOrderId());
-
-        // TODO Call database add here
         
         // Sends order to the kitchen
 //        FOHImpl.getInstance().makeOrder(order.getOrderId(), order.getTableId(), items, notes);
     }
 
     // For loading bookings from the database
-    public static void loadOrder(int tableId, int[] items, String notes) {
-        new Order(tableId, items, notes);
+    public static void loadOrder(int orderId, int tableId, int[] items, String notes) {
+        new Order(orderId, tableId, items, notes);
     }
 
     public static void payWholeBill(int bookingId, boolean isCash) {
