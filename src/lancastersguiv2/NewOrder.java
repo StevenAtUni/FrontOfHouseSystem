@@ -4,8 +4,20 @@
  */
 package lancastersguiv2;
 
-import javax.swing.DefaultListModel;
-import javax.swing.table.DefaultTableModel;
+import FOHClasses.Booking;
+import FOHClasses.Collection.BookingCollection;
+import FOHClasses.Collection.MenuItemCollection;
+import FOHClasses.MenuItem;
+import FOHClasses.Terminal;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.*;
+
 
 /**
  *
@@ -13,19 +25,54 @@ import javax.swing.table.DefaultTableModel;
  */
 public class NewOrder extends javax.swing.JFrame {
     
-    DefaultListModel model1, model2;
+    DefaultListModel<String> modelMenu, modelOrder;
+    DefaultComboBoxModel<Integer> modelBookingID, modelCoverID;
+    Note note;
+    static String noteMessage = "";
+    int bookingID;
 
     /**
      * Creates new form NewOrder
      */
     public NewOrder() {
         initComponents();
-        model1 = new DefaultListModel();
-        model2 = new DefaultListModel();
-        //add menu items to model1
-        
-        
+
+
+
+        //create the models we can use to populate the components
+        modelMenu = new DefaultListModel<>();
+        modelOrder = new DefaultListModel<>();
+        modelBookingID = new DefaultComboBoxModel<>();
+        modelCoverID = new DefaultComboBoxModel<>();
+
+        note = new Note();
+
+        for (MenuItem menuItem : MenuItemCollection.getAll()){
+            if (menuItem.isAvailable()){}
+            modelMenu.addElement(menuItem.getName());
+        }
+        listNoMenu.setModel(modelMenu);
+        for (Booking booking : BookingCollection.getAll()){
+            modelBookingID.addElement(booking.getBookingId());
+        }
+        cbNoBooking.setModel(modelBookingID);
+
+        cbNoBooking.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (cbNoBooking == e.getSource() && cbNoBooking.getSelectedItem() != null){
+                    Booking booking = (Booking) BookingCollection.get((int) cbNoBooking.getSelectedItem());
+                    for (int i = 0; i < booking.getCovers().length; i++){
+                        modelCoverID.addElement(booking.getCovers()[i]);
+                    }
+                }
+            }
+        });
+
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,11 +97,11 @@ public class NewOrder extends javax.swing.JFrame {
         spNoOrder = new javax.swing.JScrollPane();
         listNoOrders = new javax.swing.JList<>();
         pNoTable = new javax.swing.JPanel();
-        cbNoBooking = new javax.swing.JComboBox<>();
+        cbNoBooking = new javax.swing.JComboBox<Integer>();
         bNoConfirm = new javax.swing.JButton();
         lNoBooking = new javax.swing.JLabel();
         lNoCover = new javax.swing.JLabel();
-        cbNoCover = new javax.swing.JComboBox<>();
+        cbNoCover = new JComboBox<Integer>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,7 +217,7 @@ public class NewOrder extends javax.swing.JFrame {
         );
 
         cbNoBooking.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbNoBooking.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
+        //cbNoBooking.setModel(new DefaultComboBoxModel<Integer>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
 
         bNoConfirm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bNoConfirm.setText("Confirm");
@@ -186,7 +233,7 @@ public class NewOrder extends javax.swing.JFrame {
         lNoCover.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lNoCover.setText("Cover:");
 
-        cbNoCover.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        //cbNoCover.setModel(new DefaultComboBoxModel<Integer>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pNoTableLayout = new javax.swing.GroupLayout(pNoTable);
         pNoTable.setLayout(pNoTableLayout);
@@ -265,31 +312,62 @@ public class NewOrder extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //method for creating a new order
     private void bNoConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoConfirmActionPerformed
         // TODO add your handling code here:
         //send order to database
+        List<Integer> l = new ArrayList<>();
+        List<String> orderItems = new ArrayList<>();
+        int iComponentCount = listNoOrders.getComponentCount();
+        for (int i = 0; i < iComponentCount;i++){
+            orderItems.add(listNoOrders.getComponent(i).toString());
+        }
+
+        List<MenuItem> menuItems = MenuItemCollection.getAll();
+
+        for (String s : orderItems){
+            for (MenuItem menuItem : menuItems){
+                if (s.equals(menuItem.getName())) {
+                    l.add(menuItem.getItemId());
+                }
+            }
+        }
+        int[] orders = new int[l.size()];
+        for (int i = 0; i < orders.length; i++){
+            orders[i] = l.get(i);
+        }
+
+        cbNoBooking.setModel(modelBookingID);
+        cbNoCover.setModel(modelCoverID);
+        int bookingID = (int) modelBookingID.getSelectedItem();
+        int coverID = (int) modelCoverID.getSelectedItem();
+
+        Terminal.newOrder(bookingID, coverID, orders, noteMessage);
+
+        noteMessage = "";
+
         this.setVisible(false);
     }//GEN-LAST:event_bNoConfirmActionPerformed
 
     private void bNoNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoNoteActionPerformed
         // TODO add your handling code here:
-        Note note = new Note();
         note.setVisible(true);
+        //note.get
     }//GEN-LAST:event_bNoNoteActionPerformed
 
     private void bNoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoAddActionPerformed
         // TODO add your handling code here:
         if(listNoMenu.getSelectedValue() != null){
-            model2.addElement(listNoMenu.getSelectedValue());
-            listNoOrders.setModel(model2);
+            modelOrder.addElement(listNoMenu.getSelectedValue());
+            listNoOrders.setModel(modelOrder);
         }
     }//GEN-LAST:event_bNoAddActionPerformed
 
     private void bNoDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNoDeleteActionPerformed
         // TODO add your handling code here:
         if(listNoOrders.getSelectedValue() != null){
-            model2.remove(listNoOrders.getSelectedIndex());
-            listNoOrders.setModel(model2);
+            modelOrder.remove(listNoOrders.getSelectedIndex());
+            listNoOrders.setModel(modelOrder);
         }
     }//GEN-LAST:event_bNoDeleteActionPerformed
 
@@ -333,8 +411,8 @@ public class NewOrder extends javax.swing.JFrame {
     private javax.swing.JButton bNoConfirm;
     private javax.swing.JButton bNoDelete;
     private javax.swing.JButton bNoNote;
-    private javax.swing.JComboBox<String> cbNoBooking;
-    private javax.swing.JComboBox<String> cbNoCover;
+    private JComboBox<Integer> cbNoBooking;
+    private JComboBox<Integer> cbNoCover;
     private javax.swing.JLabel lNoBooking;
     private javax.swing.JLabel lNoCover;
     private javax.swing.JLabel lNoMenu;

@@ -1,7 +1,10 @@
 ### IntelliJ IDEA ###
 out/
+build/
 !**/src/main/**/out/
+!**/src/main/**/build/
 !**/src/test/**/out/
+!**/src/test/**/build/
 
 # Ignore IntelliJ IDEA files
 .idea/
@@ -31,3 +34,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 .idea/workspace.xml
+/build/
