@@ -70,4 +70,8 @@ public class Order {
         }
         return arr;
     }
+
+    public boolean isComplete() {
+        return complete;
+    }
 }
