@@ -53,14 +53,14 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         }*/
 
-        notificationList = Notification.getNotification();
-        for (int i = 0; i < notificationList.length; i++) {
-            notificationModel.addElement(notificationList[i]);
-        }
+//        notificationList = Notification.getNotification();
+//        for (int i = 0; i < notificationList.length; i++) {
+//            notificationModel.addElement(notificationList[i]);
+//        }
 
         listUnpaidOrders.setModel(unpaidModel);
         tOrders.setModel(ordersModel);
-        listNotifications.setModel(notificationModel);
+//        listNotifications.setModel(notificationModel);
 
 
 
@@ -1190,7 +1190,8 @@ public class TabbedGUI extends javax.swing.JFrame {
 
     private void bSelectBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        booking =BookingCollection.get(Integer.parseInt(listUnpaidOrders.getSelectedValue()));
+        int bookingId = listUnpaidOrders.getSelectedValue();
+        booking =BookingCollection.get(bookingId);
         int[] covers = booking.getCovers();
         int coversLength = covers.length;
         for (int i = 0; i < coversLength; i++) {
@@ -1403,7 +1404,7 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lTp9;
     private javax.swing.JLabel lUnpaidOrders;
     private javax.swing.JList<String> listNotifications;
-    private javax.swing.JList<String> listUnpaidOrders;
+    private javax.swing.JList<Integer> listUnpaidOrders;
     private javax.swing.JPanel pBooking;
     private javax.swing.JPanel pEditBooking;
     private javax.swing.JPanel pMenu;
