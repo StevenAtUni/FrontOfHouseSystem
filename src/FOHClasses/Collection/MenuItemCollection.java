@@ -19,7 +19,7 @@ public class MenuItemCollection {
      * @param menuItem The entry to add
      * @return Whether the operation succeeded (false if entry already exists)
      */
-    public void add(MenuItem menuItem){
+    public static void add(MenuItem menuItem){
         int id = menuItem.getItemId();
         items.put(id, menuItem);
         //lets say someone order multiple items

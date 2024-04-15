@@ -19,8 +19,9 @@ public class Booking {
     private int numberOfGuests;
     private boolean paid;
 
-    public Booking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables) {
-        this.bookingId = nextId++;
+    public Booking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables) {
+//        this.bookingId = nextId++;
+        this.bookingId = bookingId;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
         this.waiterId = waiterId;
