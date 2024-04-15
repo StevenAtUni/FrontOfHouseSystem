@@ -63,7 +63,8 @@ public class TabbedGUI extends javax.swing.JFrame {
         tOrders.setModel(ordersModel);
 //        listNotifications.setModel(notificationModel);
 
-
+        // Displays bookings
+        updateBookingTable(tBookings);
 
         // Use the utility class to populate the waiter dropdown
         GUIUtils.populateWaiterDropdown(cbNbWaiter);
