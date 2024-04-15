@@ -10,6 +10,8 @@ import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Notification;
 import FOHClasses.Order;
 import FOHClasses.Terminal;
+import FOHInterface.FOHController;
+
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,9 +30,9 @@ import static lancastersguiv2.BookingTableManager.updateBookingTable;
 public class TabbedGUI extends javax.swing.JFrame {
 
     DefaultListModel unpaidModel = new DefaultListModel();
-    DefaultListModel notificationModel = new DefaultListModel();
+    static DefaultListModel notificationModel = new DefaultListModel();
     DefaultTableModel ordersModel = new DefaultTableModel();
-    String[] notificationList;
+    static List<String> notificationList;
     Booking booking;
     /**
      * Creates new form TabbedGUI
@@ -53,10 +55,9 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         }*/
 
-//        notificationList = Notification.getNotification();
-//        for (int i = 0; i < notificationList.length; i++) {
-//            notificationModel.addElement(notificationList[i]);
-//        }
+        notificationList = new ArrayList<>();
+        FOHController controller = new FOHController();
+//        controller.markItemUnavailable(1); // TODO Manual call to demo notifications
 
         listUnpaidOrders.setModel(unpaidModel);
         tOrders.setModel(ordersModel);
@@ -66,6 +67,11 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         // Use the utility class to populate the waiter dropdown
         GUIUtils.populateWaiterDropdown(cbNbWaiter);
+    }
+
+    public static void newNotification(String notification) {
+        notificationModel.addElement(notification);
+        listNotifications.setModel(notificationModel);
     }
 
 
@@ -1403,7 +1409,7 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lTp8;
     private javax.swing.JLabel lTp9;
     private javax.swing.JLabel lUnpaidOrders;
-    private javax.swing.JList<String> listNotifications;
+    private static javax.swing.JList<String> listNotifications;
     private javax.swing.JList<Integer> listUnpaidOrders;
     private javax.swing.JPanel pBooking;
     private javax.swing.JPanel pEditBooking;
