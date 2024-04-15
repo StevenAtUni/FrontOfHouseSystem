@@ -3,7 +3,9 @@ package FOHClasses;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
+import FOHInterface.ManagementInterface.IRecord;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Terminal {
@@ -16,21 +18,21 @@ public class Terminal {
     }
 
     // For creating a new booking from the UI
-    public static boolean newBooking(String customerName, String phoneNumber, long startTimestamp, long endTimeStamp, int[] tables, int covers) {
+    public static boolean newBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables, int covers) {
         if (!checkArrangement(tables.length, covers)) return false;
 
-        Booking booking = createBooking(customerName, phoneNumber, startTimestamp, endTimeStamp, tables);
+        Booking booking = createBooking(customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
         if (booking == null) return false;
         for (int i = 0; i < covers; i++) {
             booking.addCover(new Cover(startTimestamp, tables[0]).getCoverId()); // Creates a cover and adds the coverId to the booking
         }
-        // Call database add here
+        // TODO Call database add here
         return true;
     }
 
     // For loading bookings from the database
-    public static boolean loadBooking(String customerName, String phoneNumber, long startTimestamp, long endTimeStamp, int[] tables, int[] covers) {
-        Booking booking = createBooking(customerName, phoneNumber, startTimestamp, endTimeStamp, tables);
+    public static boolean loadBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables, int[] covers) {
+        Booking booking = createBooking(customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
         if (booking == null) return false;
 
         // The constructor of Booker adds itself to the BookingCollection
@@ -40,7 +42,7 @@ public class Terminal {
         return true;
     }
 
-    private static Booking createBooking(String customerName, String phoneNumber, long startTimestamp, long endTimeStamp, int[] tables) {
+    private static Booking createBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables) {
         Arrays.sort(tables); // Ensures sorted into ascending order
 
         for (int tableId : tables) {
@@ -52,7 +54,7 @@ public class Terminal {
             table.book(startTimestamp, endTimeStamp);
         }
 
-        return new Booking(customerName, phoneNumber, startTimestamp, endTimeStamp, tables);
+        return new Booking(customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
     }
 
     /**
@@ -112,7 +114,53 @@ public class Terminal {
         return true;
     }
 
-    public static void createOrder() {
+    // For creating a new order from the UI
+    public static void newOrder(int tableId, int[] items, String notes) {
+        new Order(tableId, items, notes);
 
+        // TODO Call database add here
+    }
+
+    // For loading bookings from the database
+    public static void loadOrder(int tableId, int[] items, String notes) {
+        new Order(tableId, items, notes);
+    }
+
+    public static void payWholeBill(int bookingId, boolean isCash) {
+        Booking booking = BookingCollection.get(bookingId);
+        int[] covers = booking.getCovers();
+
+        ArrayList<Integer> items = new ArrayList<>();
+        for (int coverId : covers) {
+            Cover cover = CoverCollection.get(coverId);
+            int[] orders = cover.getOrders();
+            for (int itemId : orders) {
+                items.add(itemId);
+            }
+        }
+
+        createBill(booking, isCash, items, true);
+    }
+
+    public static void paySplitBill(int bookingId, boolean isCash) {
+        Booking booking = BookingCollection.get(bookingId);
+        int[] covers = booking.getCovers();
+
+        for (int coverId : covers) {
+            ArrayList<Integer> items = new ArrayList<>();
+            Cover cover = CoverCollection.get(coverId);
+            int[] orders = cover.getOrders();
+            for (int itemId : orders) {
+                items.add(itemId);
+            }
+            createBill(booking, isCash, items, true);
+        }
+    }
+
+    private static void createBill(Booking booking, boolean isCash, ArrayList<Integer> items, boolean applyServiceCharge) {
+        Bill bill = new Bill(booking.getWaiterId(), booking.getStartTimestamp(), booking.getEndTimestamp(), isCash, items, applyServiceCharge);
+
+        // TODO Sends to management
+//        IRecord.sendReceipt((int) booking.getStartTimestamp(), (int) booking.getEndTimestamp(), booking.getNumberOfGuests(), items, 0, bill.getServiceCharge());
     }
 }
