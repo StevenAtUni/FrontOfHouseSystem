@@ -20,3 +20,5 @@
     <li>Run out/artifacts/FrontOfHouseSystem_jar/FrontOfHouseSystem.jar</li>
     <li>Run src/lancastersguiv2/Login.java</li>
 </ul>
+
+Passcode: 1234
