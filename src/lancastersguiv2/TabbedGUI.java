@@ -1205,13 +1205,13 @@ public class TabbedGUI extends javax.swing.JFrame {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date parsedDate = dateFormat.parse(date + " " + time);
-            long startTimestamp = parsedDate.getTime() / 1000;
+            long startTimestamp = parsedDate.getTime() / 1000;  // Convert milliseconds to seconds
 
-            // Assume booking length is in hours and minutes (HH:mm), and calculate end timestamp
+            // Assume booking length is in hours and minutes (HH:mm), and calculate end timestamp in seconds
             String[] bookingLengthParts = cbNbBookingLength.getSelectedItem().toString().split(":");
-            long bookingLengthMillis = Integer.parseInt(bookingLengthParts[0]) * 3600000 + // Hours to milliseconds
-            Integer.parseInt(bookingLengthParts[1]) * 60000;   // Minutes to milliseconds
-            long endTimeStamp = (startTimestamp + bookingLengthMillis) / 1000;
+            long bookingLengthSeconds = Integer.parseInt(bookingLengthParts[0]) * 3600 + // Hours to seconds
+                    Integer.parseInt(bookingLengthParts[1]) * 60;     // Minutes to seconds
+            long endTimeStamp = startTimestamp + bookingLengthSeconds;
 
             // Parse the number of guests
             int covers = Integer.parseInt(cbNbNoGuests.getSelectedItem().toString());
