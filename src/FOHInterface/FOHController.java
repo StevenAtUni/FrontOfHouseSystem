@@ -22,14 +22,7 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
     //implemented methods
     @Override
     public void sendMenu(HashMap<Integer, List<String>> dishMenu, HashMap<Integer, List<String>> wineMenu) {
-        MenuItemCollection.reset();
-        for (HashMap.Entry<Integer, List<String>> dish : dishMenu.entrySet()) {
-            int dishId = dish.getKey();
-            List<String> value = dish.getValue();
-
-            MenuItemCollection.add(new MenuItem(dishId, value.get(0), Integer.parseInt(value.get(1)), value.get(2), value.get(3)));
-        }
-        MenuDAO.addMenu();
+        MenuItemCollection.newMenu(dishMenu);
     }
 
     @Override
