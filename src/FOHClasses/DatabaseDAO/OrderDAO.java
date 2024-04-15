@@ -3,6 +3,7 @@ package FOHClasses.DatabaseDAO;
 import FOHClasses.DishQuantity;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
 
 public class OrderDAO {
@@ -13,8 +14,20 @@ public class OrderDAO {
             dishQuantities.add(new DishQuantity(2, 1));
             OrderDAO.createOrder(2, "None", dishQuantities); */
             int generatedOrderID = -1; // Initialize with a default value
+            HashMap<Integer, Integer> countMap = new HashMap<>();
+
+            // Count the occurrences of each number
+            for (int num : dishIDs) {
+                if (countMap.containsKey(num)) {
+                    countMap.put(num, countMap.get(num) + 1);
+                } else {
+                    countMap.put(num, 1);
+                }
+            }
+
 
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");) {
+
                 // Create the order
                 PreparedStatement createOrder = connection.prepareStatement(
                         "INSERT INTO `Order` (orderNote, CoverscoverID) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
@@ -35,11 +48,13 @@ public class OrderDAO {
                     System.out.println("New order with ID " + generatedOrderID + " has been successfully created.");
                     // Add dishes to OrderedDishes table
                     PreparedStatement addOrderedDish = connection.prepareStatement(
-                            "INSERT INTO OrderedDishes (OrderorderID, DishesdishID) VALUES (?, ?)");
+                            "INSERT INTO OrderedDishes (OrderorderID, DishesdishID) VALUES (?, ?, ?)");
 
-                    for (int dishID : dishIDs) {
+                    for (int key : countMap.keySet()) {
+                        int count = countMap.get(key);
                         addOrderedDish.setInt(1, generatedOrderID);
-                        addOrderedDish.setInt(2, dishID);
+                        addOrderedDish.setInt(2, key);
+                        addOrderedDish.setInt(3, count);
 
                         addOrderedDish.addBatch();
                     }
