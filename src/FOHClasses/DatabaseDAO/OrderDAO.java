@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OrderDAO {
 
-        public static int createOrder(int bookingID, String orderNote, List<DishQuantity> dishQuantities) {
+        public static int createOrder(int coverID, String orderNote, int[] dishIDs) {
             /* List<DishQuantity> dishQuantities = new ArrayList<>();
             dishQuantities.add(new DishQuantity(1, 2));
             dishQuantities.add(new DishQuantity(2, 1));
@@ -17,10 +17,10 @@ public class OrderDAO {
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");) {
                 // Create the order
                 PreparedStatement createOrder = connection.prepareStatement(
-                        "INSERT INTO `Order` (orderNote, BookingbookingID) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                        "INSERT INTO `Order` (orderNote, CoverscoverID) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 
                 createOrder.setString(1, orderNote);
-                createOrder.setInt(2, bookingID);
+                createOrder.setInt(2, coverID);
 
                 int rowsAffected = createOrder.executeUpdate();
 
@@ -34,17 +34,18 @@ public class OrderDAO {
                     generatedOrderID = generatedKeys.getInt(1); // Retrieve the generated orderID
                     System.out.println("New order with ID " + generatedOrderID + " has been successfully created.");
                     // Add dishes to OrderedDishes table
-                    for (DishQuantity dishQuantity : dishQuantities) {
-                        PreparedStatement addOrderedDish = connection.prepareStatement(
-                                "INSERT INTO OrderedDishes (OrderorderID, DishesdishID, Quantity) VALUES (?, ?, ?)");
+                    PreparedStatement addOrderedDish = connection.prepareStatement(
+                            "INSERT INTO OrderedDishes (OrderorderID, DishesdishID) VALUES (?, ?)");
 
+                    for (int dishID : dishIDs) {
                         addOrderedDish.setInt(1, generatedOrderID);
-                        addOrderedDish.setInt(2, dishQuantity.getDishID());
-                        addOrderedDish.setInt(3, dishQuantity.getQuantity());
+                        addOrderedDish.setInt(2, dishID);
 
-                        addOrderedDish.executeUpdate();
-                        addOrderedDish.close();
+                        addOrderedDish.addBatch();
                     }
+
+                    addOrderedDish.executeBatch();
+                    addOrderedDish.close();
                 } else {
                     System.out.println("Failed to retrieve generated order ID.");
                     return generatedOrderID;
