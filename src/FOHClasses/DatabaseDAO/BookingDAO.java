@@ -116,7 +116,7 @@ public class BookingDAO {
                 long startTimeUnix = startTime.getTime() / 1000;
                 long endTimeUnix = endTime.getTime() / 1000;
 
-                Terminal.loadBooking();
+                //Terminal.loadBooking();
 
                 System.out.println("BookingID: " + bookingID + ", Num of People: " + numOfPeople +
                         ", Customer Name: " + customerName + ", Contact Number: " + contactNumber +
