@@ -8,7 +8,11 @@ import FOHClasses.Booking;
 import FOHClasses.Terminal;
 
 public class BookingDAO {
-    public static void createBooking(int numOfPeople, String customerName, String contactNumber, long startTime, long endTime, int[] tableIDs) {
+    public static int[] createBooking(int numOfPeople, String customerName, String contactNumber, long startTime, long endTime, int[] tableIDs) {
+
+        int bookingID = -1; // Initialize bookingID
+        List <Integer> coverIDs = new ArrayList<>(); // Initialise Array
+
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             // Insert into Bookings table
             PreparedStatement createBooking = connection.prepareStatement(
@@ -25,7 +29,6 @@ public class BookingDAO {
             createBooking.setTimestamp(5, tendTime);
 
             int rowsAffected = createBooking.executeUpdate();
-            int bookingID = -1; // Initialize bookingID
 
             if (rowsAffected == 0) {
                 System.out.println("Failed to create new booking.");
@@ -54,12 +57,38 @@ public class BookingDAO {
 
                 insertBookingTables.executeBatch();
                 insertBookingTables.close();
+
+
+                PreparedStatement insertCovers = connection.prepareStatement(
+                        "INSERT INTO Covers (coverNumber, BookingsbookingID) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+
+                for (int i = 0; i < numOfPeople; i++) {
+                    insertCovers.setInt(1, i + 1); // coverNumber starts from 1
+                    insertCovers.setInt(2, bookingID);
+                    insertCovers.executeUpdate();
+
+                    ResultSet generatedCoverKeys = insertCovers.getGeneratedKeys();
+                    if (generatedCoverKeys.next()) {
+                        coverIDs.add(generatedCoverKeys.getInt(1));
+                    }
+                }
+
+                insertCovers.close();
             } else {
                 System.out.println("Failed to insert tables for the booking");
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        int[] result = new int[1 + coverIDs.size()];
+        result[0] = bookingID;
+        for (int i = 0; i < coverIDs.size(); i++) {
+            result[i + 1] = coverIDs.get(i);
+        }
+
+        return result;
     }
 
     public static void returnBookings() {
