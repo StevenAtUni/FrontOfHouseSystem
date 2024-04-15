@@ -3,11 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lancastersguiv2;
+import FOHClasses.Collection.OrderCollection;
 import FOHClasses.Terminal;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
 import static lancastersguiv2.BookingTableManager.updateBookingTable;
 
 
@@ -17,11 +19,16 @@ import static lancastersguiv2.BookingTableManager.updateBookingTable;
  */
 public class TabbedGUI extends javax.swing.JFrame {
 
+    DefaultListModel unpaidModel = new DefaultListModel();
     /**
      * Creates new form TabbedGUI
      */
     public TabbedGUI() {
         initComponents();
+
+        //for (Order order : OrderCollection)
+        //unpaidModel.addElement("0");
+        //listUnpaidOrders.setModel(unpaidModel);
     }
 
     /**
