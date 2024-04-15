@@ -4,7 +4,7 @@ import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
 import FOHInterface.ManagementInterface.IRecord;
-import orders.FOHImpl;
+//import orders.FOHImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,7 +122,7 @@ public class Terminal {
         // TODO Call database add here
         
         // Sends order to the kitchen
-        FOHImpl.getInstance().makeOrder(order.getOrderId(), tableId, items, notes);
+        //FOHImpl.getInstance().makeOrder(order.getOrderId(), tableId, items, notes);
     }
 
     // For loading bookings from the database

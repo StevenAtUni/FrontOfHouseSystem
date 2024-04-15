@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import static lancastersguiv2.BookingTableManager.updateBookingTable;
 
 
 /**
@@ -1228,6 +1229,8 @@ public class TabbedGUI extends javax.swing.JFrame {
             // Handle the response
             if (success) {
                 JOptionPane.showMessageDialog(null, "Booking successfully created!");
+                // Update the booking table
+                updateBookingTable(tBookings);  // Assuming 'tBookings' is your JTable variable
             } else {
                 JOptionPane.showMessageDialog(null, "Failed to create booking.");
             }
