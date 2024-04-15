@@ -5,7 +5,9 @@ import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.MenuItemCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
 import FOHClasses.DatabaseDAO.BookingDAO;
+import FOHClasses.DatabaseDAO.MenuDAO;
 import FOHClasses.DatabaseDAO.OrderDAO;
+import FOHInterface.FOHController;
 import FOHInterface.ManagementInterface.IRecord;
 //import orders.FOHImpl;
 
@@ -21,9 +23,11 @@ public class Terminal {
         }
 
         // Dummy data
-        newBooking("John Smith", "12345678910", 1, 1706814000, 1706817600, new int[]{6,7}, 3);
-        MenuItemCollection.add(new MenuItem(1, "DemoDish1", 1000, "This is a dish.", "Allergen1"));
-        MenuItemCollection.add(new MenuItem(2, "DemoDish2", 2500, "A meal.", "Allergen1, Allergen2"));
+//        newBooking("John Smith", "12345678910", 1, 1706814000, 1706817600, new int[]{6,7}, 3);
+//        MenuItemCollection.add(new MenuItem(1, "DemoDish1", 1000, "This is a dish.", "Allergen1"));
+//        MenuItemCollection.add(new MenuItem(2, "DemoDish2", 2500, "A meal.", "Allergen1, Allergen2"));
+        BookingDAO.returnBookings();
+        MenuDAO.getMenu();
     }
 
     // For creating a new booking from the UI
@@ -54,10 +58,12 @@ public class Terminal {
         // The constructor of Booker adds itself to the BookingCollection
         for (int coverId : covers) {
             booking.addCover(coverId); // Creates a cover and adds the coverId to the booking
+            new Cover(coverId, startTimestamp, tables[0]);
         }
         return true;
     }
 
+    // Instantiates new booking objects for local storage and usage
     private static Booking createBooking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables) {
         Arrays.sort(tables); // Ensures sorted into ascending order
 
@@ -121,6 +127,7 @@ public class Terminal {
     }
      */
 
+    // Checks if enough tables have been booked for the desired covers.
     public static boolean checkArrangement(int tables, int covers) {
         if ((covers / 2f) > tables) return false; // Returns false if more covers than table can sit
         return true;
@@ -138,11 +145,12 @@ public class Terminal {
 //        FOHImpl.getInstance().makeOrder(order.getOrderId(), order.getTableId(), items, notes);
     }
 
-    // For loading bookings from the database
+    // For loading orders from the database
     public static void loadOrder(int orderId, int tableId, int[] items, String notes) {
         new Order(orderId, tableId, items, notes);
     }
 
+    // Pays for all the covers/orders of the booking
     public static void payWholeBill(int bookingId, boolean isCash) {
         Booking booking = BookingCollection.get(bookingId);
         int[] covers = booking.getCovers();
@@ -159,6 +167,7 @@ public class Terminal {
         createBill(booking, isCash, items, true);
     }
 
+    // Splits payment/billing into individual covers
     public static void paySplitBill(int bookingId, boolean isCash) {
         Booking booking = BookingCollection.get(bookingId);
         int[] covers = booking.getCovers();
@@ -174,6 +183,7 @@ public class Terminal {
         }
     }
 
+    // Creates the bill and sends for storage by management
     private static void createBill(Booking booking, boolean isCash, ArrayList<Integer> items, boolean applyServiceCharge) {
         Bill bill = new Bill(booking.getWaiterId(), booking.getStartTimestamp(), booking.getEndTimestamp(), isCash, items, applyServiceCharge);
 

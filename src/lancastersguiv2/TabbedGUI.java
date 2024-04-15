@@ -7,11 +7,18 @@ import FOHClasses.Booking;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
 //import FOHClasses.Order;
+import FOHClasses.Notification;
+import FOHClasses.Order;
 import FOHClasses.Terminal;
+import FOHInterface.FOHController;
+
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import static lancastersguiv2.BookingTableManager.updateBookingTable;
 
@@ -23,20 +30,51 @@ import static lancastersguiv2.BookingTableManager.updateBookingTable;
 public class TabbedGUI extends javax.swing.JFrame {
 
     DefaultListModel unpaidModel = new DefaultListModel();
+    static DefaultListModel notificationModel = new DefaultListModel();
+    DefaultTableModel ordersModel = new DefaultTableModel();
+    static List<String> notificationList;
+    Booking booking;
     /**
      * Creates new form TabbedGUI
      */
     public TabbedGUI() {
         initComponents();
 
+
         for (Booking booking : BookingCollection.getAll()) {
-            if(!booking.isPaid()){
+            if (!booking.isPaid()) {
                 unpaidModel.addElement(booking.getBookingId());
             }
-
         }
+
+        /*
+        String[] sa = {"BookingID", "Cover", "Table", "Items", "Note", "Waiter"};
+        ordersModel.addColumn(sa);
+        String[] sa2 = {"", "", "", "", "", ""};
+        for (Order order : OrderCollection.getAll()) {
+
+        }*/
+
+        notificationList = new ArrayList<>();
+        FOHController controller = new FOHController();
+//        controller.markItemUnavailable(1); // TODO Manual call to demo notifications
+
         listUnpaidOrders.setModel(unpaidModel);
+        tOrders.setModel(ordersModel);
+//        listNotifications.setModel(notificationModel);
+
+        // Displays bookings
+        updateBookingTable(tBookings);
+
+        // Use the utility class to populate the waiter dropdown
+        GUIUtils.populateWaiterDropdown(cbNbWaiter);
     }
+
+    public static void newNotification(String notification) {
+        notificationModel.addElement(notification);
+        listNotifications.setModel(notificationModel);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -580,8 +618,18 @@ public class TabbedGUI extends javax.swing.JFrame {
         lSelectedBill.setText("Selected Bill:");
 
         bPayWholeBill.setText("Pay Whole Bill");
+        bPayWholeBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPayWholeBillActionPerformed(evt);
+            }
+        });
 
         bPaySplitBill.setText("Pay Split Bill");
+        bPaySplitBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPaySplitBillActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pPaymentLayout = new javax.swing.GroupLayout(pPayment);
         pPayment.setLayout(pPaymentLayout);
@@ -1128,6 +1176,7 @@ public class TabbedGUI extends javax.swing.JFrame {
 
     private void bNotificationDeleteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        listNotifications.remove(listNotifications.getSelectedIndex());
     }
 
     private void bBookingDeleteActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1148,6 +1197,28 @@ public class TabbedGUI extends javax.swing.JFrame {
 
     private void bSelectBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        int bookingId = listUnpaidOrders.getSelectedValue();
+        booking =BookingCollection.get(bookingId);
+        int[] covers = booking.getCovers();
+        int coversLength = covers.length;
+        for (int i = 0; i < coversLength; i++) {
+            taSelectedBill.append((i+1) + ". " + covers[i] + "\n");
+        }
+
+    }
+    private void bPayWholeBillActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        if (booking != null){
+            Terminal.payWholeBill(booking.getBookingId(), false);
+        }
+
+    }
+    private void bPaySplitBillActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        if (booking != null){
+            Terminal.paySplitBill(booking.getBookingId(), false);
+        }
+
     }
 
     private void bOEditActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1339,8 +1410,8 @@ public class TabbedGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lTp8;
     private javax.swing.JLabel lTp9;
     private javax.swing.JLabel lUnpaidOrders;
-    private javax.swing.JList<String> listNotifications;
-    private javax.swing.JList<String> listUnpaidOrders;
+    private static javax.swing.JList<String> listNotifications;
+    private javax.swing.JList<Integer> listUnpaidOrders;
     private javax.swing.JPanel pBooking;
     private javax.swing.JPanel pEditBooking;
     private javax.swing.JPanel pMenu;

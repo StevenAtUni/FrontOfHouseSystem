@@ -6,21 +6,19 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class Booking {
-    private static int nextId = 1;
     private final int bookingId;
     private String customerName;
     private String phoneNumber;
     private int waiterId;
-    private long startTimestamp;
-    private long endTimestamp;
-    private int tableId;
-    private final HashSet<Integer> tables;
-    private final HashSet<Integer> covers;
+    private long startTimestamp; // Start time of the booking in seconds since UNIX epoch
+    private long endTimestamp; // End time of the booking in seconds since UNIX epoch
+    private int tableId; // Lowest tableId represents the collective joined tables
+    private final HashSet<Integer> tables; // The tableIds of the booked tables
+    private final HashSet<Integer> covers; // The coverIds of the covers belonging to this booking
     private int numberOfGuests;
     private boolean paid;
 
     public Booking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables) {
-//        this.bookingId = nextId++;
         this.bookingId = bookingId;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
@@ -37,10 +35,6 @@ public class Booking {
         this.covers = new HashSet<>();
         this.paid = false;
         BookingCollection.add(this);
-    }
-
-    public static void setNextId(int nextId) {
-        if (Booking.nextId < nextId) Booking.nextId = nextId; // Only allows nextId to be increased
     }
 
     public void addCover(int coverId) {
@@ -85,6 +79,7 @@ public class Booking {
         return tableId;
     }
 
+    // Returns all tableIds
     public int[] getTables() {
         int[] arr = new int[tables.size()];
         int i = 0;
@@ -95,6 +90,7 @@ public class Booking {
         return arr;
     }
 
+    // Returns all coverIds
     public int[] getCovers() {
         int[] arr = new int[covers.size()];
         int i = 0;

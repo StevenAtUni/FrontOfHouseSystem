@@ -27,19 +27,6 @@ public class Bill {
         this.isCash = isCash;
         this.items = items;
 
-//        // Counts up the number of items ordered
-//        for (int itemId : items) {
-//            MenuItem item = MenuItemCollection.get(itemId);
-//            orderPrice += item.getPrice();
-//
-//            if (this.items.containsKey(itemId)) {
-//                int newCount = this.items.get(itemId);
-//                this.items.put(itemId, newCount+1);
-//            } else {
-//                this.items.put(itemId, 1);
-//            }
-//        }
-
         if (applyServiceCharge){
             this.serviceCharge = this.orderPrice * (serviceChargePercentage/100);
         }
