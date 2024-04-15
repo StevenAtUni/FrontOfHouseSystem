@@ -57,10 +57,7 @@ public class TabbedGUI extends javax.swing.JFrame {
 
         notificationList = new ArrayList<>();
         FOHController controller = new FOHController();
-//        controller.markItemUnavailable(1); // Manual call to demo notifications
-//        for (int i = 0; i < notificationList.length; i++) {
-//            notificationModel.addElement(notificationList[i]);
-//        }
+//        controller.markItemUnavailable(1); // TODO Manual call to demo notifications
 
         listUnpaidOrders.setModel(unpaidModel);
         tOrders.setModel(ordersModel);
