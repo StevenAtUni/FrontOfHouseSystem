@@ -360,10 +360,18 @@ public class NewOrder extends javax.swing.JFrame {
 
     private void bNoBookingActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Booking thisBooking = (Booking) BookingCollection.get((int) cbNoBooking.getSelectedItem());
-        for (int i = 0; i < thisBooking.getCovers().length; i++){
-            modelCoverID.addElement(thisBooking.getCovers()[i]);
+        Booking thisBooking;
+        if(modelBookingID.getSelectedItem() != null) {
+            int bookingID = Integer.parseInt(cbNoBooking.getSelectedItem().toString());
+            thisBooking = BookingCollection.get(bookingID);
+
+            modelCoverID.removeAllElements();
+
+            for (int i = 0; i < thisBooking.getCovers().length; i++) {
+                modelCoverID.addElement(thisBooking.getCovers()[i]);
+            }
         }
+        cbNoCover.setModel(modelCoverID);
     }
 
     /**

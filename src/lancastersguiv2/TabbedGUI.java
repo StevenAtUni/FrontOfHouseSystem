@@ -7,11 +7,13 @@ import FOHClasses.Booking;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.OrderCollection;
 //import FOHClasses.Order;
+import FOHClasses.Order;
 import FOHClasses.Terminal;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import static lancastersguiv2.BookingTableManager.updateBookingTable;
 
@@ -23,6 +25,7 @@ import static lancastersguiv2.BookingTableManager.updateBookingTable;
 public class TabbedGUI extends javax.swing.JFrame {
 
     DefaultListModel unpaidModel = new DefaultListModel();
+    DefaultTableModel ordersModel = new DefaultTableModel();
     /**
      * Creates new form TabbedGUI
      */
@@ -35,7 +38,12 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
 
         }
+
+        for (Order order : OrderCollection.getAll()) {
+            //ordersModel.
+        }
         listUnpaidOrders.setModel(unpaidModel);
+        tOrders.setModel(ordersModel);
     }
 
     /**
@@ -1148,6 +1156,13 @@ public class TabbedGUI extends javax.swing.JFrame {
 
     private void bSelectBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        Booking booking =BookingCollection.get(Integer.parseInt(listUnpaidOrders.getSelectedValue()));
+        int[] covers = booking.getCovers();
+        int coversLength = covers.length;
+        for (int i = 0; i < coversLength; i++) {
+            taSelectedBill.append((i+1) + ". " + covers[i] + "\n");
+        }
+
     }
 
     private void bOEditActionPerformed(java.awt.event.ActionEvent evt) {
