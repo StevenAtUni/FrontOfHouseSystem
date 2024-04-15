@@ -7,6 +7,7 @@ import FOHClasses.Collection.PhysicalTableCollection;
 import FOHClasses.DatabaseDAO.BookingDAO;
 import FOHClasses.DatabaseDAO.MenuDAO;
 import FOHClasses.DatabaseDAO.OrderDAO;
+import FOHInterface.FOHController;
 import FOHInterface.ManagementInterface.IRecord;
 //import orders.FOHImpl;
 
@@ -27,6 +28,9 @@ public class Terminal {
         MenuItemCollection.add(new MenuItem(2, "DemoDish2", 2500, "A meal.", "Allergen1, Allergen2"));
         BookingDAO.returnBookings();
 //        MenuDAO.getMenu();
+
+//        FOHController controller = new FOHController();
+//        controller.markItemUnavailable(1);
     }
 
     // For creating a new booking from the UI
