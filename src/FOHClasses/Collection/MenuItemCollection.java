@@ -55,7 +55,7 @@ public class MenuItemCollection {
      * Returns all entries in ascending order by ID value.
      * @return A list of all entries.
      */
-    public List<MenuItem> getAll(){
+    public static List <MenuItem> getAll(){
         List<Integer> sortedKeys = new ArrayList<>(items.keySet()); // Gets all keys
         Collections.sort(sortedKeys); // Sorts keys
 
