@@ -8,9 +8,17 @@
 
 <h4>Project Roles</h4>
 <ul>
-    <li>Steven - Project Manager & Code Reviewer</li>
-    <li>Hossain - Java Developer</li>
-    <li>Joey - Java Developer</li>
+    <li>Steven - Project Manager, Java Developer, and Code Reviewer</li>
+    <li>Hossain - SQL and Java Developer</li>
+    <li>Joey - UI Developer</li>
     <li>Taz - SQL Developer</li>
     <li>Joseph - UI Developer</li>
 </ul>
+
+<h4>Entry Points</h4>
+<ul>
+    <li>Run out/artifacts/FrontOfHouseSystem_jar/FrontOfHouseSystem.jar</li>
+    <li>Run src/lancastersguiv2/Login.java</li>
+</ul>
+
+Passcode: 1234
