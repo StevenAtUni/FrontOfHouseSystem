@@ -3,6 +3,7 @@ package FOHClasses;
 import FOHClasses.Collection.BookingCollection;
 import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.PhysicalTableCollection;
+import FOHClasses.DatabaseDAO.BookingDAO;
 import FOHInterface.ManagementInterface.IRecord;
 //import orders.FOHImpl;
 
@@ -19,21 +20,28 @@ public class Terminal {
     }
 
     // For creating a new booking from the UI
-    public static boolean newBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables, int covers) {
+    public static boolean newBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables, int covers) {
         if (!checkArrangement(tables.length, covers)) return false;
 
-        Booking booking = createBooking(customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
+        for (int tableId : tables) {
+            PhysicalTable table = PhysicalTableCollection.get(tableId);
+            if (!table.isAvailable(startTimestamp, endTimestamp)) return false; // Fails if table not available
+        }
+
+        int[] ids = BookingDAO.createBooking(covers, customerName, phoneNumber, startTimestamp, endTimestamp, tables);
+
+        Booking booking = createBooking(ids[0], customerName, phoneNumber, waiterId, startTimestamp, endTimestamp, tables);
         if (booking == null) return false;
-        for (int i = 0; i < covers; i++) {
-            booking.addCover(new Cover(startTimestamp, tables[0]).getCoverId()); // Creates a cover and adds the coverId to the booking
+        for (int coverId = 1; coverId < ids.length; coverId++) {
+            booking.addCover(new Cover(coverId, startTimestamp, tables[0]).getCoverId()); // Creates a cover and adds the coverId to the booking
         }
         // TODO Call database add here
         return true;
     }
 
     // For loading bookings from the database
-    public static boolean loadBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables, int[] covers) {
-        Booking booking = createBooking(customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
+    public static boolean loadBooking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables, int[] covers) {
+        Booking booking = createBooking(bookingId, customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
         if (booking == null) return false;
 
         // The constructor of Booker adds itself to the BookingCollection
@@ -43,19 +51,15 @@ public class Terminal {
         return true;
     }
 
-    private static Booking createBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables) {
+    private static Booking createBooking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables) {
         Arrays.sort(tables); // Ensures sorted into ascending order
 
-        for (int tableId : tables) {
-            PhysicalTable table = PhysicalTableCollection.get(tableId);
-            if (!table.isAvailable(startTimestamp, endTimeStamp)) return null; // Fails if table not available
-        }
         for (int tableId : tables) {
             PhysicalTable table = PhysicalTableCollection.get(tableId);
             table.book(startTimestamp, endTimeStamp);
         }
 
-        return new Booking(customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
+        return new Booking(bookingId, customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
     }
 
     /**
