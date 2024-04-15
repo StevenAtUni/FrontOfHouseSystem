@@ -14,8 +14,9 @@ public class Order {
     private boolean complete;
     private List<Integer> items;
 
-    public Order(int tableId, int[] items, String notes) {
-        this.orderId = nextId++;
+    public Order(int orderId, int tableId, int[] items, String notes) {
+//        this.orderId = nextId++;
+        this.orderId = orderId;
         this.tableId = tableId;
         this.notes = notes;
 //        this.waiter = waiter;

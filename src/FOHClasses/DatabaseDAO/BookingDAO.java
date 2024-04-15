@@ -8,7 +8,7 @@ import FOHClasses.Booking;
 import FOHClasses.Terminal;
 
 public class BookingDAO {
-    public static int[] createBooking(int numOfPeople, String customerName, String contactNumber, long startTime, long endTime, int[] tableIDs) {
+    public static int[] createBooking(int numOfPeople, int waiterID, String customerName, String contactNumber, long startTime, long endTime, int[] tableIDs) {
 
         int bookingID = -1; // Initialize bookingID
         List <Integer> coverIDs = new ArrayList<>(); // Initialise Array
