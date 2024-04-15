@@ -4,7 +4,10 @@ import FOHClasses.Collection.MenuItemCollection;
 import FOHClasses.MenuItem;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MenuDAO {
 
@@ -44,4 +47,27 @@ public class MenuDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public static void getMenu(){
+        Map<Integer, List<String>> map = new HashMap<Integer, List<String>>();
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
+            PreparedStatement addMenu = connection.prepareStatement("SELECT * FROM Dishes");
+            ResultSet resultSet = addMenu.executeQuery();
+            while (resultSet.next()){
+                List<String> strings = new ArrayList<>();
+                strings.add(resultSet.getString("name"));
+                strings.add(String.valueOf(resultSet.getInt("price")));
+                strings.add(resultSet.getString("description"));
+                strings.add(resultSet.getString("allergens"));
+
+                map.put(resultSet.getInt("dishId"), strings);
+            }
+
+            addMenu.close();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
