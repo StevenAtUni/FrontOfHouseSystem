@@ -3,13 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lancastersguiv2;
-import FOHClasses.Booking;
+import FOHClasses.*;
 import FOHClasses.Collection.BookingCollection;
+import FOHClasses.Collection.CoverCollection;
 import FOHClasses.Collection.OrderCollection;
 //import FOHClasses.Order;
-import FOHClasses.Notification;
-import FOHClasses.Order;
-import FOHClasses.Terminal;
 import FOHInterface.FOHController;
 
 import java.text.SimpleDateFormat;
@@ -47,13 +45,59 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
         }
 
-        /*
         String[] sa = {"BookingID", "Cover", "Table", "Items", "Note", "Waiter"};
         ordersModel.addColumn(sa);
         String[] sa2 = {"", "", "", "", "", ""};
-        for (Order order : OrderCollection.getAll()) {
+        int bookingID = 0;
+        int coverID = 0;
+        int tableID;
+        int[] items;
+        String note;
+        int waiterID;
 
-        }*/
+        for (Order order : OrderCollection.getAll()) {
+            for (Booking booking: BookingCollection.getAll()){
+                if (booking.getTableId() == order.getTableId()){
+                    bookingID = booking.getBookingId();
+                    waiterID = booking.getWaiterId();
+                }
+
+            }
+            for (Cover cover: CoverCollection.getAll()){
+                for (int i:cover.getOrders()){
+                    if (i == order.getOrderId()){
+                        coverID = cover.getCoverId();
+                    }
+                }
+            }
+
+            tableID = order.getTableId();
+
+            items = order.getItems();
+
+            note = order.getNotes();
+
+            String bookingIDs = "";
+            String coverIDs = "";
+            String tableIDs = "";
+            String noteme = "";
+            String waiterIDs = "" ;
+            String itemss = "";
+
+            bookingIDs = String.valueOf(bookingID);
+
+            coverIDs = String.valueOf(coverID);
+
+            tableIDs = String.valueOf(tableID);
+
+            for (int i = 0; i < items.length; i ++){
+                itemss = itemss + String.valueOf(items[i]);
+            }
+
+
+            sa2 = new String[]{bookingIDs, coverIDs, tableIDs, itemss, noteme, waiterIDs};
+            ordersModel.addRow(sa2);
+        }
 
         notificationList = new ArrayList<>();
         FOHController controller = new FOHController();
@@ -62,8 +106,6 @@ public class TabbedGUI extends javax.swing.JFrame {
         listUnpaidOrders.setModel(unpaidModel);
         tOrders.setModel(ordersModel);
 //        listNotifications.setModel(notificationModel);
-
-
 
         // Use the utility class to populate the waiter dropdown
         GUIUtils.populateWaiterDropdown(cbNbWaiter);
