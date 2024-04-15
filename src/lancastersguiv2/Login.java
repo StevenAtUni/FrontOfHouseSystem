@@ -16,15 +16,13 @@ import static FOHClasses.DatabaseDAO.WaiterDAO.checkPassword;
  */
 public class Login extends javax.swing.JFrame {
 
-    int userID = -1;
-
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
     }
-    
+
 
 
     /**
@@ -84,11 +82,11 @@ public class Login extends javax.swing.JFrame {
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
         String pWord = password.getText();
-        int pWordCheck = WaiterDAO.checkPassword(pWord);
-        
-        if (pWordCheck != -1)
+        int userID = WaiterDAO.checkPassword(pWord);
+
+
+        if (userID != -1)
         {
-            userID = pWordCheck;
             TabbedGUI gui = new TabbedGUI();
             gui.setVisible(true);
             this.setVisible(false);
@@ -99,7 +97,9 @@ public class Login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         Terminal.initialise();
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -122,6 +122,7 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
