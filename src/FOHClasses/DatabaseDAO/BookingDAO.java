@@ -181,23 +181,24 @@ public class BookingDAO {
     }
 
     public static void setBookingStatusToCompleted(int bookingID) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_a","rXwsW4mUvPU");) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_a", "rXwsW4mUvPU");) {
             PreparedStatement setCompletedStatus = connection.prepareStatement(
-                    "UPDATE Bookings SET BookingStatusbookingStatusID = 3 WHERE bookingID = ? AND BookingStatusbookingStatusID = 2"); // 2 represents "Arrived", 3 represents "Completed"
+                    "UPDATE Bookings SET BookingStatusbookingStatusID = 3 WHERE bookingID = ?"); // 3 represents "Completed"
 
             setCompletedStatus.setInt(1, bookingID);
 
             int rowsAffected = setCompletedStatus.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("Booking with ID " + bookingID + " is either not found or not in 'Arrived' status.");
+                System.out.println("Booking with ID " + bookingID + " is not found.");
             } else {
-                System.out.println("Booking with ID " + bookingID + " has been successfully set to 'Completed' status."); // TO DO  (automatically create receipt)
+                System.out.println("Booking with ID " + bookingID + " has been successfully set to 'Completed' status.");
             }
             setCompletedStatus.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 }
