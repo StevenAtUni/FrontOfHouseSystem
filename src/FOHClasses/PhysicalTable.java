@@ -5,12 +5,20 @@ import FOHClasses.Collection.PhysicalTableCollection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * A class representing each physical table in the restaurant that is available to booking.
+ */
 public class PhysicalTable {
     private static int nextId = 1;
     private final int tableId;
-//    private int childSeats;
-    private HashMap<Long, Long> bookedTimes; // Key = startTimestamp, Value = endTimeStamp
+    /**
+     * A HashMap storing the startTimestamp as the key and endTimestamp as the value, both as seconds since UNIX epoch.
+     */
+    private HashMap<Long, Long> bookedTimes;
 
+    /**
+     * Constructor for a physical table.
+     */
     public PhysicalTable() {
         this.tableId = nextId++; // Auto-increments the tableId
 //        this.childSeats = 0;
@@ -57,6 +65,10 @@ public class PhysicalTable {
         return false;
     }
 
+    /**
+     * Unbooks a reservation that starts at the provided time.
+     * @param startTimestamp The start time of the booking in seconds since the UNIX epoch
+     */
     // Releases a reservation.
     public void unbook(long startTimestamp) {
         bookedTimes.remove(startTimestamp);
