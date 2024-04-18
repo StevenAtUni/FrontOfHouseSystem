@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A class store information relating to an order made by the customer.
+ * A class storing information relating to an order made by the customer.
  */
 public class Order {
     /**
