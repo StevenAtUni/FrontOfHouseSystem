@@ -14,9 +14,18 @@ import FOHInterface.ManagementInterface.IRecord;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The main class controlling this instance of the front of house system on a machine.
+ */
 public class Terminal {
+    /**
+     * The number of tables that the restaurant has made available for booking.
+     */
     private static final int numOfTables = 15;
 
+    /**
+     * Used to initialise the system/terminal/instance of the front of house system.
+     */
     public static void initialise() {
         for (int i = 1; i <= numOfTables; i++) {
             new PhysicalTable();
@@ -30,7 +39,17 @@ public class Terminal {
         MenuDAO.getMenu();
     }
 
-    // For creating a new booking from the UI
+    /**
+     * For the UI to invoke to create a fresh booking
+     * @param customerName The full name of the customer making the booking
+     * @param phoneNumber The phone number of the customer making the booking
+     * @param waiterId The unique identification number of the waiter assigned
+     * @param startTimestamp The booking's start time in seconds since the UNIX epoch
+     * @param endTimestamp The booking's end time in seconds since the UNIX epoch
+     * @param tables An array of tableIds to be booked
+     * @param covers The number of covers (guests) to be booked.
+     * @return A boolean identifying whether a booking was removed
+     */
     public static boolean newBooking(String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimestamp, int[] tables, int covers) {
         if (!checkArrangement(tables.length, covers)) return false;
 
@@ -50,20 +69,41 @@ public class Terminal {
         return true;
     }
 
-    // For loading bookings from the database
+    /**
+     * For loading bookings from the database
+     * @param bookingId The ID of the booking being loaded
+     * @param customerName The full name of the customer making the booking
+     * @param phoneNumber The phone number of the customer making the booking
+     * @param waiterId The unique identification number of the waiter assigned
+     * @param startTimestamp The booking's start time in seconds since the UNIX epoch
+     * @param endTimeStamp The booking's end time in seconds since the UNIX epoch
+     * @param tables An array of tableIds to be booked
+     * @param covers An array of coverIds associated
+     * @return A boolean identifying whether a booking was removed
+     */
     public static boolean loadBooking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables, int[] covers) {
         Booking booking = createBooking(bookingId, customerName, phoneNumber, waiterId, startTimestamp, endTimeStamp, tables);
         if (booking == null) return false;
 
         // The constructor of Booker adds itself to the BookingCollection
         for (int coverId : covers) {
-            booking.addCover(coverId); // Creates a cover and adds the coverId to the booking
-            new Cover(coverId, startTimestamp, tables[0]);
+            booking.addCover(coverId); // Adds the coverId to the booking
+            new Cover(coverId, startTimestamp, tables[0]); // Creates a Cover with
         }
         return true;
     }
 
-    // Instantiates new booking objects for local storage and usage
+    /**
+     * Instantiates new booking objects for local storage and usage
+     * @param bookingId The ID of the booking object to create
+     * @param customerName The full name of the customer making the booking
+     * @param phoneNumber The phone number of the customer making the booking
+     * @param waiterId The unique identification number of the waiter assigned
+     * @param startTimestamp The booking's start time in seconds since the UNIX epoch
+     * @param endTimeStamp The booking's end time in seconds since the UNIX epoch
+     * @param tables An array of tableIds to be booked
+     * @return Returns the booking object created
+     */
     private static Booking createBooking(int bookingId, String customerName, String phoneNumber, int waiterId, long startTimestamp, long endTimeStamp, int[] tables) {
         Arrays.sort(tables); // Ensures sorted into ascending order
 
@@ -127,13 +167,24 @@ public class Terminal {
     }
      */
 
-    // Checks if enough tables have been booked for the desired covers.
+    /**
+     * Checks if enough tables have been booked for the desired covers.
+     * @param tables Number of tables requested
+     * @param covers Number of covers requested
+     * @return True if enough tables for the number of covers
+     */
     public static boolean checkArrangement(int tables, int covers) {
         if ((covers / 2f) > tables) return false; // Returns false if more covers than table can sit
         return true;
     }
 
-    // For creating a new order from the UI
+    /**
+     * Invoked by the UI to create a new order.
+     * @param bookingId The booking that the order belongs to
+     * @param coverId The cover that made the order
+     * @param items The IDs of the menu items being ordered
+     * @param notes A string containing any notes attached to the order
+     */
     public static void newOrder(int bookingId, int coverId, int[] items, String notes) {
         Booking booking = BookingCollection.get(bookingId);
         int orderId = OrderDAO.createOrder(coverId, notes, items);
@@ -145,12 +196,21 @@ public class Terminal {
 //        FOHImpl.getInstance().makeOrder(order.getOrderId(), order.getTableId(), items, notes);
     }
 
-    // For loading orders from the database
+    /** For loading orders from the database
+     * @param orderId The ID of the existing order
+     * @param tableId The ID of the table the order belongs to
+     * @param items The IDs of the menu items ordered
+     * @param notes A string containing the notes attached to an order
+     */
     public static void loadOrder(int orderId, int tableId, int[] items, String notes) {
         new Order(orderId, tableId, items, notes);
     }
 
-    // Pays for all the covers/orders of the booking
+    /**
+     * Used to pay all the covers/orders of the booking
+     * @param bookingId The ID of the booking being paid for
+     * @param isCash Whether the payment is being made in cash
+     */
     public static void payWholeBill(int bookingId, boolean isCash) {
         Booking booking = BookingCollection.get(bookingId);
         int[] covers = booking.getCovers();
@@ -167,7 +227,11 @@ public class Terminal {
         createBill(booking, isCash, items, true);
     }
 
-    // Splits payment/billing into individual covers
+    /**
+     * Used to split the payment/bill into individual covers
+     * @param bookingId The ID of the booking being split/paid for individually
+     * @param isCash Whether the payment is being made in cash
+     */
     public static void paySplitBill(int bookingId, boolean isCash) {
         Booking booking = BookingCollection.get(bookingId);
         int[] covers = booking.getCovers();
@@ -183,7 +247,13 @@ public class Terminal {
         }
     }
 
-    // Creates the bill and sends for storage by management
+    /**
+     * Creates a bill object and sends data to management for record-keeping
+     * @param booking The booking object for usage internally
+     * @param isCash Whether the payment was made in cash
+     * @param items An ArrayList of itemIds purchased
+     * @param applyServiceCharge Whether service charge is being applied
+     */
     private static void createBill(Booking booking, boolean isCash, ArrayList<Integer> items, boolean applyServiceCharge) {
         Bill bill = new Bill(booking.getWaiterId(), booking.getStartTimestamp(), booking.getEndTimestamp(), isCash, items, applyServiceCharge);
 
