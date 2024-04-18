@@ -4,7 +4,17 @@ import java.sql.*;
 
 public class DishDAO {
 
-    public static void addDish(String name, int price, String description, String allergens, int menuID, int dishID) {
+    /**
+     * Adds a dish to a menu in the database
+     *
+     * @param name          Name of the dish
+     * @param price         Price of the dish
+     * @param description   Description of the dish
+     * @param allergens     Allergens in the dish
+     * @param menuID        ID of the menu of the dish
+     * @param dishID        ID of the dish
+     */
+    public static void addDish(String name, int price, String description, String allergens, int menuID, int dishID) { // Adds a dish to the database
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             PreparedStatement addDish = connection.prepareStatement(
                     "INSERT INTO Dishes (name, price, description, allergens, MenumenuID, dishID) VALUES (?, ?, ?, ?, ?, ?)");
@@ -31,7 +41,12 @@ public class DishDAO {
         }
     }
 
-    public static void showDishesByMenuID(int menuID) {
+    /**
+     * Show dishes by menuID
+     *
+     * @param menuID ID of the menu to show dishes from
+     */
+    public static void showDishesByMenuID(int menuID) { // Shows Dishes given a MenuID
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             PreparedStatement selectDishes = connection.prepareStatement(
                     "SELECT * FROM Dishes WHERE MenumenuID = ?");
@@ -57,7 +72,12 @@ public class DishDAO {
         }
     }
 
-    public static void setDishUnavailable(int dishID) {
+    /**
+     * Sets a selected dish to unavailable
+     *
+     * @param dishID ID of the dish to set as unavailable
+     */
+    public static void setDishUnavailable(int dishID) { // Sets the dish availability to Unavailable
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_a","rXwsW4mUvPU");) {
             PreparedStatement updateDishAvailability = connection.prepareStatement(
                     "UPDATE Dishes SET availability = 0 WHERE dishID = ?");
