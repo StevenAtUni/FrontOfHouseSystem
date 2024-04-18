@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * An object storing all necessary information of a bill/payment.
+ */
 public class Bill {
     private static int nextId = 1;
     private final int billId;
@@ -21,6 +24,14 @@ public class Bill {
     private int totalPrice = 0;
     private static int serviceChargePercentage = 0;
 
+    /**
+     * @param waiterId The waiter that was responsible for the table
+     * @param startTimestamp The booking's start time in seconds since the UNIX epoch
+     * @param endTimestamp The booking's end time in seconds since the UNIX epoch
+     * @param isCash Whether the payment/bill has been made in cash
+     * @param items An ArrayList of the IDs purchased by the order
+     * @param applyServiceCharge Whether the service charge should be applied
+     */
     public Bill(int waiterId, long startTimestamp, long endTimestamp, boolean isCash, ArrayList<Integer> items, boolean applyServiceCharge) {
         this.billId = nextId++;
         this.waiterId = waiterId;
@@ -34,10 +45,18 @@ public class Bill {
         this.totalPrice = orderPrice + serviceCharge;
     }
 
+    /**
+     * Increases the nextId
+     * @param nextId The number to increase it to
+     */
     public static void setNextId(int nextId) {
         if (Bill.nextId < nextId) Bill.nextId = nextId; // Only allows nextId to be increased
     }
 
+    /**
+     * For management to change the service charge
+     * @param serviceChargePercentage The percentage of the service charge (0-100)
+     */
     public static void setServiceChargePercentage(int serviceChargePercentage) {
         Bill.serviceChargePercentage = serviceChargePercentage;
     }
