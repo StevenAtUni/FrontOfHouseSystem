@@ -102,7 +102,7 @@ public class Order {
     }
 
     /**
-     * Fetches all items ordered.
+     * Fetches the IDs all items ordered.
      * @return An array of IDs of the items ordered
      */
     // Returns all itemIds
