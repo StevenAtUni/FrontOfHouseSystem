@@ -182,6 +182,11 @@ public class BookingDAO {
     }
 
 
+    /**
+     * Set status of a booking to Arrived in the database given a bookingID
+     * Updates the BookingStatusbookingStatusID column in the Bookings table to 2 for "Arrived"
+     * @param bookingID Id of the booking to set as arrived
+     */
     public static void setBookingStatusToArrived(int bookingID) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_a","rXwsW4mUvPU");) {
             PreparedStatement setArrivedStatus = connection.prepareStatement(
@@ -203,6 +208,11 @@ public class BookingDAO {
         }
     }
 
+    /**
+     * Set status of a booking to Completed in the database given a bookingID
+     * Updates the BookingStatusbookingStatusID column in the Bookings table to 3 for "Completed"
+     * @param bookingID Id of the booking to set as completed
+     */
     public static void setBookingStatusToCompleted(int bookingID) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_a", "rXwsW4mUvPU");) {
             PreparedStatement setCompletedStatus = connection.prepareStatement(
