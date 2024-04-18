@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * An object storing all necessary information of a bill/payment.
+ * A class storing all necessary information of a bill/payment.
  */
 public class Bill {
     private static int nextId = 1;
@@ -25,6 +25,7 @@ public class Bill {
     private static int serviceChargePercentage = 0;
 
     /**
+     * Constructs a bill object.
      * @param waiterId The waiter that was responsible for the table
      * @param startTimestamp The booking's start time in seconds since the UNIX epoch
      * @param endTimestamp The booking's end time in seconds since the UNIX epoch
