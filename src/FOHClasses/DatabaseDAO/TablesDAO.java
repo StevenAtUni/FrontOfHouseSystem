@@ -7,6 +7,12 @@ import java.util.List;
 
 public class TablesDAO {
 
+    /**
+     * Returns an array of Reserved Table IDs given a booking ID
+     *
+     * @param bookingID ID of the booking
+     * @return Array of table IDs
+     */
     public static int[] getTablesByBookingID(int bookingID) {
         List<Integer> tableIDs = new ArrayList<>();
 
