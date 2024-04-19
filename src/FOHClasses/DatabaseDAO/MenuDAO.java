@@ -11,7 +11,10 @@ import java.util.Map;
 
 public class MenuDAO {
 
-    public static void addMenu() {
+    /**
+     * Creates a new MenuID and adds all the dishes to that Menu
+     */
+    public static void addMenu() { // Adds a menu and adds its dishes
         // MenuDAO.addMenu(1,"Food", Date.valueOf("2024-04-15") , Date.valueOf("2024-04-22"));
         List<MenuItem> Items = MenuItemCollection.getAll();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
@@ -21,7 +24,7 @@ public class MenuDAO {
             int rowsAffected = addMenu.executeUpdate();
             int generatedMenuID = -1;
 
-
+            // Inititally we create a new Menu ID
             if (rowsAffected == 0) {
                 // If no rows were affected, it means the menu was not added
                 System.out.println("Failed to add menu with ID ");
@@ -38,7 +41,7 @@ public class MenuDAO {
             }
 
             addMenu.close();
-
+            // Loops through the dishes provided to add them in the database
             for (MenuItem item : Items) {
                 DishDAO.addDish(item.getName(), item.getPrice(), item.getDescription(), item.getAllergens(), generatedMenuID, item.getItemId());
             }
@@ -48,6 +51,9 @@ public class MenuDAO {
         }
     }
 
+    /**
+     * Retrieves all the dishes in the Menu table and adds them to the MenuCollection
+     */
     public static void getMenu(){
         Map<Integer, List<String>> map = new HashMap<Integer, List<String>>();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {

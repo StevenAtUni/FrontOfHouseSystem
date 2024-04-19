@@ -8,6 +8,18 @@ import FOHClasses.Booking;
 import FOHClasses.Terminal;
 
 public class BookingDAO {
+    /**
+     * Creates a new booking and inserts it into the database
+     *
+     * @param numOfPeople       Number of people attending
+     * @param waiterID          ID of the waiter serving the booking
+     * @param customerName      Name of the customer that made the booking
+     * @param contactNumber     Customer's contact number
+     * @param startTime         Start time of the booking in UNIX timestamp format
+     * @param endTime           End time of the booking in UNIX timestamp format
+     * @param tableIDs          Array of tableIDs reserved for this booking
+     * @return An array which contains the bookingID and the coverIDs
+     */
     public static int[] createBooking(int numOfPeople, int waiterID, String customerName, String contactNumber, long startTime, long endTime, int[] tableIDs) {
 
         int bookingID = -1; // Initialize bookingID
@@ -88,10 +100,14 @@ public class BookingDAO {
         for (int i = 0; i < coverIDs.size(); i++) {
             result[i + 1] = coverIDs.get(i);
         }
-//
         return result;
     }
 
+    /**
+     * Retruns bookings from the database which have status ID of 1 or 2, which means bookings that are either confirmed or arrived, these are loaded onto the program.
+     * For each booking it returns the corresponding tableIDs reseved and the coverIDs
+     * loadBooking method is called to store the booking locally in the program
+     */
     public static void returnBookings() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             PreparedStatement selectBookings = connection.prepareStatement(
@@ -123,7 +139,7 @@ public class BookingDAO {
                         ", Start Time: " + startTimeUnix + ", End Time: " + endTimeUnix +
                         ", Payment Status: " + (paymentStatus ? "Paid" : "Not Paid") +
                         ", StatusID: " + statusID);
-            }
+            }   
 
             selectBookings.close();
         } catch (SQLException e) {
@@ -132,6 +148,13 @@ public class BookingDAO {
     }
 
 
+    /**
+     * Deletes a booking form the database given a b bookingID
+     * Initially all data is deleted from the Bookings_Tables which stores the reserved tables
+     * then the Bookings itself is deleted from the Bookings table
+     *
+     * @param bookingID ID of the booking to delete
+     */
     public static void deleteBooking(int bookingID) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             // Delete from Bookings_Tables table
@@ -159,6 +182,11 @@ public class BookingDAO {
     }
 
 
+    /**
+     * Set status of a booking to Arrived in the database given a bookingID
+     * Updates the BookingStatusbookingStatusID column in the Bookings table to 2 for "Arrived"
+     * @param bookingID Id of the booking to set as arrived
+     */
     public static void setBookingStatusToArrived(int bookingID) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_a","rXwsW4mUvPU");) {
             PreparedStatement setArrivedStatus = connection.prepareStatement(
@@ -180,6 +208,11 @@ public class BookingDAO {
         }
     }
 
+    /**
+     * Set status of a booking to Completed in the database given a bookingID
+     * Updates the BookingStatusbookingStatusID column in the Bookings table to 3 for "Completed"
+     * @param bookingID Id of the booking to set as completed
+     */
     public static void setBookingStatusToCompleted(int bookingID) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_a", "rXwsW4mUvPU");) {
             PreparedStatement setCompletedStatus = connection.prepareStatement(

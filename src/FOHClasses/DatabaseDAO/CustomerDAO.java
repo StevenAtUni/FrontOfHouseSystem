@@ -5,6 +5,14 @@ import java.time.Period;
 
 public class CustomerDAO {
 
+    /**
+     * Creates a new customer in the database
+     *
+     * @param name              Name of the customer
+     * @param contactNumber     Customer's contact number
+     * @param disabilities      Any disabilities
+     * @param allergens         Any allergens
+     */
     public static void insertCustomer(String name, String contactNumber, String disabilities, String allergens) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");){
             PreparedStatement createCustomer = connection.prepareStatement("INSERT INTO Customer (name, contactNumber, disabilities, allergens) VALUES (?, ?, ?, ?)");
@@ -20,6 +28,9 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     *  Retrieves all the customers
+     */
     public static void selectAllCustomers() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");){
             PreparedStatement selectAllCustomers = connection.prepareStatement("SELECT * FROM Customer");
@@ -38,6 +49,11 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * Search the customer from their phone number
+     *
+     * @param phoneNumber   Customer's phone number to search for
+     */
     public static void searchCustomerByPhoneNumber(String phoneNumber) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07","in2033t07_d","qbB_pkC1GZQ");) {
             PreparedStatement searchCustomer = connection.prepareStatement("SELECT * FROM Customer WHERE contactNumber = ?");

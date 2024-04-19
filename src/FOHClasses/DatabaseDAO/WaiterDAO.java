@@ -6,6 +6,12 @@ import java.util.List;
 
 
 public class WaiterDAO {
+    /**
+     * Checks if the PIN provided matches with any waiter's PIN
+     *
+     * @param passwordToCheck Password to check
+     * @return the waiter's ID if the password matches, or -1 if there is no matching password
+     */
     public static int checkPassword(String passwordToCheck) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");) {
             PreparedStatement checkPassword = connection.prepareStatement("SELECT waiterID, pin FROM Waiter");
@@ -26,6 +32,11 @@ public class WaiterDAO {
         return -1; // Return -1 if no matching password is found
     }
 
+    /**
+     * Returns all thw WaitedIDs in the form of an array
+     *
+     * @return an array containing the waited IDs
+     */
     public static int[] getAllWaiterIDs() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");
              Statement stmt = connection.createStatement();
@@ -43,7 +54,11 @@ public class WaiterDAO {
         }
     }
 
-
+    /**
+     *Returns all the waiterIDs from the database
+     *
+     * @return An array that contains all the waiter's IDs
+     */
     public static int[] returnAllWaiterIDs() {
         List<Integer> waiterIDs = new ArrayList<>();
 
@@ -69,7 +84,5 @@ public class WaiterDAO {
 
         return waiterIDArray;
     }
-
-
 
 }

@@ -6,7 +6,15 @@ import java.util.List;
 
 public class OrderDAO {
 
-        public static int createOrder(int coverID, String orderNote, int[] dishIDs) {
+    /**
+     * Creates a new order for a given coverID
+     *
+      * @param coverID      ID of the cover that is making the order
+     * @param orderNote     Order notes
+     * @param dishIDs       Array containing dishID that have been ordered
+     * @return ID of the ordered that has been created, otherwise returns -1 if it is failed
+     */
+    public static int createOrder(int coverID, String orderNote, int[] dishIDs) {
             /* List<DishQuantity> dishQuantities = new ArrayList<>();
             dishQuantities.add(new DishQuantity(1, 2));
             dishQuantities.add(new DishQuantity(2, 1));
@@ -74,8 +82,12 @@ public class OrderDAO {
         }
 
 
-
-        public static void cancelOrder(int orderID) {
+    /**
+     * Sets Order status to Cancel
+     *
+     * @param orderID ID of the order to cancel
+     */
+    public static void cancelOrder(int orderID) {
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");) {
                 PreparedStatement cancelOrder = connection.prepareStatement(
                         "UPDATE `Order` SET OrderStatusorderStatusID = 4 WHERE orderID = ?");
@@ -96,7 +108,12 @@ public class OrderDAO {
         }
 
 
-        public static void setOrderStatusToReady(int orderID) {
+    /**
+     * Sets Order status to Ready
+     *
+     * @param orderID ID of the order to set as ready
+     */
+    public static void setOrderStatusToReady(int orderID) {
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");) {
                 PreparedStatement prepareOrder = connection.prepareStatement(
                         "UPDATE `Order` SET OrderStatusorderStatusID = 3 WHERE orderID = ? AND OrderStatusorderStatusID = 1");
@@ -117,7 +134,12 @@ public class OrderDAO {
         }
 
 
-        public static void setOrderStatusToCompleted(int orderID) {
+    /**
+     * Sets Order status to Complete
+     *
+     * @param orderID ID of the order to set as Complete
+     */
+    public static void setOrderStatusToCompleted(int orderID) {
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2033t07", "in2033t07_d", "qbB_pkC1GZQ");) {
                 PreparedStatement completeOrder = connection.prepareStatement(
                         "UPDATE `Order` SET OrderStatusorderStatusID = 4 WHERE orderID = ? AND OrderStatusorderStatusID = 3");
