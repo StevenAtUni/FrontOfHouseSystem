@@ -20,7 +20,6 @@ import java.util.List;
 
  This class implements the FOHManagementInterface and FOHKitchenInterface, providing functionalities for the Front Of House (FOH) system to communicate with management and kitchen.
 
- @author Hossain Ahmed
 
  */
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
