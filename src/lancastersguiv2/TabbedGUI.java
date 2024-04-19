@@ -26,13 +26,30 @@ import static lancastersguiv2.BookingTableManager.updateBookingTable;
 /**
  *
  * @author josep
+ * The main GUI class that creates a tabbed interface storing components and functions
+ * regarding the menu, notifications, payments, bookings, the table plan and orders
  */
 public class TabbedGUI extends javax.swing.JFrame {
 
+    /**
+     * model storing the content for the unpaid orders list
+     */
     DefaultListModel unpaidModel = new DefaultListModel();
+    /**
+     *model storing the content for the notifications list
+     */
     static DefaultListModel notificationModel = new DefaultListModel();
+    /**
+     * model storing the content for the orders table
+     */
     DefaultTableModel ordersModel = new DefaultTableModel();
+    /**
+     * list storing the notifications to be displayed in the list
+     */
     static List<String> notificationList;
+    /**
+     * Stores an instance of the booking class
+     */
     Booking booking;
     /**
      * Creates new form TabbedGUI
@@ -47,13 +64,6 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
         }
 
-        /*
-        String[] sa = {"BookingID", "Cover", "Table", "Items", "Note", "Waiter"};
-        ordersModel.addColumn(sa);
-        String[] sa2 = {"", "", "", "", "", ""};
-        for (Order order : OrderCollection.getAll()) {
-
-        }*/
 
         notificationList = new ArrayList<>();
         FOHController controller = new FOHController();
@@ -1174,6 +1184,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+    /**
+     * function that removes the selected notification from the list of notifications
+     * @param evt event triggered when the delete notification button is pressed
+     */
     private void bNotificationDeleteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         listNotifications.remove(listNotifications.getSelectedIndex());
@@ -1195,6 +1209,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
+    /**
+     * function to show the bill of the selected booking
+     * @param evt event triggered when the select bill button is pressed
+     */
     private void bSelectBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int bookingId = listUnpaidOrders.getSelectedValue();
@@ -1206,6 +1224,11 @@ public class TabbedGUI extends javax.swing.JFrame {
         }
 
     }
+
+    /**
+     * function to pay a bill in full, calls the payWholeBill function in terminal
+     * @param evt event triggered when the pay whole bill button is pressed
+     */
     private void bPayWholeBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (booking != null){
@@ -1213,6 +1236,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         }
 
     }
+    /**
+     * function to pay a bill in full, calls the paySplitBill function in terminal
+     * @param evt event triggered when the pay split bill button is pressed
+     */
     private void bPaySplitBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (booking != null){
@@ -1225,6 +1252,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
+    /**
+     * function that creates a new order entity and makes it visible
+     * @param evt event triggered when the new order button is pressed
+     */
     private void bONewOrderActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         NewOrder order = new NewOrder();

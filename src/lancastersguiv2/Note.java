@@ -7,6 +7,7 @@ package lancastersguiv2;
 /**
  *
  * @author josep
+ * A class that allows a note to be added to an order
  */
 public class Note extends javax.swing.JFrame {
 
@@ -95,9 +96,12 @@ public class Note extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * When the event is triggered the message stored in the text area will be stored in the notemessage
+     * string variable in the newOrder class so the note can be added to the order
+     * @param evt event triggered by the pressing of the submit button
+     */
     private void bSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubmitActionPerformed
-        // TODO add your handling code here:
-        //TODO: add note to order
         NewOrder.noteMessage  = taNote.getText();
         this.setVisible(false);
     }//GEN-LAST:event_bSubmitActionPerformed

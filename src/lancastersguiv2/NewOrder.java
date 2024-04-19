@@ -18,17 +18,36 @@ import javax.swing.*;
 /**
  *
  * @author josep
+ *A class that provides the components and functionality allowing staff to create new orders.
  */
 public class NewOrder extends javax.swing.JFrame {
 
+    /**
+     * model providing content for the menu list
+     */
     DefaultListModel<String> modelMenu, modelOrder;
+    /**
+     * model providing content for the combo box
+     */
     DefaultComboBoxModel<Integer> modelBookingID, modelCoverID;
+    /**
+     *If there is a note added it is stored here
+     */
     Note note;
+    /**
+     * The message stored in the note is stored here
+     */
     static String noteMessage = "";
+    /**
+     *Stores the booking ID of the booking the order is part of
+     */
     int bookingID;
 
     /**
      * Creates new form NewOrder
+     * assigns models to components
+     * populates the menu list with items from the menu item collection class
+     * populates the booking id combo box with valid bookings from the booking collection class
      */
     public NewOrder() {
         initComponents();
@@ -299,7 +318,12 @@ public class NewOrder extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    //method for creating a new order
+    /**
+     *method for creating a new order when the confirm button is pressed
+     * It does this by retrieving the data from the form, formatting it, and passing it to a method
+     * in the terminal.
+     */
+
     private void bNoConfirmActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         //send order to database
@@ -336,12 +360,20 @@ public class NewOrder extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
+    /**
+     * makes the note form visible
+     * @param evt event triggered by the pressing of the note button
+     */
     private void bNoNoteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         note.setVisible(true);
-        //note.get
+
     }
 
+    /**
+     * function that takes the selected menu item from the table and adds it to the list of order items
+     * @param evt event triggered by the pressing of the add button
+     */
     private void bNoAddActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if(listNoMenu.getSelectedValue() != null){
@@ -350,6 +382,10 @@ public class NewOrder extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * function that takes the selected item on the order items list and removes it
+     * @param evt event triggered by the pressing of the delete button
+     */
     private void bNoDeleteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if(listNoOrders.getSelectedValue() != null){
@@ -358,6 +394,10 @@ public class NewOrder extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * function that shows which covers are available for each booking
+     * @param evt event triggered by the pressing of the bookings button
+     */
     private void bNoBookingActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         Booking thisBooking;
