@@ -29,7 +29,7 @@ public class CoverDAO {
 
             selectCovers.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to retrieve covers for booking ID: " + bookingID, e);
         }
 
         // Convert list to array
