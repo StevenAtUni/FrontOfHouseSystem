@@ -16,15 +16,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+
+ This class implements the FOHManagementInterface and FOHKitchenInterface, providing functionalities for the Front Of House (FOH) system to communicate with management and kitchen.
+
+
+ */
 public class FOHController implements FOHManagementInterface, FOHKitchenInterface {
     // Class name may be changed at a later date when we figure out how we will implement our system/code.
-
+    
     //implemented methods
+    /**
+
+     Sends the menu to the system, stored in the static class MenuItemCollection.
+     @param dishMenu a HashMap containing dish IDs as keys and a list of Strings representing the details of each dish as values.
+     @param wineMenu a HashMap containing wine IDs as keys and a list of Strings representing the details of each wine as values.
+     */
     @Override
     public void sendMenu(HashMap<Integer, List<String>> dishMenu, HashMap<Integer, List<String>> wineMenu) {
         MenuItemCollection.newMenu(dishMenu);
     }
 
+    /**
+
+     Gets the number of bookings for a specific time which management can use.
+     @param timestamp the timestamp to check bookings for.
+     @return the number of bookings that overlap with the given timestamp.
+     */
     @Override
     public int getAmountBooked(long timestamp) {
         List<Booking> bookings = BookingCollection.getAll();
@@ -36,7 +54,12 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         }
         return amountBooked;
     }
+    /**
 
+     Sets the service charge percentage for bills given by management. Notifies the user the service charge amount.
+
+     @param newCharge the new service charge percentage.
+     */
     @Override
     public void setServiceCharge(int newCharge) {
 
@@ -44,6 +67,11 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         String notification = "The service charge now is: " + newCharge +"%";
         Notification.addNotification(notification);
     }
+    /**
+
+     Marks an order as complete. Notifies the system the order is ready to collect and sets the order in the database as ready to collect.
+     @param orderID the ID of the order to mark complete.
+     */
 
     @Override
     public void markOrderComplete(int orderID) {
@@ -54,6 +82,11 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         Notification.addNotification(notification);
     }
 
+    /**
+
+     Marks a dish item as unavailable. Sets the dish in the database as unavailable and notifies the system.
+     @param itemID the ID of the dish item to mark unavailable.
+     */
     @Override
     public void markItemUnavailable(int itemID) {
         DishDAO.setDishUnavailable(itemID);
@@ -62,6 +95,11 @@ public class FOHController implements FOHManagementInterface, FOHKitchenInterfac
         Notification.addNotification(notification);
     }
 
+    /**
+
+     Sends all orders in a format requested by the kitchen.
+     @return a 2D object array containing order details.
+     */
     @Override
     public Object[][] getOrders() {
         List<Order> orders = OrderCollection.getAll();
