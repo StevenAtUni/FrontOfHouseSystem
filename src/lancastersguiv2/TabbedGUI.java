@@ -1253,7 +1253,31 @@ public class TabbedGUI extends javax.swing.JFrame {
 
 
 
+
     private void bNbSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+        /**
+         * This method is called when the submit button is clicked for creating a new booking.
+         * It extracts the customer name, phone number, waiter ID, start time, end time,
+         * table numbers, and the number of guests from the new booking input fields in the GUI.
+         * The start time and end time are calculated using a UNIX conversuin based on the selected date and time and
+         * the booking duration. it also calls the newBooking method from the Terminal class to create a new booking
+         * record.
+         *
+         * If the booking is successful, it displays a confirmation message and updates the booking
+         * table visual . If unsuccessful, it notifies the user that the booking could not be created.
+         *
+         * @param evt the ActionEvent trigger showing the button press
+         * @param customerName the name of the customer making the booking
+         * @param phoneNumber the phone number of the customer making the booking
+         * @param waiterId the unique number of the waiter assigned
+         * @param startTimestamp the booking's start time in seconds since the UNIX epoch
+         * @param endTimeStamp the booking's end time in seconds since the UNIX epoch
+         * @param tables an array of tables to be booked
+         * @param covers the number of guests to be booked
+         * @return a boolean identifying whether a booking was created successfully
+         * @throws ParseException if the date and time strings cannot be parsed into a valid timestamp
+         * @throws NumberFormatException if the number of guests or table IDs cannot be parsed into integers
+         */
         // Retrieve values from form components
         String customerName = tfNbName.getText();
         String phoneNumber = tfNbPhoneNumber.getText();
