@@ -4,7 +4,13 @@ import FOHClasses.Booking;
 
 import java.util.*;
 
+/**
+ * This class stores all the bookings in use.
+ */
 public class BookingCollection {
+    /**
+     * Stores the bookingId as the key and a Booking object as the value
+     */
     private static final HashMap<Integer, Booking> bookings = new HashMap<>();
 
     public BookingCollection() {
