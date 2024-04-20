@@ -4,7 +4,13 @@ import FOHClasses.Cover;
 
 import java.util.*;
 
+/**
+ * This class stores all the covers.
+ */
 public class CoverCollection {
+    /**
+     * Stores the coverId as the key and a Cover object as the value
+     */
     private static final HashMap<Integer, Cover> covers = new HashMap<>();
 
     public CoverCollection() {

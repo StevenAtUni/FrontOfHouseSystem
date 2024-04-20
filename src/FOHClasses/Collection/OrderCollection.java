@@ -7,7 +7,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class stores all the orders made.
+ */
 public class OrderCollection {
+    /**
+     * Stores the orderId as the key and an Order object as the value
+     */
     private static final HashMap<Integer, Order> orders = new HashMap<>();
 
     public OrderCollection() {

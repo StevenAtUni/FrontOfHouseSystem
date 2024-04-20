@@ -8,13 +8,23 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class stores all the MenuItems currently on the menu.
+ */
 public class MenuItemCollection {
+    /**
+     * Stores the itemId as the key and a MenuItem object as the value
+     */
     private static final HashMap<Integer, MenuItem> items = new HashMap<>();
 
     public MenuItemCollection() {
         throw new UnsupportedOperationException("This class should not be instantiated.");
     }
 
+    /**
+     * For the generation of a fresh menu from the management team.
+     * @param dishMenu A hashmap representing a menu with dishId as the key and a list of dish data as the value
+     */
     public static void newMenu(HashMap<Integer, List<String>> dishMenu) {
         MenuItemCollection.reset();
         for (HashMap.Entry<Integer, List<String>> dish : dishMenu.entrySet()) {
@@ -26,6 +36,10 @@ public class MenuItemCollection {
         MenuDAO.addMenu();
     }
 
+    /**
+     * For the loading of a menu from the database.
+     * @param dishMenu A hashmap representing a menu with dishId as the key and a list of dish data as the value
+     */
     public static void loadMenu(HashMap<Integer, List<String>> dishMenu) {
         MenuItemCollection.reset();
         for (HashMap.Entry<Integer, List<String>> dish : dishMenu.entrySet()) {
