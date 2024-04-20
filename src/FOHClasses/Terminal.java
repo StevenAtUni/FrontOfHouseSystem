@@ -63,7 +63,7 @@ public class Terminal {
         Booking booking = createBooking(ids[0], customerName, phoneNumber, waiterId, startTimestamp, endTimestamp, tables);
         if (booking == null) return false;
         for (int coverId = 1; coverId < ids.length; coverId++) {
-            booking.addCover(new Cover(coverId, startTimestamp, tables[0]).getCoverId()); // Creates a cover and adds the coverId to the booking
+            booking.addCover(new Cover(ids[coverId], startTimestamp, tables[0]).getCoverId()); // Creates a cover and adds the coverId to the booking
         }
         // TODO Call database add here
         return true;
