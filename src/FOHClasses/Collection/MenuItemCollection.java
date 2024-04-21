@@ -54,7 +54,6 @@ public class MenuItemCollection {
     /**
      * Adds an entry to the hashmap
      * @param menuItem The entry to add
-     * @return Whether the operation succeeded (false if entry already exists)
      */
     public static void add(MenuItem menuItem){
         int id = menuItem.getItemId();
