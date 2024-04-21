@@ -5,11 +5,18 @@ import javax.swing.JOptionPane;
 import java.util.List; // Import for using List
 import FOHClasses.DatabaseDAO.WaiterDAO; // Adjust the import based on the actual package of WaiterDAO
 
+/**
+ * This class provides utility methods for GUI components to interact with application data,
+ * such as populating UI elements with data from the database.
+ */
 public class GUIUtils {
 
     /**
-     * Populates the provided JComboBox with waiter IDs from the database.
-     * @param comboBox The JComboBox to populate.
+     * Populates JComboBox with waiter IDs retrieved from the database.
+     * The IDs are added as string items to the provided JComboBox.
+     * If an error occurs during retrieval, an error dialog is shown.
+     *
+     * @param comboBox The JComboBox to be populated with waiter IDs.
      */
     public static void populateWaiterDropdown(JComboBox<String> comboBox) {
         try {
@@ -23,5 +30,3 @@ public class GUIUtils {
         }
     }
 }
-
-

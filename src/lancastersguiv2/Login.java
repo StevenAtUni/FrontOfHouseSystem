@@ -13,6 +13,9 @@ import static FOHClasses.DatabaseDAO.WaiterDAO.checkPassword;
 /**
  *
  * @author josep
+ * A class creating the login screen and checking whether the password used is in the
+ * database before sending them to the main GUI component.
+ * Is the starting screen when the program runs.
  */
 public class Login extends javax.swing.JFrame {
 
@@ -79,6 +82,11 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * This function gets the password entered in the text field and checks it against
+     * the database. If there is a match the main GUI is created and made visible.
+     * @param evt This parameter captures the event that occurs when the login button is pressed.
+     */
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
         String pWord = password.getText();
@@ -94,6 +102,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_bLoginActionPerformed
 
     /**
+     * The main function that starts the program.
      * @param args the command line arguments
      */
     public static void main(String args[]) {

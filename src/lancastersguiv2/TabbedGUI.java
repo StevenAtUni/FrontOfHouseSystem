@@ -26,13 +26,30 @@ import static lancastersguiv2.BookingTableManager.updateBookingTable;
 /**
  *
  * @author josep
+ * The main GUI class that creates a tabbed interface storing components and functions
+ * regarding the menu, notifications, payments, bookings, the table plan and orders
  */
 public class TabbedGUI extends javax.swing.JFrame {
 
+    /**
+     * model storing the content for the unpaid orders list
+     */
     DefaultListModel unpaidModel = new DefaultListModel();
+    /**
+     *model storing the content for the notifications list
+     */
     static DefaultListModel notificationModel = new DefaultListModel();
+    /**
+     * model storing the content for the orders table
+     */
     DefaultTableModel ordersModel = new DefaultTableModel();
+    /**
+     * list storing the notifications to be displayed in the list
+     */
     static List<String> notificationList;
+    /**
+     * Stores an instance of the booking class
+     */
     Booking booking;
     /**
      * Creates new form TabbedGUI
@@ -47,13 +64,6 @@ public class TabbedGUI extends javax.swing.JFrame {
             }
         }
 
-        /*
-        String[] sa = {"BookingID", "Cover", "Table", "Items", "Note", "Waiter"};
-        ordersModel.addColumn(sa);
-        String[] sa2 = {"", "", "", "", "", ""};
-        for (Order order : OrderCollection.getAll()) {
-
-        }*/
 
         notificationList = new ArrayList<>();
         FOHController controller = new FOHController();
@@ -1174,6 +1184,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+    /**
+     * function that removes the selected notification from the list of notifications
+     * @param evt event triggered when the delete notification button is pressed
+     */
     private void bNotificationDeleteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         listNotifications.remove(listNotifications.getSelectedIndex());
@@ -1195,6 +1209,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
+    /**
+     * function to show the bill of the selected booking
+     * @param evt event triggered when the select bill button is pressed
+     */
     private void bSelectBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int bookingId = listUnpaidOrders.getSelectedValue();
@@ -1206,6 +1224,11 @@ public class TabbedGUI extends javax.swing.JFrame {
         }
 
     }
+
+    /**
+     * function to pay a bill in full, calls the payWholeBill function in terminal
+     * @param evt event triggered when the pay whole bill button is pressed
+     */
     private void bPayWholeBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (booking != null){
@@ -1213,6 +1236,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         }
 
     }
+    /**
+     * function to pay a bill in full, calls the paySplitBill function in terminal
+     * @param evt event triggered when the pay split bill button is pressed
+     */
     private void bPaySplitBillActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (booking != null){
@@ -1225,6 +1252,10 @@ public class TabbedGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
+    /**
+     * function that creates a new order entity and makes it visible
+     * @param evt event triggered when the new order button is pressed
+     */
     private void bONewOrderActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         NewOrder order = new NewOrder();
@@ -1253,7 +1284,31 @@ public class TabbedGUI extends javax.swing.JFrame {
 
 
 
+
     private void bNbSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+        /**
+         * This method is called when the submit button is clicked for creating a new booking.
+         * It extracts the customer name, phone number, waiter ID, start time, end time,
+         * table numbers, and the number of guests from the new booking input fields in the GUI.
+         * The start time and end time are calculated using a UNIX conversuin based on the selected date and time and
+         * the booking duration. it also calls the newBooking method from the Terminal class to create a new booking
+         * record.
+         *
+         * If the booking is successful, it displays a confirmation message and updates the booking
+         * table visual . If unsuccessful, it notifies the user that the booking could not be created.
+         *
+         * @param evt the ActionEvent trigger showing the button press
+         * @param customerName the name of the customer making the booking
+         * @param phoneNumber the phone number of the customer making the booking
+         * @param waiterId the unique number of the waiter assigned
+         * @param startTimestamp the booking's start time in seconds since the UNIX epoch
+         * @param endTimeStamp the booking's end time in seconds since the UNIX epoch
+         * @param tables an array of tables to be booked
+         * @param covers the number of guests to be booked
+         * @return a boolean identifying whether a booking was created successfully
+         * @throws ParseException if the date and time strings cannot be parsed into a valid timestamp
+         * @throws NumberFormatException if the number of guests or table IDs cannot be parsed into integers
+         */
         // Retrieve values from form components
         String customerName = tfNbName.getText();
         String phoneNumber = tfNbPhoneNumber.getText();
