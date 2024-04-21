@@ -18,6 +18,9 @@ public class Booking {
      * The phone number of the customer who made the booking
      */
     private String phoneNumber;
+    /**
+     * The waiter responsible for the booking
+     */
     private int waiterId;
     /**
      * Start time of the booking in seconds since UNIX epoch

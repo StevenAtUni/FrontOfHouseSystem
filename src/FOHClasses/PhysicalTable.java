@@ -9,6 +9,9 @@ import java.util.HashMap;
  * A class representing each physical table in the restaurant that is available to booking.
  */
 public class PhysicalTable {
+    /**
+     * The next available ID number
+     */
     private static int nextId = 1;
     private final int tableId;
     /**
