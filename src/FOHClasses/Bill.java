@@ -12,16 +12,49 @@ import java.util.List;
  * A class storing all necessary information of a bill/payment.
  */
 public class Bill {
+    /**
+     * The next available ID number
+     */
     private static int nextId = 1;
+    /**
+     * The unique identifier of this bill
+     */
     private final int billId;
-    private final int waiterId;
+    /**
+     * The waiter responsible for the booking
+     */
+    private int waiterId;
+    /**
+     * Start time of the booking in seconds since UNIX epoch
+     */
     private long startTimestamp;
+    /**
+     * End time of the booking in seconds since UNIX epoch
+     */
     private long endTimestamp;
+    /**
+     * Whether the payment was made in cash
+     */
     private final boolean isCash;
+    /**
+     * An ArrayList of IDs representing each item ordered
+     */
     private ArrayList<Integer> items;
+    /**
+     * Price, in pence, of the items ordered
+     */
     private int orderPrice = 0;
+    /**
+     * The amount, in pence, of service charge paid
+     */
     private int serviceCharge = 0;
+    /**
+     * The total price paid in pence
+     */
     private int totalPrice = 0;
+    /**
+     * The service charge as an integer between 0-100
+     */
     private static int serviceChargePercentage = 0;
 
     /**
