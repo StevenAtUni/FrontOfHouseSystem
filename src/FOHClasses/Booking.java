@@ -165,6 +165,10 @@ public class Booking {
         return numberOfGuests;
     }
 
+    /**
+     * Returns whether the booking has been paid.
+     * @return True if paid, false if still requires payment
+     */
     public boolean isPaid() {
         return paid;
     }
