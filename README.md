@@ -13,6 +13,7 @@
     <li>Joey - UI Developer</li>
     <li>Taz - SQL Developer</li>
     <li>Joseph - UI Developer</li>
+    <li>Mohamed - System Designer</li>
 </ul>
 
 <h4>Entry Points</h4>
